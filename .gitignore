@@ -45,6 +45,8 @@ Miniconda*.exe
 # ===== 临时提交脚本/日志 =====
 git_commit_push.py
 git_push3.py
+commit_fda.py
+commit_fda.log
 git_final.log
 git_push3.log
 git_state.log
