@@ -451,5 +451,33 @@ class AlphaFold3Runner:
 
 
 if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="AlphaFold3 复合物预测")
+    parser.add_argument("--use_singularity", action="store_true",
+                        help="使用 Singularity 后端（武大超算等无 Docker 集群）")
+    parser.add_argument("--sif_path", type=str, default=None,
+                        help="Singularity 镜像路径（.sif）")
+    parser.add_argument("--db_dir", type=str, default=None,
+                        help="AlphaFold3 数据库目录")
+    args = parser.parse_args()
+
+    # 命令行参数优先级更高：动态覆盖 config 里的 af3 配置
+    if args.use_singularity or args.sif_path or args.db_dir:
+        cfg_path = Path(__file__).parent.parent / "config" / "config.yaml"
+        with open(cfg_path, 'r', encoding='utf-8') as f:
+            cfg = yaml.safe_load(f)
+        af3 = cfg.setdefault('screening', {}).setdefault('af3', {})
+        if args.use_singularity:
+            af3['backend'] = 'singularity'
+        if args.sif_path:
+            af3['af3_singularity_sif'] = args.sif_path
+        if args.db_dir:
+            af3['af3_data_dir'] = args.db_dir
+        with open(cfg_path, 'w', encoding='utf-8') as f:
+            yaml.safe_dump(cfg, f, allow_unicode=True, sort_keys=False)
+        print(f"  ℹ 已通过命令行覆盖 af3 配置: backend={af3.get('backend')}, "
+              f"sif={af3.get('af3_singularity_sif')}, db={af3.get('af3_data_dir')}")
+
     runner = AlphaFold3Runner()
     results = runner.run()
