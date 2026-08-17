@@ -161,7 +161,9 @@ class AlphaFold3Runner:
         3. 解析输出 JSON 提取 pLDDT/ipTM/链间接触
         """
         af3_cfg = self.config['screening']['af3']
+        backend = af3_cfg.get('backend', 'docker')
         image = af3_cfg.get('af3_docker_image', 'ghcr.io/google-deepmind/alphafold3:latest')
+        sif_path = af3_cfg.get('af3_singularity_sif', 'alphafold3.sif')
         data_dir = str(self.base_dir / af3_cfg.get('af3_data_dir', 'data/alphafold3_databases'))
 
         # AF3 输入目录
@@ -198,20 +200,41 @@ class AlphaFold3Runner:
             print("  ⚠ 无有效候选分子，无法调用真实 AF3")
             return None
 
-        print(f"  调用真实 AlphaFold3 (Docker)：{len(mol_id_list)} 个复合物")
+        print(f"  调用真实 AlphaFold3 ({backend})：{len(mol_id_list)} 个复合物")
 
-        # docker run 调用 AF3（输入目录含所有 job json）
-        cmd = [
-            "docker", "run", "--gpus", "all",
-            "-v", f"{data_dir}:/data",
-            "-v", f"{str(input_dir)}:/input",
-            "-v", f"{str(output_dir)}:/output",
-            image,
-            "python", "/app/alphafold/run_alphafold.py",
-            "--input_dir", "/input",
-            "--output_dir", "/output",
-            "--model_dir", "/data/models",
-        ]
+        # 根据后端构造调用命令（docker 或 singularity）
+        if backend == 'singularity':
+            # Singularity（武大超算等无 root 集群）
+            sif = str(Path(sif_path).expanduser())
+            if not Path(sif).exists():
+                print(f"    ⚠ Singularity 镜像不存在: {sif}")
+                print(f"    请先: singularity pull {sif} docker://{image}")
+                return None
+            cmd = [
+                "singularity", "exec", "--nv",
+                "--bind", f"{data_dir}:/data",
+                "--bind", f"{str(input_dir)}:/input",
+                "--bind", f"{str(output_dir)}:/output",
+                sif,
+                "python", "/app/alphafold/run_alphafold.py",
+                "--input_dir", "/input",
+                "--output_dir", "/output",
+                "--model_dir", "/data/models",
+            ]
+        else:
+            # Docker（普通服务器）
+            cmd = [
+                "docker", "run", "--gpus", "all",
+                "-v", f"{data_dir}:/data",
+                "-v", f"{str(input_dir)}:/input",
+                "-v", f"{str(output_dir)}:/output",
+                image,
+                "python", "/app/alphafold/run_alphafold.py",
+                "--input_dir", "/input",
+                "--output_dir", "/output",
+                "--model_dir", "/data/models",
+            ]
+
         print(f"  命令：{' '.join(cmd)}")
         r = subprocess.run(cmd, cwd=str(self.base_dir), capture_output=True, text=True, timeout=86400)
 

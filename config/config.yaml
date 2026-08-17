@@ -50,9 +50,12 @@ screening:
     inference_steps: 20
     samples_per_complex: 10
   af3:
-    # 是否使用真实 AlphaFold3（需 Docker + 数据库）
+    # 是否使用真实 AlphaFold3
     use_real_model: false
+    # 运行后端：docker（普通服务器）或 singularity（武大超算等无root集群）
+    backend: "docker"
     af3_docker_image: "ghcr.io/google-deepmind/alphafold3:latest"
+    af3_singularity_sif: "alphafold3.sif"
     af3_data_dir: "data/alphafold3_databases"
   rapid_prefilter:
     # 海选第一关：从百万级库筛到 top_n 个分子再进 DiffDock
