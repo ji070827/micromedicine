@@ -24,7 +24,8 @@ immuno_checkpoint_screen/
 │   ├── generate_real_library.py  # 真实化合物库生成
 │   ├── download_real_data.py     # 真实数据下载（服务器）
 │   ├── activity_model_train.py   # 活性模型训练（路线二）
-│   ├── molecule_generation.py    # 分子生成（路线二）
+│   ├── molecule_generation.py    # 分子生成（路线二，RDKit 组合化学）
+│   ├── targetdiff_generate.py    # 🆕 口袋感知分子生成（TargetDiff + 降级）
 │   ├── pubchem_fetcher.py        # PubChem 拉取
 │   ├── pdb_fetcher.py            # PDB 元数据
 │   └── tme_simulator.py          # 肿瘤微环境模拟
@@ -44,8 +45,10 @@ immuno_checkpoint_screen/
 │   ├── primary_screen/           # 初筛结果
 │   ├── alphafold3/               # AF3 + 相互作用结果
 │   └── final_report/             # 终选报告
-├── tools/DiffDock/               # 官方 DiffDock 源码 + 兼容 shim
-├── setup_server.sh               # DiffDock 服务器部署脚本
+├── tools/
+│   ├── DiffDock/                 # 官方 DiffDock 源码 + 兼容 shim
+│   └── TargetDiff/               # 🆕 TargetDiff 口袋感知分子生成（setup_server.sh 克隆）
+├── setup_server.sh               # DiffDock + TargetDiff 服务器部署脚本
 ├── setup_alphafold3.sh           # AlphaFold3 Docker 部署脚本
 ├── requirements_server.txt       # 服务器依赖清单
 ├── README.md                     # 项目说明
@@ -83,6 +86,7 @@ immuno_checkpoint_screen/
 | `final_ranking.py` | 七维加权综合打分 → A/B/C/D 分级 | 路线一 |
 | `activity_model_train.py` | scikit-learn 随机森林 + ECFP4 真实训练 | 路线二 |
 | `molecule_generation.py` | RDKit 化学反应组合生成新分子 | 路线二 |
+| `targetdiff_generate.py` | 🆕 TargetDiff 口袋感知生成（真实扩散模型，降级到 RDKit 组合化学） | 路线二 |
 | `generate_3d_complex.py` | 用 IgV 拓扑模板生成蛋白-药物 3D 结构 | 共用 |
 | `generate_real_library.py` | 生成 200 个真实类药分子库 | 共用 |
 | `download_real_data.py` | 下载真实 PDB 结构 + PubChem 抑制剂（服务器） | 共用 |
@@ -151,7 +155,8 @@ Step 6  final_ranking.py          七维加权终选 → A/B/C/D 分级
 
 ```
 Step 1  activity_model_train.py   真实 scikit-learn 训练（ECFP4 特征）
-Step 2  molecule_generation.py    RDKit 化学反应组合生成新分子
+Step 2  targetdiff_generate.py    TargetDiff 口袋感知生成（真实扩散模型）
+                                 （未部署/失败时自动降级到 RDKit 组合化学）
                                  → 过滤后接入路线一的对接-筛选流程
 ```
 
@@ -214,6 +219,7 @@ python app.py                          # 启动 Web 服务
 |------|------|
 | `activity_model_train.py` | 真实 scikit-learn 随机森林 + ECFP4 特征（实测 AUC=0.979） |
 | `molecule_generation.py` | 真实 RDKit 化学反应组合生成（酰胺/磺酰胺键） |
+| `targetdiff_generate.py` | 🆕 TargetDiff 口袋感知扩散生成（真实模型，降级到 RDKit） |
 
 ### 4. Web 可视化
 

@@ -202,6 +202,7 @@ immuno_checkpoint_screen/
 │   ├── download_real_data.py          # 🆕 真实数据下载（服务器）
 │   ├── activity_model_train.py        # 真实ML模型训练（路线二）
 │   ├── molecule_generation.py         # 真实RDKit组合生成（路线二）
+│   ├── targetdiff_generate.py         # 🆕 TargetDiff口袋感知生成（路线二）
 │   ├── pubchem_fetcher.py             # PubChem在线拉取
 │   ├── pdb_fetcher.py                 # PDB元数据获取
 │   └── tme_simulator.py               # 肿瘤微环境模拟
@@ -355,12 +356,13 @@ immuno_checkpoint_screen/
 | 12 | `generate_real_library.py` | 200真实类药分子库 | ✅ 真实 |
 | 13 | `download_real_data.py` | 真实数据下载（服务器） | 🆕 待运行 |
 
-### 路线二专用（真实ML/组合化学）
+### 路线二专用（真实ML / TargetDiff 生成 / 组合化学）
 
 | # | 脚本 | 功能 | 状态 |
 |---|------|------|------|
 | 14 | `activity_model_train.py` | ECFP4 + scikit-learn 真实训练 | ✅ 真实 |
 | 15 | `molecule_generation.py` | RDKit 化学反应组合生成 | ✅ 真实 |
+| 16 | `targetdiff_generate.py` | 🆕 TargetDiff 口袋感知扩散生成（真实模型，降级到 RDKit） | ✅ 代码就绪，待权重 |
 
 ### `generate_3d_complex.py` 详解
 

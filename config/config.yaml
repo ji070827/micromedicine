@@ -91,6 +91,17 @@ route2:
     num_generate: 500
     active_prob_threshold: 0.7
     diversity_threshold: 0.6
+  # TargetDiff 口袋感知分子生成（路线二前段，真实扩散模型）
+  targetdiff:
+    # 是否使用真实 TargetDiff（服务器部署后改为 true；本地无权重时降级到 RDKit 组合化学）
+    use_real_model: false
+    # TargetDiff 部署目录（setup_server.sh 克隆）
+    repo_dir: "tools/TargetDiff"
+    # 预训练权重路径（相对 repo_dir）
+    checkpoint: "checkpoints/pretrained.pt"
+    # 每次采样样本数 / 随机种子
+    samples_per_run: 20
+    seed: 42
 
 # 可视化参数
 visualization:

@@ -1,23 +1,23 @@
 # 服务器部署指南
 
-> 本文档说明如何在 **Linux 服务器**上部署真实的 DiffDock 和 AlphaFold3 模型，以及下载真实数据。
+> 本文档说明如何在 **Linux 服务器**上部署真实的 DiffDock、AlphaFold3 和 TargetDiff 模型，以及下载真实数据。
 
 ---
 
 ## 一、部署条件
 
-| 需求 | DiffDock | AlphaFold3 |
-|------|----------|-----------|
-| GPU | NVIDIA GPU ≥8GB | NVIDIA GPU ≥16GB（推荐 A100/4090） |
-| 系统 | Linux | Linux |
-| 网络 | 可访问 GitHub / RCSB / PubChem | 可访问 Google / UniProt |
-| 磁盘 | ~10GB（权重+模型） | ~2TB（完整数据库）或 ~100GB（精简） |
+| 需求 | DiffDock | AlphaFold3 | TargetDiff（路线二生成） |
+|------|----------|-----------|------------------------|
+| GPU | NVIDIA GPU ≥8GB | NVIDIA GPU ≥16GB（推荐 A100/4090） | NVIDIA GPU ≥8GB |
+| 系统 | Linux | Linux | Linux |
+| 网络 | 可访问 GitHub / RCSB / PubChem | 可访问 Google / UniProt | 可访问 GitHub / Google Drive |
+| 磁盘 | ~10GB（权重+模型） | ~2TB（完整数据库）或 ~100GB（精简） | ~2GB（权重） |
 
 ---
 
 ## 二、部署步骤
 
-### 步骤 1：DiffDock 部署（约 30 分钟）
+### 步骤 1：DiffDock + TargetDiff 部署（约 30-60 分钟）
 
 ```bash
 # 在服务器项目根目录执行
@@ -28,9 +28,13 @@ bash setup_server.sh
 1. 安装系统依赖（git、openbabel、cuda-toolkit）
 2. 创建 Python 虚拟环境
 3. 安装 PyTorch (CUDA) + PyG + e3nn + esm + 所有依赖
-4. 克隆 DiffDock 仓库
-5. 下载预训练权重
-6. 下载真实蛋白结构 + 真实小分子库
+4. 下载 DiffDock 预训练权重（~4.5GB）
+5. 克隆 TargetDiff 仓库到 tools/TargetDiff + 安装依赖
+6. 自动开启 DiffDock 和 TargetDiff 的 `use_real_model` 开关
+7. 下载真实蛋白结构 + 真实小分子库
+
+> ⚠️ **TargetDiff 预训练权重**需手动下载（Google Drive），放到 `tools/TargetDiff/checkpoints/`。
+> 未下载权重时，路线二会**自动降级到 RDKit 组合化学**，不影响其他流程。
 
 ### 步骤 2：AlphaFold3 部署（约 2-4 小时）
 

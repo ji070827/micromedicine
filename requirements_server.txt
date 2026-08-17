@@ -39,6 +39,13 @@ scikit-learn
 # ---- 本项目 Web 依赖 ----
 flask
 
+# ---- TargetDiff（路线二分子生成，setup_server.sh 单独安装，可选）----
+# torchdrug
+# hydra-core
+# omegaconf
+# 注：TargetDiff 预训练权重需手动下载到 tools/TargetDiff/checkpoints/
+#     未部署时路线二自动降级到 RDKit 组合化学
+
 # ============================================================
 # CUDA 版本对照（选择其一替换上面的 torch 行）
 # ============================================================

@@ -42,6 +42,24 @@ tmp/
 *.tar.gz
 Miniconda*.exe
 
+# ===== 临时提交脚本/日志 =====
+git_commit_push.py
+git_final.log
+git_state.log
+git_push2.log
+final_push.log
+final_push.py
+do_push.py
+check_state.py
+check_encoding.py
+find_conda.py
+install_miniconda.py
+install_conda_user.py
+setup_conda_env.py
+mk_env.py
+install_deps_conda.py
+verify_conda_app.py
+
 # ===== IDE =====
 .vscode/
 .idea/

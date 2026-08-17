@@ -177,11 +177,11 @@ def run_full_pipeline_route2():
         model_viz = json.load(open(model_viz_path, 'r', encoding='utf-8')) if model_viz_path.exists() else {}
         pipeline_status['results']['activity_model'] = model_viz
         
-        # Step 2: 全新分子生成
-        pipeline_status['current_step'] = '全新分子生成与初筛'
+        # Step 2: 全新分子生成（TargetDiff 口袋感知生成，降级到 RDKit 组合化学）
+        pipeline_status['current_step'] = '全新分子生成与初筛 (TargetDiff)'
         pipeline_status['progress'] = 45
-        from scripts.molecule_generation import MoleculeGenerator
-        generator = MoleculeGenerator()
+        from scripts.targetdiff_generate import TargetDiffGenerator
+        generator = TargetDiffGenerator()
         gen_results = generator.run()
         
         gen_viz_path = Path(__file__).parent / "data" / "activity_dataset" / "generation_viz_data.json"
@@ -453,8 +453,8 @@ def run_single_step():
             r.run()
             result = {'status': 'ok'}
         elif step == 'molecule_generation':
-            from scripts.molecule_generation import MoleculeGenerator
-            r = MoleculeGenerator()
+            from scripts.targetdiff_generate import TargetDiffGenerator
+            r = TargetDiffGenerator()
             r.run()
             result = {'status': 'ok'}
         else:
