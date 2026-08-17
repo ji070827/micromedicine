@@ -179,6 +179,92 @@ def load_library_file(path, smiles_col=None):
     return df.reset_index(drop=True)
 
 
+def iter_library_chunks(path, chunksize=10000):
+    """
+    流式迭代读取大型分子库，逐块返回标准化的 DataFrame。
+    用于百万级库的快速预筛，避免一次性加载全部到内存。
+
+    参数：
+        path: 库文件路径（.csv/.smi/.txt）
+        chunksize: 每块行数
+
+    返回：
+        生成器，每次 yield 一个标准化后的 DataFrame（含 'smiles' 和 'mol_id' 列）
+    """
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(f"化合物库文件不存在: {path}")
+
+    ext = path.suffix.lower()
+
+    if ext == '.csv':
+        # CSV 分块读取
+        reader = pd.read_csv(path, chunksize=chunksize)
+        for raw_chunk in reader:
+            yield standardize_dataframe(raw_chunk)
+    elif ext in ('.smi', '.txt'):
+        # 文本分块读取
+        rows = []
+        count = 0
+        with open(path, 'r', encoding='utf-8', errors='replace') as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith('#'):
+                    continue
+                parts = line.split()
+                smiles = None
+                mol_id = None
+                for tok in parts:
+                    if smiles is None and parse_molecule(tok) is not None:
+                        smiles = tok
+                    elif smiles is not None and mol_id is None:
+                        mol_id = tok
+                if smiles is not None:
+                    rows.append({'smiles': smiles, 'mol_id': mol_id})
+                    count += 1
+                    if count >= chunksize:
+                        yield standardize_dataframe(pd.DataFrame(rows))
+                        rows = []
+                        count = 0
+        if rows:
+            yield standardize_dataframe(pd.DataFrame(rows))
+    else:
+        # 其他格式一次性读（SDF 不流式）
+        df = load_library_file(path)
+        yield df
+
+
+def standardize_dataframe(df):
+    """
+    对已读取的 DataFrame 做标准化：统一 smiles/mol_id 列名 + 过滤空值。
+    供流式读取复用。
+    """
+    if df is None or len(df) == 0:
+        return df
+
+    # 统一 SMILES 列名
+    smiles_col = detect_smiles_column(df)
+    if smiles_col is None:
+        # 如果没有 smiles 列，返回原样（调用方会跳过）
+        return df
+    if smiles_col != 'smiles':
+        df = df.rename(columns={smiles_col: 'smiles'})
+
+    # 统一 mol_id 列
+    if 'mol_id' not in df.columns:
+        id_col = detect_id_column(df)
+        if id_col is not None and id_col != 'smiles':
+            df = df.rename(columns={id_col: 'mol_id'})
+        else:
+            df['mol_id'] = [f"CMPD_{i+1:06d}" for i in range(len(df))]
+
+    # 过滤空 SMILES
+    df = df[df['smiles'].notna() & (df['smiles'].astype(str).str.strip() != '')]
+    df['smiles'] = df['smiles'].astype(str).str.strip()
+
+    return df.reset_index(drop=True)
+
+
 if __name__ == '__main__':
     # 自测：临时创建一个不同列名的库
     import tempfile

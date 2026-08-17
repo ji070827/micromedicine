@@ -54,6 +54,9 @@ screening:
     use_real_model: false
     af3_docker_image: "ghcr.io/google-deepmind/alphafold3:latest"
     af3_data_dir: "data/alphafold3_databases"
+  rapid_prefilter:
+    # 海选第一关：从百万级库筛到 top_n 个分子再进 DiffDock
+    top_n: 5000
   primary_filter:
     top_n_per_target: 75
     drug_likeness:

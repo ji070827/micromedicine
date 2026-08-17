@@ -37,16 +37,35 @@ class DiffDockBatchRunner:
         self.base_dir = Path(__file__).parent.parent
     
     def load_compounds(self):
-        """加载预处理后的小分子库"""
+        """
+        加载待对接的小分子库。
+        优先级：快速预筛结果 > 标准化库 > 原始激活库
+        海选场景：rapid_prefilter 从百万筛到几千后，这里只对接存活的几千个。
+        """
+        # 1. 快速预筛结果（海选第一关的输出）
+        prefilter_path = self.base_dir / "results" / "rapid_prefilter" / "rapid_prefilter_top.csv"
+        if prefilter_path.exists():
+            df = pd.read_csv(prefilter_path)
+            print(f"  加载快速预筛结果: {len(df)} 个分子")
+            return df
+
+        # 2. 标准化库
         compounds_path = self.base_dir / "data" / "library" / "compounds_standardized.csv"
         if compounds_path.exists():
             return pd.read_csv(compounds_path)
-        else:
-            # 如果没有预处理数据，生成模拟数据
-            from scripts.data_preprocess import DataPreprocessor
-            preprocessor = DataPreprocessor()
-            df, _ = preprocessor.preprocess_compounds()
-            return df
+
+        # 3. 原始激活库
+        active_lib = self.config.get('data', {}).get('active_library', 'fda_approved_drugs.csv')
+        lib_path = self.base_dir / "data" / "library" / active_lib
+        if lib_path.exists():
+            from scripts.library_loader import load_library_file
+            return load_library_file(lib_path)
+
+        # 4. 都没有则生成
+        from scripts.data_preprocess import DataPreprocessor
+        preprocessor = DataPreprocessor()
+        df, _ = preprocessor.preprocess_compounds()
+        return df
 
     def generate_conformers(self, df_compounds):
         """
