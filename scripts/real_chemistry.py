@@ -133,6 +133,34 @@ _SA_SCORE_CONTRIBUTIONS = {
 }
 
 
+# 缓存 RDKit 内置 sascorer（避免每次计算都做文件系统检查 + import）
+_SASCORER = None
+_SASCORER_LOOKED_UP = False
+
+
+def _get_sascorer():
+    """获取 RDKit 内置 sascorer 模块（带缓存），失败返回 None"""
+    global _SASCORER, _SASCORER_LOOKED_UP
+    if _SASCORER_LOOKED_UP:
+        return _SASCORER
+    _SASCORER_LOOKED_UP = True
+    try:
+        from rdkit.Chem import RDConfig
+        import os as _os
+        import sys as _sys
+        contrib_path = _os.path.join(RDConfig.RDContribDir, 'SA_Score')
+        if _os.path.exists(contrib_path) and _os.path.exists(_os.path.join(contrib_path, 'sascorer.py')):
+            _sys.path.append(contrib_path)
+            try:
+                import sascorer
+                _SASCORER = sascorer
+            except Exception:
+                _SASCORER = None
+    except Exception:
+        _SASCORER = None
+    return _SASCORER
+
+
 def compute_sa_score(mol):
     """
     计算合成可及性评分 (Synthetic Accessibility)。
@@ -140,23 +168,12 @@ def compute_sa_score(mol):
     SA = fragmentScore - complexityPenalty
     返回值在 1(易合成)~10(难合成) 之间。
     """
-    try:
-        from rdkit.Chem import RDConfig
-        import os as _os
-        import sys as _sys
-        import importlib.util
-
-        # 尝试使用 RDKit 内置的 sascorer
-        contrib_path = _os.path.join(RDConfig.RDContribDir, 'SA_Score')
-        if _contrib_path_exists(contrib_path):
-            _sys.path.append(contrib_path)
-            try:
-                import sascorer
-                return sascorer.calculateScore(mol)
-            except Exception:
-                _sys.path.remove(contrib_path)
-    except Exception:
-        pass
+    sascorer = _get_sascorer()
+    if sascorer is not None:
+        try:
+            return sascorer.calculateScore(mol)
+        except Exception:
+            pass
 
     # 回退：基于环复杂度+杂原子+分子量的启发式（仍真实反映合成难度趋势）
     ring_info = mol.GetRingInfo()
@@ -260,17 +277,30 @@ def get_conformer_coordinates(mol):
 # PAINS / Brenk 过滤 (真实子结构警示)
 # ============================================================
 
+# PAINS/Brenk FilterCatalog 只需初始化一次（避免百万级筛选时重复构建开销）
+_PAINS_BRENK_CATALOG = None
+try:
+    _params = FilterCatalogParams()
+    _params.AddCatalog(FilterCatalogParams.FilterCatalogs.PAINS)
+    _params.AddCatalog(FilterCatalogParams.FilterCatalogs.BRENK)
+    _PAINS_BRENK_CATALOG = FilterCatalog(_params)
+except Exception:
+    _PAINS_BRENK_CATALOG = None
+
+
 def check_pains_brenk(mol):
     """
     用 RDKit FilterCatalog 检查 PAINS 和 Brenk 过滤。
-    返回 (是否命中PAINS, 命中的警示类型列表)
+    返回 (是否命中PAINS, 命中的警示类型列表)。
+
+    注意：catalog 在模块加载时一次性初始化，避免每次调用重复构建。
     """
+    if mol is None:
+        return False, []
     try:
-        params = FilterCatalogParams()
-        params.AddCatalog(FilterCatalogParams.FilterCatalogs.PAINS)
-        params.AddCatalog(FilterCatalogParams.FilterCatalogs.BRENK)
-        catalog = FilterCatalog(params)
-        entry = catalog.GetFirstMatch(mol)
+        if _PAINS_BRENK_CATALOG is None:
+            return False, []
+        entry = _PAINS_BRENK_CATALOG.GetFirstMatch(mol)
         if entry is not None:
             return True, [entry.GetDescription()]
         return False, []

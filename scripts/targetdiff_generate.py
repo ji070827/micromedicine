@@ -78,8 +78,8 @@ class TargetDiffGenerator:
 
         # 3. 都没有则生成
         print(f"    ⚠ 未找到 {target_name} 蛋白结构，先生成...")
-        from scripts.generate_3d_complex import ComplexGenerator
-        cg = ComplexGenerator()
+        from scripts.generate_3d_complex import Complex3DGenerator
+        cg = Complex3DGenerator()
         cg.run()
         if gen_pdb.exists():
             return str(gen_pdb)
