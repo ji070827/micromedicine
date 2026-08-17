@@ -18,6 +18,12 @@
 # 环境路径（与 setup_whu.sh 一致）
 ENV_PATH="${HOME}/project/conda_envs/immuno_drug_screen"
 
+# 临时目录指到 /project（避免运行时 /home 爆盘）
+export TMPDIR="${HOME}/project/tmp"
+export TMP="${HOME}/project/tmp"
+export TEMP="${HOME}/project/tmp"
+mkdir -p "${TMPDIR}"
+
 echo "=== DiffDock 作业开始 ==="
 date
 hostname

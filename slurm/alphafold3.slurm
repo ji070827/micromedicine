@@ -20,6 +20,12 @@ ENV_PATH="${HOME}/project/conda_envs/immuno_drug_screen"
 AF3_SIF="${HOME}/project/alphafold3.sif"      # Singularity 镜像放 /project
 AF3_DB_DIR="${HOME}/project/af3_databases"   # AF3 数据库放 /project
 
+# 临时目录指到 /project（避免 /home 爆盘）
+export TMPDIR="${HOME}/project/tmp"
+export TMP="${HOME}/project/tmp"
+export TEMP="${HOME}/project/tmp"
+mkdir -p "${TMPDIR}"
+
 echo "=== AlphaFold3 作业开始 ==="
 date
 hostname
