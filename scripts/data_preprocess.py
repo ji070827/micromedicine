@@ -72,16 +72,31 @@ class DataPreprocessor:
         return protein_results
 
     def load_library(self):
-        """加载小分子化合物库（真实 SMILES）"""
-        lib_path = self.base_dir / "data" / "library" / "pubchem_all_targets.csv"
+        """
+        加载小分子化合物库（通用：自动识别 SMILES 列 + 多格式支持）。
+        优先读取 config 里配置的 active_library，失配时回退到默认库。
+        """
+        from scripts.library_loader import load_library_file
+
+        # 1. 优先使用 config 里配置的激活库
+        active_lib = self.config.get('data', {}).get('active_library', 'pubchem_all_targets.csv')
+        lib_path = self.base_dir / "data" / "library" / active_lib
         if lib_path.exists():
-            df = pd.read_csv(lib_path)
-            print(f"  加载化合物库: {len(df)} 个分子")
+            df = load_library_file(lib_path)
+            print(f"  加载化合物库: {lib_path.name}（{len(df)} 个分子，SMILES列自动识别）")
             return df
-        else:
-            print("  警告: 未找到 pubchem_all_targets.csv")
-            print("  请先运行: python scripts/generate_real_library.py")
-            return None
+
+        # 2. 回退到默认库
+        default_path = self.base_dir / "data" / "library" / "pubchem_all_targets.csv"
+        if default_path.exists():
+            df = load_library_file(default_path)
+            print(f"  加载默认库: {default_path.name}（{len(df)} 个分子）")
+            return df
+
+        # 3. 都没有则尝试生成
+        print("  警告: 未找到化合物库文件")
+        print("  请先运行: python scripts/generate_real_library.py")
+        return None
 
     def preprocess_compounds(self):
         """
