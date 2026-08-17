@@ -1,0 +1,20 @@
+{
+  "target_name": "TIM-3",
+  "pdb_id": "5F71",
+  "description": "TIM-3 IgV domain with phosphatidylserine",
+  "method": "X-ray diffraction",
+  "resolution": 2.5,
+  "has_ligand": true,
+  "ligand_description": "Phosphatidylserine binding pocket",
+  "alternatives": [
+    "5F7X",
+    "7M3Z",
+    "6DHB"
+  ],
+  "chain": "A",
+  "source": "RCSB PDB",
+  "fetch_date": "2026-08-06",
+  "deposition_date": "",
+  "release_date": "2016-02-03T00:00:00.000+00:00",
+  "organism": "Homo sapiens"
+}

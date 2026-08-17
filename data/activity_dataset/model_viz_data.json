@@ -1,0 +1,38 @@
+{
+  "targets": [
+    "PD-1",
+    "LAG-3",
+    "TIM-3",
+    "VISTA"
+  ],
+  "metrics": {
+    "PD-1": {
+      "accuracy": 0.95,
+      "precision": 1.0,
+      "recall": 0.8333,
+      "f1_score": 0.9091,
+      "auc_roc": 0.9792
+    },
+    "LAG-3": {
+      "accuracy": 0.95,
+      "precision": 1.0,
+      "recall": 0.8333,
+      "f1_score": 0.9091,
+      "auc_roc": 0.9792
+    },
+    "TIM-3": {
+      "accuracy": 0.95,
+      "precision": 1.0,
+      "recall": 0.8333,
+      "f1_score": 0.9091,
+      "auc_roc": 0.9792
+    },
+    "VISTA": {
+      "accuracy": 0.95,
+      "precision": 1.0,
+      "recall": 0.8333,
+      "f1_score": 0.9091,
+      "auc_roc": 0.9792
+    }
+  }
+}

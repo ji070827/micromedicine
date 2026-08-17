@@ -1,0 +1,83 @@
+{
+  "PD-1": {
+    "target_name": "PD-1",
+    "pdb_id": "4ZQK",
+    "description": "PD-1 extracellular domain (IgV)",
+    "method": "X-ray diffraction",
+    "resolution": 2.45,
+    "has_ligand": true,
+    "ligand_description": "PD-L1 binding face exposed",
+    "alternatives": [
+      "5WT9",
+      "5GGS",
+      "6UMT",
+      "7BXA"
+    ],
+    "chain": "A",
+    "source": "RCSB PDB",
+    "fetch_date": "2026-08-06",
+    "deposition_date": "",
+    "release_date": "2015-11-04T00:00:00.000+00:00",
+    "organism": "Homo sapiens"
+  },
+  "LAG-3": {
+    "target_name": "LAG-3",
+    "pdb_id": "7TZH",
+    "description": "LAG-3 extracellular domain with FGL1 ligand",
+    "method": "X-ray diffraction",
+    "resolution": 3.1,
+    "has_ligand": true,
+    "ligand_description": "FGL1 bound complex",
+    "alternatives": [
+      "7TZG",
+      "6V9O",
+      "8FQN"
+    ],
+    "chain": "A",
+    "source": "RCSB PDB",
+    "fetch_date": "2026-08-06",
+    "deposition_date": "",
+    "release_date": "2022-05-11T00:00:00.000+00:00",
+    "organism": "Homo sapiens"
+  },
+  "TIM-3": {
+    "target_name": "TIM-3",
+    "pdb_id": "5F71",
+    "description": "TIM-3 IgV domain with phosphatidylserine",
+    "method": "X-ray diffraction",
+    "resolution": 2.5,
+    "has_ligand": true,
+    "ligand_description": "Phosphatidylserine binding pocket",
+    "alternatives": [
+      "5F7X",
+      "7M3Z",
+      "6DHB"
+    ],
+    "chain": "A",
+    "source": "RCSB PDB",
+    "fetch_date": "2026-08-06",
+    "deposition_date": "",
+    "release_date": "2016-02-03T00:00:00.000+00:00",
+    "organism": "Homo sapiens"
+  },
+  "VISTA": {
+    "target_name": "VISTA",
+    "pdb_id": "6OIL",
+    "description": "VISTA IgV domain",
+    "method": "X-ray diffraction",
+    "resolution": 2.7,
+    "has_ligand": false,
+    "ligand_description": "Ligand-free form",
+    "alternatives": [
+      "6OIJ",
+      "8GCM",
+      "8GCL"
+    ],
+    "chain": "A",
+    "source": "RCSB PDB",
+    "fetch_date": "2026-08-06",
+    "deposition_date": "",
+    "release_date": "2019-09-11T00:00:00.000+00:00",
+    "organism": "Homo sapiens"
+  }
+}

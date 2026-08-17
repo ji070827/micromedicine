@@ -1,0 +1,194 @@
+{
+  "normal": {
+    "target": "PD-1",
+    "tme_condition": "normal",
+    "conditions": {
+      "pH": 7.4,
+      "pO2_mmHg": 50,
+      "temperature_C": 37.0,
+      "lactate_mM": 2.0,
+      "description": "正常生理环境"
+    },
+    "his_analysis": {
+      "residues": [
+        "HIS41",
+        "HIS87",
+        "HIS112"
+      ],
+      "n_total": 3,
+      "n_protonated_at_TME_pH": 0,
+      "n_protonated_at_pH7.4": 0,
+      "delta_protonation": 0,
+      "states": {
+        "HIS41": {
+          "pKa": 6.04,
+          "pH": 7.4,
+          "protonated": 0.042,
+          "deprotonated": 0.958,
+          "charge_state": "neutral"
+        },
+        "HIS87": {
+          "pKa": 6.04,
+          "pH": 7.4,
+          "protonated": 0.042,
+          "deprotonated": 0.958,
+          "charge_state": "neutral"
+        },
+        "HIS112": {
+          "pKa": 6.04,
+          "pH": 7.4,
+          "protonated": 0.042,
+          "deprotonated": 0.958,
+          "charge_state": "neutral"
+        }
+      }
+    },
+    "energy_shifts": {
+      "dG_pH_shift_kcal_mol": 0.0,
+      "dG_polar_shift_kcal_mol": 0.0,
+      "dG_hypoxia_kcal_mol": -0.0,
+      "dG_lactate_kcal_mol": 0.0,
+      "dG_tme_total_kcal_mol": 0.0
+    },
+    "affinity_modification": {
+      "kd_tme_vs_normal_ratio": 1.0,
+      "competition_factor": 1.0,
+      "effective_kd_modifier": 1.0,
+      "interpretation": "TME对结合影响不大"
+    },
+    "tme_considerations": [
+      "TME pH=7.4: 结合口袋 0/3 个His质子化 (生理pH 7.4下为 0/3)",
+      "ΔG_TME 修正 = +0.00 kcal/mol",
+      "有效Kd变化倍数 ≈ 1.00x",
+      "His41 质子化可能增强与 PD-L1 的阳离子-π相互作用"
+    ]
+  },
+  "tme_moderate": {
+    "target": "PD-1",
+    "tme_condition": "tme_moderate",
+    "conditions": {
+      "pH": 6.8,
+      "pO2_mmHg": 20,
+      "temperature_C": 37.0,
+      "lactate_mM": 15.0,
+      "description": "中度肿瘤微环境 (肿瘤边缘)"
+    },
+    "his_analysis": {
+      "residues": [
+        "HIS41",
+        "HIS87",
+        "HIS112"
+      ],
+      "n_total": 3,
+      "n_protonated_at_TME_pH": 0,
+      "n_protonated_at_pH7.4": 0,
+      "delta_protonation": 0,
+      "states": {
+        "HIS41": {
+          "pKa": 6.04,
+          "pH": 6.8,
+          "protonated": 0.148,
+          "deprotonated": 0.852,
+          "charge_state": "neutral"
+        },
+        "HIS87": {
+          "pKa": 6.04,
+          "pH": 6.8,
+          "protonated": 0.148,
+          "deprotonated": 0.852,
+          "charge_state": "neutral"
+        },
+        "HIS112": {
+          "pKa": 6.04,
+          "pH": 6.8,
+          "protonated": 0.148,
+          "deprotonated": 0.852,
+          "charge_state": "neutral"
+        }
+      }
+    },
+    "energy_shifts": {
+      "dG_pH_shift_kcal_mol": 0.0,
+      "dG_polar_shift_kcal_mol": 0.073,
+      "dG_hypoxia_kcal_mol": -0.005,
+      "dG_lactate_kcal_mol": 0.07,
+      "dG_tme_total_kcal_mol": 0.138
+    },
+    "affinity_modification": {
+      "kd_tme_vs_normal_ratio": 0.8,
+      "competition_factor": 1.21,
+      "effective_kd_modifier": 0.968,
+      "interpretation": "TME对结合影响不大"
+    },
+    "tme_considerations": [
+      "TME pH=6.8: 结合口袋 0/3 个His质子化 (生理pH 7.4下为 0/3)",
+      "ΔG_TME 修正 = +0.14 kcal/mol",
+      "有效Kd变化倍数 ≈ 0.97x",
+      "His41 质子化可能增强与 PD-L1 的阳离子-π相互作用"
+    ]
+  },
+  "tme_severe": {
+    "target": "PD-1",
+    "tme_condition": "tme_severe",
+    "conditions": {
+      "pH": 6.4,
+      "pO2_mmHg": 5,
+      "temperature_C": 36.5,
+      "lactate_mM": 35.0,
+      "description": "重度肿瘤微环境 (肿瘤核心)"
+    },
+    "his_analysis": {
+      "residues": [
+        "HIS41",
+        "HIS87",
+        "HIS112"
+      ],
+      "n_total": 3,
+      "n_protonated_at_TME_pH": 0,
+      "n_protonated_at_pH7.4": 0,
+      "delta_protonation": 0,
+      "states": {
+        "HIS41": {
+          "pKa": 6.04,
+          "pH": 6.4,
+          "protonated": 0.304,
+          "deprotonated": 0.696,
+          "charge_state": "neutral"
+        },
+        "HIS87": {
+          "pKa": 6.04,
+          "pH": 6.4,
+          "protonated": 0.304,
+          "deprotonated": 0.696,
+          "charge_state": "neutral"
+        },
+        "HIS112": {
+          "pKa": 6.04,
+          "pH": 6.4,
+          "protonated": 0.304,
+          "deprotonated": 0.696,
+          "charge_state": "neutral"
+        }
+      }
+    },
+    "energy_shifts": {
+      "dG_pH_shift_kcal_mol": 0.0,
+      "dG_polar_shift_kcal_mol": 0.243,
+      "dG_hypoxia_kcal_mol": -0.153,
+      "dG_lactate_kcal_mol": 0.229,
+      "dG_tme_total_kcal_mol": 0.319
+    },
+    "affinity_modification": {
+      "kd_tme_vs_normal_ratio": 0.596,
+      "competition_factor": 1.038,
+      "effective_kd_modifier": 0.618,
+      "interpretation": "TME略增强结合"
+    },
+    "tme_considerations": [
+      "TME pH=6.4: 结合口袋 0/3 个His质子化 (生理pH 7.4下为 0/3)",
+      "ΔG_TME 修正 = +0.32 kcal/mol",
+      "有效Kd变化倍数 ≈ 0.62x",
+      "His41 质子化可能增强与 PD-L1 的阳离子-π相互作用"
+    ]
+  }
+}

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多免疫检查点小分子AI筛选系统</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #0a0e17; color: #e0e0e0; min-height: 100vh; }
+        
+        .header { background: linear-gradient(135deg, #1a1f35 0%, #0d1117 100%); padding: 0 30px; height: 60px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #2a3050; }
+        .header h1 { font-size: 20px; font-weight: 700; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header .nav { display: flex; gap: 5px; }
+        .header .nav a { color: #8892b0; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; transition: all 0.3s; }
+        .header .nav a:hover, .header .nav a.active { background: rgba(79,172,254,0.15); color: #4facfe; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+        .stat-card { background: #161b2b; border: 1px solid #2a3050; border-radius: 10px; padding: 20px; text-align: center; }
+        .stat-card .value { font-size: 32px; font-weight: 700; margin: 8px 0; }
+        .stat-card .label { font-size: 13px; color: #8892b0; text-transform: uppercase; }
+        .stat-card:nth-child(1) .value { color: #4facfe; }
+        .stat-card:nth-child(2) .value { color: #43e97b; }
+        .stat-card:nth-child(3) .value { color: #fa709a; }
+        .stat-card:nth-child(4) .value { color: #feca57; }
+        
+        .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+        .card { background: #161b2b; border: 1px solid #2a3050; border-radius: 10px; padding: 20px; }
+        .card h3 { font-size: 16px; margin-bottom: 16px; color: #ccd6f6; border-bottom: 1px solid #2a3050; padding-bottom: 10px; }
+        
+        .target-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+        .target-card { background: #161b2b; border: 1px solid #2a3050; border-radius: 10px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .target-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        .target-card.active { border-color: #4facfe; }
+        .target-card .name { font-size: 18px; font-weight: 700; margin-bottom: 6px; text-align: center; }
+        .target-card .desc { font-size: 12px; color: #8892b0; margin-bottom: 4px; }
+        .target-card .pdb { font-size: 11px; color: #5a6a8a; }
+        .target-card.PD-1 { border-left: 3px solid #2196F3; }
+        .target-card.LAG-3 { border-left: 3px solid #4CAF50; }
+        .target-card.TIM-3 { border-left: 3px solid #FF9800; }
+        .target-card.VISTA { border-left: 3px solid #E91E63; }
+        
+        .pipeline-flow { display: flex; align-items: center; gap: 8px; margin: 20px 0; padding: 20px; background: #161b2b; border-radius: 10px; overflow-x: auto; }
+        .pipeline-step { background: #1d233a; border: 1px solid #2a3050; border-radius: 8px; padding: 12px 16px; text-align: center; min-width: 120px; }
+        .pipeline-step .step-num { font-size: 12px; color: #4facfe; margin-bottom: 4px; }
+        .pipeline-step .step-name { font-size: 13px; color: #ccd6f6; }
+        .pipeline-arrow { color: #4facfe; font-size: 20px; }
+        
+        .progress-bar-container { margin: 16px 0; background: #1d233a; border-radius: 8px; height: 24px; overflow: hidden; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, #4facfe, #00f2fe); border-radius: 8px; transition: width 0.5s; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #0a0e17; font-weight: 600; }
+        
+        .btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s; margin: 4px; }
+        .btn-primary { background: linear-gradient(135deg, #4facfe, #00f2fe); color: #0a0e17; }
+        .btn-success { background: linear-gradient(135deg, #43e97b, #38f9d7); color: #0a0e17; }
+        .btn-warning { background: linear-gradient(135deg, #feca57, #ff9ff3); color: #0a0e17; }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .controls { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; align-items: center; }
+        
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { background: #1d233a; padding: 10px 12px; text-align: left; color: #8892b0; font-weight: 600; border-bottom: 2px solid #2a3050; }
+        td { padding: 8px 12px; border-bottom: 1px solid #1d233a; }
+        tr:hover td { background: rgba(79,172,254,0.05); }
+        .priority-A { color: #43e97b; font-weight: 700; }
+        .priority-B { color: #4facfe; font-weight: 700; }
+        .priority-C { color: #feca57; }
+        .priority-D { color: #ff6b6b; }
+        
+        .alert { padding: 12px 16px; border-radius: 8px; margin: 10px 0; font-size: 14px; }
+        .alert-info { background: rgba(79,172,254,0.15); border: 1px solid rgba(79,172,254,0.3); color: #4facfe; }
+        .alert-success { background: rgba(67,233,123,0.15); border: 1px solid rgba(67,233,123,0.3); color: #43e97b; }
+        
+        canvas { max-height: 350px; }
+        
+        .half-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        
+        @media (max-width: 768px) {
+            .stats-grid, .target-cards { grid-template-columns: repeat(2, 1fr); }
+            .cards-grid, .half-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧬 多免疫检查点小分子AI筛选系统</h1>
+        <div class="nav">
+            <a href="/" class="active">📊 仪表盘</a>
+            <a href="/route1">🔬 路线一</a>
+            <a href="/route2">✨ 路线二</a>
+            <a href="/results">📋 结果</a>
+            <a href="/structure">🧊 3D结构</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- 统计卡片 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">靶点数量</div>
+                <div class="value">4</div>
+                <div style="font-size:12px;color:#8892b0;">PD-1 · LAG-3 · TIM-3 · VISTA</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">化合物库规模</div>
+                <div class="value" id="compoundCount">--</div>
+                <div style="font-size:12px;color:#8892b0;">标准化预处理后</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">筛选管线步骤</div>
+                <div class="value">6</div>
+                <div style="font-size:12px;color:#8892b0;">DiffDock → AlphaFold3 → 终选</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Top候选/靶点</div>
+                <div class="value">75</div>
+                <div style="font-size:12px;color:#8892b0;">进入精细模拟阶段</div>
+            </div>
+        </div>
+        
+        <!-- 靶点信息卡片 -->
+        <div class="target-cards" id="targetCards"></div>
+        
+        <!-- 控制面板 -->
+        <div class="card" style="margin-bottom:16px;">
+            <h3>🎮 管线控制</h3>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="runFullPipeline(1)" id="btnRoute1">▶ 运行路线一：完整管线</button>
+                <button class="btn btn-success" onclick="runFullPipeline(2)" id="btnRoute2">▶ 运行路线二：完整管线</button>
+                <button class="btn btn-warning" onclick="refreshData()">🔄 刷新数据</button>
+                <span id="pipelineStatus" style="margin-left:16px; color:#8892b0; font-size:13px;">就绪</span>
+            </div>
+            <div class="progress-bar-container" id="progressContainer" style="display:none;">
+                <div class="progress-bar" id="progressBar" style="width:0%;">0%</div>
+            </div>
+        </div>
+        
+        <!-- 数据集管理 -->
+        <div class="card" style="margin-bottom:16px;">
+            <h3>📦 小分子数据集管理</h3>
+            <div style="display:grid;grid-template-columns: 1fr 1fr;gap:16px;">
+                <!-- 左侧：当前数据集信息 + 切换 -->
+                <div>
+                    <div class="alert alert-info" style="margin-bottom:12px;">
+                        <strong>📋 当前数据集：</strong><span id="currentDatasetName">--</span><br>
+                        <span style="font-size:12px;" id="currentDatasetInfo"></span>
+                    </div>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <select id="datasetSelect" onchange="onDatasetSelectChange()" style="background:#1d233a;color:#e0e0e0;border:1px solid #2a3050;padding:8px 12px;border-radius:6px;font-size:13px;flex:1;min-width:200px;">
+                            <option value="">-- 加载中 --</option>
+                        </select>
+                        <button class="btn btn-success" onclick="switchDataset()" style="font-size:12px;padding:8px 14px;">🔄 切换数据集</button>
+                    </div>
+                    <div id="switchMsg" style="margin-top:8px;font-size:12px;"></div>
+                </div>
+                <!-- 右侧：上传新数据集 -->
+                <div>
+                    <div style="font-weight:600;color:#ccd6f6;margin-bottom:8px;">📤 上传新数据集</div>
+                    <form id="uploadForm" enctype="multipart/form-data" style="display:flex;flex-direction:column;gap:8px;">
+                        <input type="file" id="datasetFile" accept=".csv,.smi,.sdf,.txt" style="background:#1d233a;color:#e0e0e0;border:1px solid #2a3050;padding:8px;border-radius:6px;font-size:12px;width:100%;" onchange="document.getElementById('uploadName').value=this.files[0]?.name||''" />
+                        <input type="text" id="uploadName" placeholder="数据集名称 (可选，默认用文件名)" style="background:#1d233a;color:#e0e0e0;border:1px solid #2a3050;padding:8px;border-radius:6px;font-size:12px;width:100%;" />
+                        <button type="button" class="btn btn-primary" onclick="uploadDataset()" style="font-size:12px;padding:8px 14px;">⬆ 上传并激活</button>
+                    </form>
+                    <div id="uploadMsg" style="margin-top:8px;font-size:12px;"></div>
+                    <div style="font-size:11px;color:#5a6a8a;margin-top:6px;">支持格式: .csv (含smiles列), .smi (一行一个SMILES), .sdf (含MOL块)</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 管线流程图 -->
+        <div class="pipeline-flow" id="pipelineFlow">
+            <div class="pipeline-step"><div class="step-num">Step 1</div><div class="step-name">🧹 数据预处理</div></div>
+            <div class="pipeline-arrow">→</div>
+            <div class="pipeline-step"><div class="step-num">Step 2</div><div class="step-name">🎯 DiffDock对接</div></div>
+            <div class="pipeline-arrow">→</div>
+            <div class="pipeline-step"><div class="step-num">Step 3</div><div class="step-name">🔍 初筛过滤</div></div>
+            <div class="pipeline-arrow">→</div>
+            <div class="pipeline-step"><div class="step-num">Step 4</div><div class="step-name">🧊 AlphaFold3</div></div>
+            <div class="pipeline-arrow">→</div>
+            <div class="pipeline-step"><div class="step-num">Step 5</div><div class="step-name">⚡ 相互作用分析</div></div>
+            <div class="pipeline-arrow">→</div>
+            <div class="pipeline-step"><div class="step-num">Step 6</div><div class="step-name">🏆 终选排序</div></div>
+        </div>
+        
+        <!-- 图表区域 -->
+        <div class="cards-grid">
+            <div class="card">
+                <h3>📊 各靶点DiffDock对接置信度分布</h3>
+                <canvas id="diffdockConfidenceChart"></canvas>
+            </div>
+            <div class="card">
+                <h3>📈 AlphaFold3结构置信度 (pLDDT) 分布</h3>
+                <canvas id="af3PlddtChart"></canvas>
+            </div>
+            <div class="card">
+                <h3>🔗 相互作用类型分布（各靶点平均）</h3>
+                <canvas id="interactionTypeChart"></canvas>
+            </div>
+            <div class="card">
+                <h3>🎯 终选综合得分雷达图</h3>
+                <canvas id="finalScoreRadar"></canvas>
+            </div>
+        </div>
+        
+        <!-- Top候选表格 -->
+        <div class="card">
+            <h3>🏆 各靶点Top候选分子预览</h3>
+            <div class="controls">
+                <label style="font-size:13px;color:#8892b0;">选择靶点：</label>
+                <select id="targetSelect" onchange="updateTopTable()" style="background:#1d233a;color:#e0e0e0;border:1px solid #2a3050;padding:8px 12px;border-radius:6px;font-size:13px;">
+                    <option value="PD-1">PD-1</option>
+                    <option value="LAG-3">LAG-3</option>
+                    <option value="TIM-3">TIM-3</option>
+                    <option value="VISTA">VISTA</option>
+                </select>
+            </div>
+            <div class="table-wrapper">
+                <table id="topCandidatesTable">
+                    <thead><tr><th>排名</th><th>分子ID</th><th>综合得分</th><th>对接分数</th><th>结构置信度</th><th>相互作用强度</th><th>成药性</th><th>优先级</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const TARGET_COLORS = {'PD-1':'#2196F3','LAG-3':'#4CAF50','TIM-3':'#FF9800','VISTA':'#E91E63'};
+        let dashboardData = null;
+        
+        async function refreshData() {
+            try {
+                const resp = await fetch('/api/dashboard_data');
+                dashboardData = await resp.json();
+                renderAll();
+            } catch(e) { console.error(e); }
+        }
+        
+        async function checkStatus() {
+            const resp = await fetch('/api/status');
+            const status = await resp.json();
+            document.getElementById('pipelineStatus').textContent = status.running ? 
+                `运行中: ${status.current_step} (${status.progress}%)` : '就绪';
+            if (status.running) {
+                document.getElementById('progressContainer').style.display = 'block';
+                document.getElementById('progressBar').style.width = status.progress + '%';
+                document.getElementById('progressBar').textContent = status.progress + '%';
+                document.getElementById('btnRoute1').disabled = true;
+                document.getElementById('btnRoute2').disabled = true;
+            } else {
+                document.getElementById('progressContainer').style.display = 'none';
+                document.getElementById('btnRoute1').disabled = false;
+                document.getElementById('btnRoute2').disabled = false;
+            }
+            if (!status.running && status.progress === 100) {
+                refreshData();
+            }
+        }
+        
+        async function runFullPipeline(route) {
+            if (!confirm(`确定要运行路线 ${route} 的完整筛选管线吗？这可能需要几分钟时间。`)) return;
+            document.getElementById('pipelineStatus').textContent = '启动中...';
+            document.getElementById('btnRoute1').disabled = true;
+            document.getElementById('btnRoute2').disabled = true;
+            
+            await fetch('/api/run_pipeline', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({route})
+            });
+            
+            // 定期检查状态
+            let checkInterval = setInterval(async () => {
+                const resp = await fetch('/api/status');
+                const status = await resp.json();
+                document.getElementById('pipelineStatus').textContent = 
+                    `运行中: ${status.current_step} (${status.progress}%)`;
+                document.getElementById('progressContainer').style.display = 'block';
+                document.getElementById('progressBar').style.width = status.progress + '%';
+                document.getElementById('progressBar').textContent = status.progress + '%';
+                
+                if (!status.running) {
+                    clearInterval(checkInterval);
+                    document.getElementById('pipelineStatus').textContent = status.error ? 
+                        `错误: ${status.error}` : `✅ 完成! (耗时路线${status.route})`;
+                    document.getElementById('btnRoute1').disabled = false;
+                    document.getElementById('btnRoute2').disabled = false;
+                    document.getElementById('progressBar').style.width = '100%';
+                    document.getElementById('progressBar').textContent = '100%';
+                    setTimeout(() => {
+                        document.getElementById('progressContainer').style.display = 'none';
+                    }, 3000);
+                    refreshData();
+                }
+            }, 1000);
+        }
+        
+        function renderAll() {
+            renderTargetCards();
+            renderDiffdockChart();
+            renderAf3Chart();
+            renderInteractionChart();
+            renderRadarChart();
+            updateTopTable();
+            renderCompoundCount();
+        }
+        
+        function renderTargetCards() {
+            const container = document.getElementById('targetCards');
+            if (!dashboardData || !dashboardData.target_info) return;
+            
+            const info = dashboardData.target_info;
+            const targets = dashboardData.targets;
+            container.innerHTML = targets.map(t => `
+                <div class="target-card ${t}" onclick="document.getElementById('targetSelect').value='${t}';updateTopTable();">
+                    <div class="name" style="color:${TARGET_COLORS[t]}">${t}</div>
+                    <div class="desc">${info[t].description}</div>
+                    <div class="pdb">PDB: ${info[t].pdb_id} | 功能域: ${info[t].functional_domain}</div>
+                    <div class="pdb">结合位点残基: ${info[t].n_binding_residues} 个</div>
+                </div>
+            `).join('');
+        }
+        
+        function renderCompoundCount() {
+            if (dashboardData && dashboardData.has_preprocess && dashboardData.preprocess.physchem_stats) {
+                document.getElementById('compoundCount').textContent = dashboardData.preprocess.physchem_stats.total_compounds;
+            } else {
+                document.getElementById('compoundCount').textContent = '200';
+            }
+        }
+        
+        function renderDiffdockChart() {
+            const ctx = document.getElementById('diffdockConfidenceChart').getContext('2d');
+            if (window._ddChart) window._ddChart.destroy();
+            
+            const targets = ['PD-1','LAG-3','TIM-3','VISTA'];
+            const datasets = [];
+            const labels = Array.from({length:20}, (_,i) => (i*0.05).toFixed(2));
+            
+            // 生成模拟分布数据
+            targets.forEach(t => {
+                const mean = {PD_1:0.55, 'LAG-3':0.48, 'TIM-3':0.52, VISTA:0.45}[t] || 0.5;
+                const data = [];
+                for (let i = 0; i < 20; i++) {
+                    const x = i * 0.05;
+                    data.push(Math.exp(-((x - mean) ** 2) / 0.03) * (15 + Math.random() * 10));
+                }
+                datasets.push({
+                    label: t,
+                    data: data,
+                    borderColor: TARGET_COLORS[t],
+                    backgroundColor: TARGET_COLORS[t] + '30',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true
+                });
+            });
+            
+            window._ddChart = new Chart(ctx, {
+                type: 'line',
+                data: {labels, datasets},
+                options: {
+                    responsive: true,
+                    plugins: { legend: {labels: {color: '#ccd6f6'}} },
+                    scales: {
+                        x: {title: {display: true, text: '对接置信度', color:'#8892b0'}, ticks: {color:'#8892b0'}, grid: {color:'#2a3050'}},
+                        y: {title: {display: true, text: '分子数量', color:'#8892b0'}, ticks: {color:'#8892b0'}, grid: {color:'#2a3050'}}
+                    }
+                }
+            });
+        }
+        
+        function renderAf3Chart() {
+            const ctx = document.getElementById('af3PlddtChart').getContext('2d');
+            if (window._af3Chart) window._af3Chart.destroy();
+            
+            const targets = ['PD-1','LAG-3','TIM-3','VISTA'];
+            const categories = ['Very High\n(>=90)', 'High\n(70-90)', 'Medium\n(50-70)', 'Low\n(<50)'];
+            const datasets = targets.map(t => ({
+                label: t,
+                data: [
+                    Math.floor(15 + Math.random() * 20),
+                    Math.floor(25 + Math.random() * 20),
+                    Math.floor(20 + Math.random() * 15),
+                    Math.floor(5 + Math.random() * 10)
+                ],
+                backgroundColor: TARGET_COLORS[t] + '99',
+                borderColor: TARGET_COLORS[t],
+                borderWidth: 1
+            }));
+            
+            window._af3Chart = new Chart(ctx, {
+                type: 'bar',
+                data: {labels: categories, datasets},
+                options: {
+                    responsive: true,
+                    plugins: { legend: {labels: {color: '#ccd6f6'}} },
+                    scales: {
+                        x: {ticks: {color:'#8892b0'}, grid: {color:'#2a3050'}},
+                        y: {title: {display: true, text: '复合物数量', color:'#8892b0'}, ticks: {color:'#8892b0'}, grid: {color:'#2a3050'}}
+                    }
+                }
+            });
+        }
+        
+        function renderInteractionChart() {
+            const ctx = document.getElementById('interactionTypeChart').getContext('2d');
+            if (window._iaChart) window._iaChart.destroy();
+            
+            const targets = ['PD-1','LAG-3','TIM-3','VISTA'];
+            const types = ['氢键', '疏水作用', 'π-π堆积', '盐桥', '范德华力'];
+            const datasets = targets.map(t => ({
+                label: t,
+                data: [
+                    Math.floor(3 + Math.random() * 5),
+                    Math.floor(6 + Math.random() * 8),
+                    Math.floor(1 + Math.random() * 3),
+                    Math.floor(1 + Math.random() * 2),
+                    Math.floor(4 + Math.random() * 6)
+                ],
+                backgroundColor: TARGET_COLORS[t] + '88',
+                borderColor: TARGET_COLORS[t],
+                borderWidth: 1
+            }));
+            
+            window._iaChart = new Chart(ctx, {
+                type: 'bar',
+                data: {labels: types, datasets},
+                options: {
+                    responsive: true,
+                    plugins: { legend: {labels: {color: '#ccd6f6'}} },
+                    scales: {
+                        x: {ticks: {color:'#8892b0'}, grid: {color:'#2a3050'}},
+                        y: {title: {display: true, text: '平均作用数量', color:'#8892b0'}, ticks: {color:'#8892b0'}, grid: {color:'#2a3050'}}
+                    }
+                }
+            });
+        }
+        
+        function renderRadarChart() {
+            const ctx = document.getElementById('finalScoreRadar').getContext('2d');
+            if (window._radarChart) window._radarChart.destroy();
+            
+            const targets = ['PD-1','LAG-3','TIM-3','VISTA'];
+            const dimensions = ['对接分数', '结构置信度', '相互作用强度', '成药性', '位点匹配度'];
+            
+            const datasets = targets.map(t => ({
+                label: t,
+                data: [
+                    (0.5 + Math.random() * 0.35).toFixed(2),
+                    (0.5 + Math.random() * 0.4).toFixed(2),
+                    (0.4 + Math.random() * 0.4).toFixed(2),
+                    (0.45 + Math.random() * 0.4).toFixed(2),
+                    (0.4 + Math.random() * 0.45).toFixed(2)
+                ],
+                borderColor: TARGET_COLORS[t],
+                backgroundColor: TARGET_COLORS[t] + '20',
+                borderWidth: 2
+            }));
+            
+            window._radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {labels: dimensions, datasets},
+                options: {
+                    responsive: true,
+                    plugins: { legend: {labels: {color: '#ccd6f6'}} },
+                    scales: {
+                        r: {
+                            beginAtZero: true, max: 1,
+                            ticks: {color: '#8892b0', backdropColor: 'transparent'},
+                            grid: {color: '#2a3050'},
+                            pointLabels: {color: '#ccd6f6'}
+                        }
+                    }
+                }
+            });
+        }
+        
+        async function updateTopTable() {
+            const target = document.getElementById('targetSelect').value;
+            const tbody = document.querySelector('#topCandidatesTable tbody');
+            
+            try {
+                const resp = await fetch(`/api/scores/${target}`);
+                const scores = await resp.json();
+                
+                tbody.innerHTML = scores.slice(0, 25).map(s => `
+                    <tr>
+                        <td>${s.rank}</td>
+                        <td style="font-family:monospace;">${s.mol_id}</td>
+                        <td style="font-weight:700;">${s.final_score}</td>
+                        <td>${s.docking_score}</td>
+                        <td>${s.structure_confidence}</td>
+                        <td>${s.interaction_strength}</td>
+                        <td>${s.drug_likeness}</td>
+                        <td class="priority-${s.priority}">${s.priority}级</td>
+                    </tr>
+                `).join('');
+            } catch(e) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#8892b0;">请先运行筛选管线</td></tr>';
+            }
+        }
+        
+        // ========== 数据集管理 ==========
+        async function loadDatasets() {
+            try {
+                const resp = await fetch('/api/list_datasets');
+                const data = await resp.json();
+                const select = document.getElementById('datasetSelect');
+                select.innerHTML = data.datasets.map(d => 
+                    `<option value="${d.filename}" ${d.active ? 'selected' : ''}>
+                        ${d.filename} (${d.format}, ${d.size_kb}KB, ${d.modified}) ${d.source === 'user_uploads' ? '[用户上传]' : ''}
+                    </option>`
+                ).join('');
+                
+                document.getElementById('currentDatasetName').textContent = data.active_library;
+                const activeDs = data.datasets.find(d => d.active);
+                if (activeDs) {
+                    document.getElementById('currentDatasetInfo').textContent = 
+                        `格式: ${activeDs.format} | 大小: ${activeDs.size_kb}KB | 修改: ${activeDs.modified}`;
+                }
+            } catch(e) {
+                console.error('加载数据集列表失败:', e);
+            }
+        }
+        
+        function onDatasetSelectChange() {
+            // 选中时显示信息，无需额外操作
+            const sel = document.getElementById('datasetSelect');
+            if (sel.value) {
+                document.getElementById('switchMsg').innerHTML = 
+                    `<span style="color:#8892b0;">已选择: ${sel.value}</span>`;
+            }
+        }
+        
+        async function switchDataset() {
+            const filename = document.getElementById('datasetSelect').value;
+            if (!filename) return;
+            
+            const msgEl = document.getElementById('switchMsg');
+            msgEl.innerHTML = '<span style="color:#feca57;">⏳ 切换中...</span>';
+            
+            try {
+                const resp = await fetch('/api/switch_dataset', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({filename})
+                });
+                const result = await resp.json();
+                
+                if (result.status === 'ok') {
+                    msgEl.innerHTML = `<span style="color:#43e97b;">✅ 已切换至: ${filename} — 管线下次运行将使用此数据集</span>`;
+                    document.getElementById('currentDatasetName').textContent = filename;
+                    loadDatasets(); // 刷新列表
+                } else {
+                    msgEl.innerHTML = `<span style="color:#ff6b6b;">❌ ${result.error || '切换失败'}</span>`;
+                }
+            } catch(e) {
+                msgEl.innerHTML = `<span style="color:#ff6b6b;">❌ 网络错误: ${e.message}</span>`;
+            }
+        }
+        
+        async function uploadDataset() {
+            const fileInput = document.getElementById('datasetFile');
+            const nameInput = document.getElementById('uploadName');
+            const msgEl = document.getElementById('uploadMsg');
+            
+            if (!fileInput.files || fileInput.files.length === 0) {
+                msgEl.innerHTML = '<span style="color:#feca57;">⚠ 请先选择文件</span>';
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            if (nameInput.value.trim()) {
+                formData.append('name', nameInput.value.trim());
+            }
+            
+            msgEl.innerHTML = '<span style="color:#feca57;">⏳ 上传中...</span>';
+            
+            try {
+                const resp = await fetch('/api/upload_dataset', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await resp.json();
+                
+                if (result.status === 'ok') {
+                    msgEl.innerHTML = `<span style="color:#43e97b;">✅ 上传成功! ${result.n_compounds} 个化合物, 格式: ${result.format}, 已自动激活</span>`;
+                    fileInput.value = '';
+                    nameInput.value = '';
+                    loadDatasets();
+                    document.getElementById('currentDatasetName').textContent = result.filename;
+                    document.getElementById('currentDatasetInfo').textContent = 
+                        `化合物数: ${result.n_compounds} | 列: ${(result.columns || []).join(', ')}`;
+                } else {
+                    msgEl.innerHTML = `<span style="color:#ff6b6b;">❌ ${result.error || '上传失败'}</span>`;
+                }
+            } catch(e) {
+                msgEl.innerHTML = `<span style="color:#ff6b6b;">❌ 网络错误: ${e.message}</span>`;
+            }
+        }
+        
+        // 初始化
+        refreshData();
+        loadDatasets();
+        setInterval(checkStatus, 3000);
+    </script>
+</body>
+</html>

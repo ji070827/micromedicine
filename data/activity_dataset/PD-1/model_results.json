@@ -1,0 +1,108 @@
+{
+  "target": "PD-1",
+  "model_type": "RandomForest (真实scikit-learn)",
+  "n_train": 160,
+  "n_test": 40,
+  "n_features": 2048,
+  "n_active": 60,
+  "n_inactive": 140,
+  "accuracy": 0.95,
+  "precision": 1.0,
+  "recall": 0.8333,
+  "f1_score": 0.9091,
+  "auc_roc": 0.9792,
+  "confusion_matrix": {
+    "TP": 10,
+    "FP": 0,
+    "FN": 2,
+    "TN": 28
+  },
+  "top_features": [
+    {
+      "bit": 1385,
+      "importance": 0.03104
+    },
+    {
+      "bit": 1795,
+      "importance": 0.02318
+    },
+    {
+      "bit": 1697,
+      "importance": 0.01983
+    },
+    {
+      "bit": 1665,
+      "importance": 0.01533
+    },
+    {
+      "bit": 1152,
+      "importance": 0.01456
+    },
+    {
+      "bit": 1163,
+      "importance": 0.01387
+    },
+    {
+      "bit": 881,
+      "importance": 0.01379
+    },
+    {
+      "bit": 385,
+      "importance": 0.01346
+    },
+    {
+      "bit": 807,
+      "importance": 0.01141
+    },
+    {
+      "bit": 1816,
+      "importance": 0.01032
+    },
+    {
+      "bit": 486,
+      "importance": 0.00991
+    },
+    {
+      "bit": 1917,
+      "importance": 0.00974
+    },
+    {
+      "bit": 315,
+      "importance": 0.00951
+    },
+    {
+      "bit": 1146,
+      "importance": 0.00918
+    },
+    {
+      "bit": 80,
+      "importance": 0.00876
+    },
+    {
+      "bit": 1099,
+      "importance": 0.00847
+    },
+    {
+      "bit": 675,
+      "importance": 0.00819
+    },
+    {
+      "bit": 715,
+      "importance": 0.00805
+    },
+    {
+      "bit": 1536,
+      "importance": 0.00797
+    },
+    {
+      "bit": 1700,
+      "importance": 0.00761
+    }
+  ],
+  "parameters": {
+    "n_estimators": 200,
+    "max_depth": 15,
+    "random_state": 42,
+    "nbits": 2048
+  }
+}

@@ -1,0 +1,1138 @@
+{
+  "PD-1": [
+    {
+      "mol_id": "mol_006",
+      "name": "Pembrolizumab Small Molecule Mimetic",
+      "mol_type": "Indole-piperidine",
+      "binding_affinity": -10.1,
+      "mw": 326.4,
+      "drug_likeness": 0.81,
+      "predicted_interactions": {
+        "hydrogen_bonds": 4,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_008",
+      "name": "BMS-986207 Analog (Triazolopyrimidine)",
+      "mol_type": "Triazolopyrimidine",
+      "binding_affinity": -9.8,
+      "mw": 370.4,
+      "drug_likeness": 0.83,
+      "predicted_interactions": {
+        "hydrogen_bonds": 4,
+        "pi_stacking": 3,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 18
+    },
+    {
+      "mol_id": "mol_003",
+      "name": "TSR-042 Analog (Benzimidazole)",
+      "mol_type": "Benzimidazole",
+      "binding_affinity": -9.5,
+      "mw": 310.3,
+      "drug_likeness": 0.85,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_007",
+      "name": "MBG453 Analog (Thiadiazole)",
+      "mol_type": "Thiadiazole",
+      "binding_affinity": -9.3,
+      "mw": 358.3,
+      "drug_likeness": 0.79,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 1,
+        "hydrophobic": 5,
+        "halogen": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_001",
+      "name": "BMS-936558 Analog (Aryl Ether)",
+      "mol_type": "Aryl Ether",
+      "binding_affinity": -9.2,
+      "mw": 380.4,
+      "drug_likeness": 0.82,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 17
+    },
+    {
+      "mol_id": "mol_010",
+      "name": "AB122 Analog (Pyridine-Benzamide)",
+      "mol_type": "Pyridine-Benzamide",
+      "binding_affinity": -9.0,
+      "mw": 325.4,
+      "drug_likeness": 0.88,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 20
+    },
+    {
+      "mol_id": "mol_005",
+      "name": "SHR-1210 Analog (Quinoline)",
+      "mol_type": "Quinoline",
+      "binding_affinity": -8.9,
+      "mw": 345.4,
+      "drug_likeness": 0.73,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 3,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 20
+    },
+    {
+      "mol_id": "mol_002",
+      "name": "LAG-525 Analog (Benzamide)",
+      "mol_type": "Benzamide",
+      "binding_affinity": -8.7,
+      "mw": 345.4,
+      "drug_likeness": 0.78,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 1,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 17
+    },
+    {
+      "mol_id": "mol_009",
+      "name": "TSR-033 Analog (Pyrazolopyrimidine)",
+      "mol_type": "Pyrazolopyrimidine",
+      "binding_affinity": -8.6,
+      "mw": 340.3,
+      "drug_likeness": 0.75,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 3,
+        "halogen": 1
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_004",
+      "name": "CA-170 Analog (Biphenyl Urea)",
+      "mol_type": "Biphenyl Urea",
+      "binding_affinity": -8.4,
+      "mw": 355.4,
+      "drug_likeness": 0.76,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "simple_004",
+      "name": "Cyclopropyl-carboxamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -8.0,
+      "mw": 293.3,
+      "drug_likeness": 0.75,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 1,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 13
+    },
+    {
+      "mol_id": "simple_006",
+      "name": "N-methyl piperidine amide",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.9,
+      "mw": 283.8,
+      "drug_likeness": 0.69,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 1,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 12
+    },
+    {
+      "mol_id": "simple_001",
+      "name": "4-(4-Fluorobenzyl)piperidine",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.4,
+      "mw": 274.0,
+      "drug_likeness": 0.89,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 1,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 13
+    },
+    {
+      "mol_id": "simple_005",
+      "name": "t-Butyl benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.4,
+      "mw": 333.7,
+      "drug_likeness": 0.77,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 1,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 11
+    },
+    {
+      "mol_id": "simple_008",
+      "name": "Thiadiazole thioether",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.3,
+      "mw": 298.1,
+      "drug_likeness": 0.83,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 0,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 9
+    },
+    {
+      "mol_id": "simple_007",
+      "name": "Diethoxy benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.7,
+      "mw": 385.2,
+      "drug_likeness": 0.86,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 0,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 14
+    },
+    {
+      "mol_id": "simple_002",
+      "name": "Dopamine Analog",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.3,
+      "mw": 304.7,
+      "drug_likeness": 0.55,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 1,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 9
+    },
+    {
+      "mol_id": "simple_009",
+      "name": "Tetrahydroisoquinoline furan",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.2,
+      "mw": 372.8,
+      "drug_likeness": 0.79,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 14
+    },
+    {
+      "mol_id": "simple_010",
+      "name": "Morpholine benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.2,
+      "mw": 277.1,
+      "drug_likeness": 0.58,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 0,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 11
+    },
+    {
+      "mol_id": "simple_003",
+      "name": "Sulfonamide-thiazole",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.0,
+      "mw": 366.2,
+      "drug_likeness": 0.5,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 12
+    }
+  ],
+  "LAG-3": [
+    {
+      "mol_id": "mol_006",
+      "name": "Pembrolizumab Small Molecule Mimetic",
+      "mol_type": "Indole-piperidine",
+      "binding_affinity": -10.1,
+      "mw": 326.4,
+      "drug_likeness": 0.81,
+      "predicted_interactions": {
+        "hydrogen_bonds": 4,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_008",
+      "name": "BMS-986207 Analog (Triazolopyrimidine)",
+      "mol_type": "Triazolopyrimidine",
+      "binding_affinity": -9.8,
+      "mw": 370.4,
+      "drug_likeness": 0.83,
+      "predicted_interactions": {
+        "hydrogen_bonds": 4,
+        "pi_stacking": 3,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 18
+    },
+    {
+      "mol_id": "mol_003",
+      "name": "TSR-042 Analog (Benzimidazole)",
+      "mol_type": "Benzimidazole",
+      "binding_affinity": -9.5,
+      "mw": 310.3,
+      "drug_likeness": 0.85,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_007",
+      "name": "MBG453 Analog (Thiadiazole)",
+      "mol_type": "Thiadiazole",
+      "binding_affinity": -9.3,
+      "mw": 358.3,
+      "drug_likeness": 0.79,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 1,
+        "hydrophobic": 5,
+        "halogen": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_001",
+      "name": "BMS-936558 Analog (Aryl Ether)",
+      "mol_type": "Aryl Ether",
+      "binding_affinity": -9.2,
+      "mw": 380.4,
+      "drug_likeness": 0.82,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 17
+    },
+    {
+      "mol_id": "mol_010",
+      "name": "AB122 Analog (Pyridine-Benzamide)",
+      "mol_type": "Pyridine-Benzamide",
+      "binding_affinity": -9.0,
+      "mw": 325.4,
+      "drug_likeness": 0.88,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 20
+    },
+    {
+      "mol_id": "mol_005",
+      "name": "SHR-1210 Analog (Quinoline)",
+      "mol_type": "Quinoline",
+      "binding_affinity": -8.9,
+      "mw": 345.4,
+      "drug_likeness": 0.73,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 3,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 20
+    },
+    {
+      "mol_id": "mol_002",
+      "name": "LAG-525 Analog (Benzamide)",
+      "mol_type": "Benzamide",
+      "binding_affinity": -8.7,
+      "mw": 345.4,
+      "drug_likeness": 0.78,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 1,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 17
+    },
+    {
+      "mol_id": "mol_009",
+      "name": "TSR-033 Analog (Pyrazolopyrimidine)",
+      "mol_type": "Pyrazolopyrimidine",
+      "binding_affinity": -8.6,
+      "mw": 340.3,
+      "drug_likeness": 0.75,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 3,
+        "halogen": 1
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "simple_003",
+      "name": "Sulfonamide-thiazole",
+      "mol_type": "Fragment",
+      "binding_affinity": -8.5,
+      "mw": 372.8,
+      "drug_likeness": 0.51,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 12
+    },
+    {
+      "mol_id": "simple_005",
+      "name": "t-Butyl benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -8.5,
+      "mw": 312.7,
+      "drug_likeness": 0.53,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 1,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 11
+    },
+    {
+      "mol_id": "mol_004",
+      "name": "CA-170 Analog (Biphenyl Urea)",
+      "mol_type": "Biphenyl Urea",
+      "binding_affinity": -8.4,
+      "mw": 355.4,
+      "drug_likeness": 0.76,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "simple_010",
+      "name": "Morpholine benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -8.1,
+      "mw": 387.0,
+      "drug_likeness": 0.52,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 0,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 11
+    },
+    {
+      "mol_id": "simple_002",
+      "name": "Dopamine Analog",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.4,
+      "mw": 282.4,
+      "drug_likeness": 0.77,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 1,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 9
+    },
+    {
+      "mol_id": "simple_009",
+      "name": "Tetrahydroisoquinoline furan",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.4,
+      "mw": 370.3,
+      "drug_likeness": 0.6,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 2,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 14
+    },
+    {
+      "mol_id": "simple_008",
+      "name": "Thiadiazole thioether",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.3,
+      "mw": 274.8,
+      "drug_likeness": 0.6,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 1,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 9
+    },
+    {
+      "mol_id": "simple_006",
+      "name": "N-methyl piperidine amide",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.0,
+      "mw": 398.7,
+      "drug_likeness": 0.86,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 1,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 12
+    },
+    {
+      "mol_id": "simple_007",
+      "name": "Diethoxy benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.0,
+      "mw": 301.6,
+      "drug_likeness": 0.54,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 1,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 14
+    },
+    {
+      "mol_id": "simple_001",
+      "name": "4-(4-Fluorobenzyl)piperidine",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.5,
+      "mw": 319.0,
+      "drug_likeness": 0.66,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 1,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 13
+    },
+    {
+      "mol_id": "simple_004",
+      "name": "Cyclopropyl-carboxamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.1,
+      "mw": 297.6,
+      "drug_likeness": 0.75,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 13
+    }
+  ],
+  "TIM-3": [
+    {
+      "mol_id": "mol_006",
+      "name": "Pembrolizumab Small Molecule Mimetic",
+      "mol_type": "Indole-piperidine",
+      "binding_affinity": -10.1,
+      "mw": 326.4,
+      "drug_likeness": 0.81,
+      "predicted_interactions": {
+        "hydrogen_bonds": 4,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_008",
+      "name": "BMS-986207 Analog (Triazolopyrimidine)",
+      "mol_type": "Triazolopyrimidine",
+      "binding_affinity": -9.8,
+      "mw": 370.4,
+      "drug_likeness": 0.83,
+      "predicted_interactions": {
+        "hydrogen_bonds": 4,
+        "pi_stacking": 3,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 18
+    },
+    {
+      "mol_id": "mol_003",
+      "name": "TSR-042 Analog (Benzimidazole)",
+      "mol_type": "Benzimidazole",
+      "binding_affinity": -9.5,
+      "mw": 310.3,
+      "drug_likeness": 0.85,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_007",
+      "name": "MBG453 Analog (Thiadiazole)",
+      "mol_type": "Thiadiazole",
+      "binding_affinity": -9.3,
+      "mw": 358.3,
+      "drug_likeness": 0.79,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 1,
+        "hydrophobic": 5,
+        "halogen": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_001",
+      "name": "BMS-936558 Analog (Aryl Ether)",
+      "mol_type": "Aryl Ether",
+      "binding_affinity": -9.2,
+      "mw": 380.4,
+      "drug_likeness": 0.82,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 17
+    },
+    {
+      "mol_id": "mol_010",
+      "name": "AB122 Analog (Pyridine-Benzamide)",
+      "mol_type": "Pyridine-Benzamide",
+      "binding_affinity": -9.0,
+      "mw": 325.4,
+      "drug_likeness": 0.88,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 20
+    },
+    {
+      "mol_id": "mol_005",
+      "name": "SHR-1210 Analog (Quinoline)",
+      "mol_type": "Quinoline",
+      "binding_affinity": -8.9,
+      "mw": 345.4,
+      "drug_likeness": 0.73,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 3,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 20
+    },
+    {
+      "mol_id": "mol_002",
+      "name": "LAG-525 Analog (Benzamide)",
+      "mol_type": "Benzamide",
+      "binding_affinity": -8.7,
+      "mw": 345.4,
+      "drug_likeness": 0.78,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 1,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 17
+    },
+    {
+      "mol_id": "mol_009",
+      "name": "TSR-033 Analog (Pyrazolopyrimidine)",
+      "mol_type": "Pyrazolopyrimidine",
+      "binding_affinity": -8.6,
+      "mw": 340.3,
+      "drug_likeness": 0.75,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 3,
+        "halogen": 1
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_004",
+      "name": "CA-170 Analog (Biphenyl Urea)",
+      "mol_type": "Biphenyl Urea",
+      "binding_affinity": -8.4,
+      "mw": 355.4,
+      "drug_likeness": 0.76,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "simple_002",
+      "name": "Dopamine Analog",
+      "mol_type": "Fragment",
+      "binding_affinity": -8.1,
+      "mw": 347.1,
+      "drug_likeness": 0.89,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 9
+    },
+    {
+      "mol_id": "simple_005",
+      "name": "t-Butyl benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.6,
+      "mw": 385.6,
+      "drug_likeness": 0.85,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 11
+    },
+    {
+      "mol_id": "simple_004",
+      "name": "Cyclopropyl-carboxamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.3,
+      "mw": 365.0,
+      "drug_likeness": 0.65,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 0,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 13
+    },
+    {
+      "mol_id": "simple_009",
+      "name": "Tetrahydroisoquinoline furan",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.0,
+      "mw": 283.5,
+      "drug_likeness": 0.68,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 1,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 14
+    },
+    {
+      "mol_id": "simple_003",
+      "name": "Sulfonamide-thiazole",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.9,
+      "mw": 344.2,
+      "drug_likeness": 0.88,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 0,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 12
+    },
+    {
+      "mol_id": "simple_001",
+      "name": "4-(4-Fluorobenzyl)piperidine",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.6,
+      "mw": 306.0,
+      "drug_likeness": 0.51,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 13
+    },
+    {
+      "mol_id": "simple_007",
+      "name": "Diethoxy benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.6,
+      "mw": 325.4,
+      "drug_likeness": 0.65,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 1,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 14
+    },
+    {
+      "mol_id": "simple_010",
+      "name": "Morpholine benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.4,
+      "mw": 303.6,
+      "drug_likeness": 0.52,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 1,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 11
+    },
+    {
+      "mol_id": "simple_006",
+      "name": "N-methyl piperidine amide",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.2,
+      "mw": 387.3,
+      "drug_likeness": 0.69,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 12
+    },
+    {
+      "mol_id": "simple_008",
+      "name": "Thiadiazole thioether",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.1,
+      "mw": 375.0,
+      "drug_likeness": 0.85,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 0,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 9
+    }
+  ],
+  "VISTA": [
+    {
+      "mol_id": "mol_006",
+      "name": "Pembrolizumab Small Molecule Mimetic",
+      "mol_type": "Indole-piperidine",
+      "binding_affinity": -10.1,
+      "mw": 326.4,
+      "drug_likeness": 0.81,
+      "predicted_interactions": {
+        "hydrogen_bonds": 4,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_008",
+      "name": "BMS-986207 Analog (Triazolopyrimidine)",
+      "mol_type": "Triazolopyrimidine",
+      "binding_affinity": -9.8,
+      "mw": 370.4,
+      "drug_likeness": 0.83,
+      "predicted_interactions": {
+        "hydrogen_bonds": 4,
+        "pi_stacking": 3,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 18
+    },
+    {
+      "mol_id": "mol_003",
+      "name": "TSR-042 Analog (Benzimidazole)",
+      "mol_type": "Benzimidazole",
+      "binding_affinity": -9.5,
+      "mw": 310.3,
+      "drug_likeness": 0.85,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_007",
+      "name": "MBG453 Analog (Thiadiazole)",
+      "mol_type": "Thiadiazole",
+      "binding_affinity": -9.3,
+      "mw": 358.3,
+      "drug_likeness": 0.79,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 1,
+        "hydrophobic": 5,
+        "halogen": 3
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_001",
+      "name": "BMS-936558 Analog (Aryl Ether)",
+      "mol_type": "Aryl Ether",
+      "binding_affinity": -9.2,
+      "mw": 380.4,
+      "drug_likeness": 0.82,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 17
+    },
+    {
+      "mol_id": "mol_010",
+      "name": "AB122 Analog (Pyridine-Benzamide)",
+      "mol_type": "Pyridine-Benzamide",
+      "binding_affinity": -9.0,
+      "mw": 325.4,
+      "drug_likeness": 0.88,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 20
+    },
+    {
+      "mol_id": "mol_005",
+      "name": "SHR-1210 Analog (Quinoline)",
+      "mol_type": "Quinoline",
+      "binding_affinity": -8.9,
+      "mw": 345.4,
+      "drug_likeness": 0.73,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 3,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 20
+    },
+    {
+      "mol_id": "mol_002",
+      "name": "LAG-525 Analog (Benzamide)",
+      "mol_type": "Benzamide",
+      "binding_affinity": -8.7,
+      "mw": 345.4,
+      "drug_likeness": 0.78,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 1,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 17
+    },
+    {
+      "mol_id": "mol_009",
+      "name": "TSR-033 Analog (Pyrazolopyrimidine)",
+      "mol_type": "Pyrazolopyrimidine",
+      "binding_affinity": -8.6,
+      "mw": 340.3,
+      "drug_likeness": 0.75,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 3,
+        "halogen": 1
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "mol_004",
+      "name": "CA-170 Analog (Biphenyl Urea)",
+      "mol_type": "Biphenyl Urea",
+      "binding_affinity": -8.4,
+      "mw": 355.4,
+      "drug_likeness": 0.76,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 2,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 19
+    },
+    {
+      "mol_id": "simple_009",
+      "name": "Tetrahydroisoquinoline furan",
+      "mol_type": "Fragment",
+      "binding_affinity": -8.0,
+      "mw": 318.0,
+      "drug_likeness": 0.71,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 14
+    },
+    {
+      "mol_id": "simple_004",
+      "name": "Cyclopropyl-carboxamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.9,
+      "mw": 281.4,
+      "drug_likeness": 0.61,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 0,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 13
+    },
+    {
+      "mol_id": "simple_006",
+      "name": "N-methyl piperidine amide",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.9,
+      "mw": 382.2,
+      "drug_likeness": 0.71,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 0,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 12
+    },
+    {
+      "mol_id": "simple_008",
+      "name": "Thiadiazole thioether",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.8,
+      "mw": 307.0,
+      "drug_likeness": 0.51,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 9
+    },
+    {
+      "mol_id": "simple_010",
+      "name": "Morpholine benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.8,
+      "mw": 279.6,
+      "drug_likeness": 0.88,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 0,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 11
+    },
+    {
+      "mol_id": "simple_002",
+      "name": "Dopamine Analog",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.1,
+      "mw": 337.8,
+      "drug_likeness": 0.61,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 0,
+        "hydrophobic": 4
+      },
+      "n_ligand_atoms": 9
+    },
+    {
+      "mol_id": "simple_007",
+      "name": "Diethoxy benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -7.0,
+      "mw": 327.9,
+      "drug_likeness": 0.74,
+      "predicted_interactions": {
+        "hydrogen_bonds": 2,
+        "pi_stacking": 1,
+        "hydrophobic": 2
+      },
+      "n_ligand_atoms": 14
+    },
+    {
+      "mol_id": "simple_003",
+      "name": "Sulfonamide-thiazole",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.5,
+      "mw": 349.6,
+      "drug_likeness": 0.51,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 0,
+        "hydrophobic": 5
+      },
+      "n_ligand_atoms": 12
+    },
+    {
+      "mol_id": "simple_001",
+      "name": "4-(4-Fluorobenzyl)piperidine",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.4,
+      "mw": 382.4,
+      "drug_likeness": 0.66,
+      "predicted_interactions": {
+        "hydrogen_bonds": 3,
+        "pi_stacking": 1,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 13
+    },
+    {
+      "mol_id": "simple_005",
+      "name": "t-Butyl benzamide",
+      "mol_type": "Fragment",
+      "binding_affinity": -6.1,
+      "mw": 362.1,
+      "drug_likeness": 0.89,
+      "predicted_interactions": {
+        "hydrogen_bonds": 1,
+        "pi_stacking": 2,
+        "hydrophobic": 3
+      },
+      "n_ligand_atoms": 11
+    }
+  ]
+}

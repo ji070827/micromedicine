@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D结构查看器 | 免疫检查点AI筛选</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://3dmol.org/build/3Dmol-min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #0a0e17; color: #e0e0e0; min-height: 100vh; }
+        
+        .header { background: linear-gradient(135deg, #1a1f35 0%, #0d1117 100%); padding: 0 30px; height: 60px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #2a3050; }
+        .header h1 { font-size: 20px; font-weight: 700; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header .nav { display: flex; gap: 5px; }
+        .header .nav a { color: #8892b0; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; transition: all 0.3s; }
+        .header .nav a:hover, .header .nav a.active { background: rgba(79,172,254,0.15); color: #4facfe; }
+        
+        .container { max-width: 1500px; margin: 0 auto; padding: 16px; height: calc(100vh - 60px); }
+        
+        .main-layout { display: grid; grid-template-columns: 370px 1fr 280px; gap: 16px; height: 100%; }
+        
+        .panel { background: #161b2b; border: 1px solid #2a3050; border-radius: 10px; padding: 16px; overflow-y: auto; }
+        .panel h3 { font-size: 15px; color: #ccd6f6; margin-bottom: 12px; border-bottom: 1px solid #2a3050; padding-bottom: 8px; }
+        
+        .viewer-panel { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+        .viewer-toolbar { padding: 8px 12px; display: flex; gap: 6px; background: #1d233a; border-bottom: 1px solid #2a3050; flex-wrap: wrap; }
+        .viewer-panel #3dviewer { flex: 1; min-height: 450px; }
+        
+        .btn { padding: 8px 14px; border: none; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.3s; white-space: nowrap; }
+        .btn-primary { background: #4facfe; color: #0a0e17; }
+        .btn-success { background: #43e97b; color: #0a0e17; }
+        .btn-warning { background: #feca57; color: #0a0e17; }
+        .btn-outline { background: transparent; border: 1px solid #4facfe; color: #4facfe; }
+        .btn-outline:hover, .btn-outline.active { background: #4facfe; color: #fff; }
+        .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+        
+        .target-tabs { display: flex; gap: 4px; margin-bottom: 12px; }
+        .target-tab { flex: 1; padding: 10px 6px; border: 1px solid #2a3050; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.3s; background: #1d233a; font-size: 13px; font-weight: 600; }
+        .target-tab:hover, .target-tab.selected { border-color: #4facfe; box-shadow: 0 0 12px rgba(79,172,254,0.2); }
+        
+        .drug-list { max-height: 480px; overflow-y: auto; }
+        .drug-item { padding: 10px; border: 1px solid #2a3050; border-radius: 8px; margin: 4px 0; cursor: pointer; transition: all 0.3s; background: #1d233a; }
+        .drug-item:hover { border-color: #4facfe; box-shadow: 0 0 8px rgba(79,172,254,0.15); }
+        .drug-item.selected { border-color: #43e97b; box-shadow: 0 0 12px rgba(67,233,123,0.3); }
+        .drug-item .drug-name { font-size: 13px; font-weight: 600; color: #ccd6f6; margin-bottom: 4px; }
+        .drug-item .drug-type { font-size: 11px; color: #5a6a8a; }
+        .drug-item .drug-stats { display: flex; gap: 8px; font-size: 11px; color: #8892b0; margin-top: 4px; }
+        .drug-item .affinity { color: #43e97b; }
+        .drug-item .rank-badge { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; background: rgba(67,233,123,0.15); color: #43e97b; }
+        
+        .info-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1d233a; font-size: 12px; }
+        .info-row .label { color: #8892b0; }
+        .info-row .value { color: #ccd6f6; font-weight: 600; }
+        
+        .legend-item { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-size: 12px; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+        
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin: 2px; }
+        .badge-hydrophobic { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .badge-polar { background: rgba(0,255,136,0.2); color: #00FF88; }
+        .badge-positive { background: rgba(68,136,255,0.2); color: #4488FF; }
+        .badge-negative { background: rgba(255,68,68,0.2); color: #FF4444; }
+        
+        .status-bar { display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: #1d233a; border-radius: 6px; font-size: 11px; color: #8892b0; margin-top: 8px; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .status-dot.green { background: #43e97b; }
+        .status-dot.yellow { background: #feca57; }
+        .status-dot.red { background: #ff6b6b; }
+        
+        .interaction-list { max-height: 200px; overflow-y: auto; }
+        .interaction-item { padding: 6px 8px; border-left: 3px solid #4facfe; margin: 6px 0; font-size: 11px; background: rgba(79,172,254,0.05); border-radius: 0 4px 4px 0; }
+        .interaction-item.hbond { border-left-color: #4488FF; }
+        .interaction-item.hydrophobic { border-left-color: #FFD700; }
+        .interaction-item.pistacking { border-left-color: #E91E63; }
+        .interaction-item.saltbridge { border-left-color: #ff6b6b; }
+        
+        .drug-search { width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid #2a3050; background: #1d233a; color: #e0e0e0; font-size: 12px; margin-bottom: 8px; }
+        .drug-search::placeholder { color: #5a6a8a; }
+        
+        .minichart { display: flex; gap: 2px; align-items: flex-end; height: 20px; }
+        .minichart .bar { width: 4px; border-radius: 1px; transition: height 0.3s; }
+        
+        @media (max-width: 1000px) {
+            .main-layout { grid-template-columns: 1fr; height: auto; }
+            .viewer-panel { min-height: 450px; }
+            .drug-list { max-height: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧬 多免疫检查点小分子AI筛选系统</h1>
+        <div class="nav">
+            <a href="/">📊 仪表盘</a>
+            <a href="/route1">🔬 路线一</a>
+            <a href="/route2">✨ 路线二</a>
+            <a href="/results">📋 结果</a>
+            <a href="/structure" class="active">🧊 3D结构</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="main-layout">
+            <!-- 左侧：靶点选择 + 药物列表 -->
+            <div class="panel" id="leftPanel">
+                <h3>🎯 靶点选择</h3>
+                <div class="target-tabs" id="targetTabs"></div>
+                
+                <h3 style="margin-top:12px;">💊 候选药物 (<span id="drugCount">0</span>)</h3>
+                <input type="text" class="drug-search" id="drugSearch" placeholder="🔍 搜索药物名称..." oninput="filterDrugs()" />
+                <div class="drug-list" id="drugList"></div>
+                
+                <div class="status-bar" id="statusBar">
+                    <span class="status-dot yellow" id="statusDot"></span>
+                    <span id="statusText">选择靶点查看3D结构</span>
+                </div>
+            </div>
+            
+            <!-- 中间：3D Viewer -->
+            <div class="panel viewer-panel">
+                <div class="viewer-toolbar">
+                    <button class="btn btn-primary" onclick="resetView()" title="重置视角">🏠 重置</button>
+                    <button class="btn btn-outline" id="btnCartoon" onclick="toggleStyle('cartoon')">🎨 卡通</button>
+                    <button class="btn btn-outline" id="btnStick" onclick="toggleStyle('stick')">🧬 线状</button>
+                    <button class="btn btn-outline" id="btnSurface" onclick="toggleStyle('surface')">🌐 表面</button>
+                    <button class="btn btn-outline" id="btnPocket" onclick="togglePocket()">📍 口袋</button>
+                    <button class="btn btn-outline" onclick="focusLigand()">🔍 聚焦药物</button>
+                    <span style="font-size:11px;color:#5a6a8a;margin-left:8px;">R=重置 F=聚焦 C=卡通 S=线状</span>
+                </div>
+                <div id="3dviewer"></div>
+            </div>
+            
+            <!-- 右侧：信息面板 -->
+            <div class="panel" id="rightPanel">
+                <h3>📋 当前药物信息</h3>
+                <div id="drugInfo">
+                    <div class="info-row"><span class="label">靶点</span><span class="value" id="infoTarget">--</span></div>
+                    <div class="info-row"><span class="label">药物</span><span class="value" id="infoDrug">--</span></div>
+                    <div class="info-row"><span class="label">类型</span><span class="value" id="infoType">--</span></div>
+                    <div class="info-row"><span class="label">接合亲和力</span><span class="value" id="infoAffinity" style="color:#43e97b;">--</span></div>
+                    <div class="info-row"><span class="label">分子量</span><span class="value" id="infoMW">--</span></div>
+                    <div class="info-row"><span class="label">成药性</span><span class="value" id="infoDruglike">--</span></div>
+                    <div class="info-row"><span class="label">配体原子数</span><span class="value" id="infoAtoms">--</span></div>
+                    <div class="info-row"><span class="label">SMILES-like</span><span class="value" id="infoSmiles" style="font-size:10px;word-break:break-all;">--</span></div>
+                </div>
+                
+                <h3 style="margin-top:14px;">🔗 预测相互作用</h3>
+                <div class="interaction-list" id="interactionList">
+                    <span style="color:#5a6a8a;">请先加载结构</span>
+                </div>
+                
+                <h3 style="margin-top:14px;">🔬 结合口袋残基</h3>
+                <div id="pocketResidues" style="max-height:140px;overflow-y:auto;font-size:12px;">
+                    <span style="color:#5a6a8a;">请先加载结构</span>
+                </div>
+                
+                <h3 style="margin-top:14px;">🗺️ 图例</h3>
+                <div class="legend-item"><span class="legend-dot" style="background:#FFD700;"></span> 疏水残基</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#00FF88;"></span> 极性残基</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#4488FF;"></span> 正电残基</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#FF4444;"></span> 负电残基</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#4facfe;border-radius:3px;width:12px;height:4px;"></span> 药物分子 (stick)</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const TARGET_COLORS = {'PD-1':'#2196F3','LAG-3':'#4CAF50','TIM-3':'#FF9800','VISTA':'#E91E63'};
+        const TARGET_NAMES = {
+            'PD-1': 'PD-1', 'LAG-3': 'LAG-3', 'TIM-3': 'TIM-3', 'VISTA': 'VISTA'
+        };
+        
+        let viewer = null;
+        let currentTarget = 'PD-1';
+        let currentDrugId = null;
+        let currentPdbData = null;
+        let currentStyle = 'cartoon';
+        let pocketShown = false;
+        let drugListData = {};
+        let filteredDrugs = [];
+        
+        // ========== Initialization ==========
+        function initViewer() {
+            let element = document.getElementById('3dviewer');
+            viewer = $3Dmol.createViewer(element, {
+                backgroundColor: '0x0a0e17',
+                antialias: true,
+            });
+            viewer.setBackgroundColor('0x0a0e17');
+            renderTargetTabs();
+            loadDrugLists();
+        }
+        
+        function renderTargetTabs() {
+            const container = document.getElementById('targetTabs');
+            const targets = ['PD-1', 'LAG-3', 'TIM-3', 'VISTA'];
+            container.innerHTML = targets.map(t => `
+                <div class="target-tab ${t === currentTarget ? 'selected' : ''}" 
+                     onclick="switchTarget('${t}')" style="color:${TARGET_COLORS[t]};">
+                    ${t}
+                </div>
+            `).join('');
+        }
+        
+        async function loadDrugLists() {
+            updateStatus('loading', '加载候选药物列表...');
+            try {
+                const resp = await fetch('/api/all_drug_lists');
+                drugListData = await resp.json();
+                filterDrugs();
+                if (drugListData[currentTarget] && drugListData[currentTarget].length > 0) {
+                    selectDrug(currentTarget, drugListData[currentTarget][0].mol_id);
+                }
+            } catch(e) {
+                updateStatus('error', '加载药物列表失败');
+                console.error(e);
+            }
+        }
+        
+        // ========== Drug List ==========
+        function filterDrugs() {
+            const searchTerm = document.getElementById('drugSearch').value.toLowerCase();
+            const drugs = drugListData[currentTarget] || [];
+            filteredDrugs = searchTerm 
+                ? drugs.filter(d => d.name.toLowerCase().includes(searchTerm) || d.mol_id.includes(searchTerm))
+                : drugs;
+            renderDrugList();
+        }
+        
+        function renderDrugList() {
+            const container = document.getElementById('drugList');
+            document.getElementById('drugCount').textContent = filteredDrugs.length;
+            
+            if (filteredDrugs.length === 0) {
+                container.innerHTML = '<div style="padding:16px;text-align:center;color:#5a6a8a;">未找到匹配药物</div>';
+                return;
+            }
+            
+            const colorMap = {'PD-1':'#2196F3','LAG-3':'#4CAF50','TIM-3':'#FF9800','VISTA':'#E91E63'};
+            const targetColor = colorMap[currentTarget] || '#4facfe';
+            
+            container.innerHTML = filteredDrugs.map((d, i) => {
+                const affColor = d.binding_affinity <= -9.0 ? '#43e97b' : d.binding_affinity <= -8.0 ? '#4facfe' : '#feca57';
+                const dlColor = d.drug_likeness >= 0.8 ? '#43e97b' : d.drug_likeness >= 0.6 ? '#4facfe' : '#feca57';
+                
+                const ints = d.predicted_interactions || {};
+                const intText = [
+                    ints.hydrogen_bonds ? `H:${ints.hydrogen_bonds}` : '',
+                    ints.pi_stacking ? `π:${ints.pi_stacking}` : '',
+                    ints.hydrophobic ? `Φ:${ints.hydrophobic}` : '',
+                    ints.halogen ? `X:${ints.halogen}` : '',
+                ].filter(Boolean).join(' ');
+                
+                const dlBars = Array.from({length: 10}, (_, j) => {
+                    const h = j < Math.round(d.drug_likeness * 10) ? '8px' : '3px';
+                    const c = j < Math.round(d.drug_likeness * 10) ? dlColor : '#2a3050';
+                    return `<div class="bar" style="height:${h};background:${c};"></div>`;
+                }).join('');
+                
+                return `
+                <div class="drug-item ${currentDrugId === d.mol_id ? 'selected' : ''}" 
+                     onclick="selectDrug('${currentTarget}', '${d.mol_id}')">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div class="drug-name">${d.name}</div>
+                        <div class="rank-badge">#${i+1}</div>
+                    </div>
+                    <div class="drug-type">${d.mol_type} | MW: ${d.mw?.toFixed(0) || '--'}</div>
+                    <div class="drug-stats">
+                        <span class="affinity">ΔG: ${d.binding_affinity} kcal/mol</span>
+                        <span>DL: <span style="color:${dlColor}">${d.drug_likeness?.toFixed(2) || '--'}</span></span>
+                    </div>
+                    <div style="font-size:10px;color:#5a6a8a;margin-top:2px;">${intText || '相互作用数据待定'}</div>
+                    <div class="minichart">${dlBars}</div>
+                </div>`;
+            }).join('');
+        }
+        
+        // ========== Target & Drug Selection ==========
+        function switchTarget(target) {
+            currentTarget = target;
+            currentDrugId = null;
+            renderTargetTabs();
+            filterDrugs();
+            if (filteredDrugs.length > 0) {
+                selectDrug(target, filteredDrugs[0].mol_id);
+            }
+        }
+        
+        async function selectDrug(target, drugId) {
+            currentTarget = target;
+            currentDrugId = drugId;
+            renderTargetTabs();
+            renderDrugList();
+            updateStatus('loading', `加载 ${drugId}...`);
+            
+            try {
+                const resp = await fetch(`/api/3d_complex/${target}/${drugId}`);
+                const data = await resp.json();
+                
+                if (data.error) {
+                    updateStatus('error', data.error);
+                    return;
+                }
+                
+                currentPdbData = data;
+                loadStructure(data);
+                updateInfoPanel(data);
+                updateStatus('ok', `${target} / ${data.name} (ΔG=${data.binding_affinity} kcal/mol)`);
+            } catch(e) {
+                updateStatus('error', `加载失败: ${e.message}`);
+            }
+        }
+        
+        // ========== 3D Rendering ==========
+        function loadStructure(data) {
+            viewer.clear();
+            viewer.removeAllModels();
+            viewer.removeAllLabels();
+            viewer.removeAllSurfaces();
+            
+            const pdbData = data.pdb_string;
+            
+            // Protein: cartoon with spectrum coloring
+            viewer.addModel(pdbData, "pdb");
+            viewer.setStyle({chain: 'A'}, {
+                cartoon: {color: 'spectrum', style: 'trace'}
+            });
+            
+            // Ligand: bright sticks (chain B)
+            viewer.setStyle({chain: 'B'}, {
+                stick: {colorscheme: 'Jmol', radius: 0.3}
+            });
+            
+            // Highlight binding pocket residues in orange
+            const pocketRes = data.binding_pocket_residues || [];
+            if (pocketRes.length > 0) {
+                const resiList = pocketRes.map(r => r.res_num);
+                viewer.addStyle({chain: 'A', resi: resiList}, {
+                    cartoon: {color: '0xFF6600', style: 'trace'}
+                });
+                pocketShown = true;
+                document.getElementById('btnPocket').classList.add('active');
+            } else {
+                pocketShown = false;
+                document.getElementById('btnPocket').classList.remove('active');
+            }
+            
+            // Add label near ligand center
+            const ligandAtoms = pdbData.split('\n').filter(l => l.startsWith('HETATM') && l.includes(' B '));
+            let lx = 0, ly = 0, lz = 0, lcount = 0;
+            ligandAtoms.forEach(l => {
+                try {
+                    lx += parseFloat(l.substring(30, 38));
+                    ly += parseFloat(l.substring(38, 46));
+                    lz += parseFloat(l.substring(46, 54));
+                    lcount++;
+                } catch(e) {}
+            });
+            if (lcount > 0) {
+                viewer.addLabel(data.name || 'Drug', {
+                    position: {x: lx/lcount + 3, y: ly/lcount, z: lz/lcount},
+                    backgroundColor: '0x1d233a',
+                    fontColor: '0x43e97b',
+                    fontSize: 13,
+                    showBackground: true
+                });
+            }
+            
+            currentStyle = 'cartoon';
+            document.getElementById('btnCartoon').classList.add('active');
+            document.getElementById('btnStick').classList.remove('active');
+            document.getElementById('btnSurface').classList.remove('active');
+            
+            viewer.zoomTo({chain: 'B'});
+            viewer.render();
+            viewer.zoom(1.3);
+            viewer.spin('y', 0.4);
+            setTimeout(() => viewer.spin(false), 5000);
+        }
+        
+        function resetView() {
+            if (!currentPdbData) return;
+            loadStructure(currentPdbData);
+            updateStatus('ok', `${currentTarget} 视角已重置`);
+        }
+        
+        function toggleStyle(style) {
+            if (!currentPdbData) return;
+            currentStyle = style;
+            
+            document.getElementById('btnCartoon').classList.remove('active');
+            document.getElementById('btnStick').classList.remove('active');
+            document.getElementById('btnSurface').classList.remove('active');
+            
+            if (style === 'cartoon') {
+                viewer.setStyle({chain: 'A'}, {cartoon: {color: 'spectrum', style: 'trace'}});
+                document.getElementById('btnCartoon').classList.add('active');
+            } else if (style === 'stick') {
+                viewer.setStyle({chain: 'A'}, {stick: {color: 'spectrum', radius: 0.15}});
+                document.getElementById('btnStick').classList.add('active');
+            } else if (style === 'surface') {
+                viewer.addSurface($3Dmol.SurfaceType.VDW, {
+                    opacity: 0.5,
+                    colorscheme: 'whiteCarbon'
+                }, {chain: 'A'});
+                document.getElementById('btnSurface').classList.add('active');
+            }
+            
+            // Restore pocket highlight
+            const pocketRes = currentPdbData.binding_pocket_residues || [];
+            if (pocketShown && pocketRes.length > 0) {
+                const resiList = pocketRes.map(r => r.res_num);
+                if (style === 'surface') {
+                    viewer.addSurface($3Dmol.SurfaceType.VDW, {
+                        opacity: 0.5,
+                        color: '0xFF6600'
+                    }, {chain: 'A', resi: resiList});
+                } else {
+                    viewer.addStyle({chain: 'A', resi: resiList}, {
+                        cartoon: {color: '0xFF6600', style: 'trace'}
+                    });
+                }
+            }
+            
+            viewer.render();
+        }
+        
+        function focusLigand() {
+            if (!currentPdbData) return;
+            viewer.zoomTo({chain: 'B'});
+            viewer.render();
+            viewer.spin('y', 0.8);
+            setTimeout(() => viewer.spin(false), 4000);
+        }
+        
+        function togglePocket() {
+            pocketShown = !pocketShown;
+            const btn = document.getElementById('btnPocket');
+            btn.classList.toggle('active', pocketShown);
+            
+            const pocketRes = currentPdbData?.binding_pocket_residues || [];
+            if (pocketRes.length > 0) {
+                const resiList = pocketRes.map(r => r.res_num);
+                if (pocketShown) {
+                    viewer.addStyle({chain: 'A', resi: resiList}, {
+                        cartoon: {color: '0xFF6600', style: 'trace'}
+                    });
+                } else {
+                    viewer.setStyle({chain: 'A', resi: resiList}, {
+                        cartoon: {color: 'spectrum', style: 'trace'}
+                    });
+                }
+                viewer.render();
+            }
+        }
+        
+        // ========== Info Panel ==========
+        function updateInfoPanel(data) {
+            document.getElementById('infoTarget').textContent = currentTarget;
+            document.getElementById('infoTarget').style.color = TARGET_COLORS[currentTarget];
+            document.getElementById('infoDrug').textContent = data.name || '--';
+            document.getElementById('infoType').textContent = data.mol_type || '--';
+            document.getElementById('infoAffinity').textContent = (data.binding_affinity || '--') + ' kcal/mol';
+            document.getElementById('infoMW').textContent = data.predicted_interactions ? '--' : '--';
+            document.getElementById('infoDruglike').textContent = '--';
+            document.getElementById('infoAtoms').textContent = data.n_ligand_atoms || '--';
+            document.getElementById('infoSmiles').textContent = '--';
+            
+            // Update from drug list for richer data
+            const drugs = drugListData[currentTarget] || [];
+            const drugMeta = drugs.find(d => d.mol_id === data.mol_id);
+            if (drugMeta) {
+                document.getElementById('infoMW').textContent = drugMeta.mw?.toFixed(1) || '--';
+                document.getElementById('infoDruglike').textContent = drugMeta.drug_likeness?.toFixed(2) || '--';
+                document.getElementById('infoSmiles').textContent = drugMeta.smiles_like || '--';
+            }
+            
+            // Pocket residues
+            const pocketRes = data.binding_pocket_residues || [];
+            const pocketDiv = document.getElementById('pocketResidues');
+            pocketDiv.innerHTML = pocketRes.slice(0, 20).map(r => {
+                let cat = 'polar';
+                if ('ALVIMFWPG'.includes(r.aa)) cat = 'hydrophobic';
+                else if ('KRH'.includes(r.aa)) cat = 'positive';
+                else if ('DE'.includes(r.aa)) cat = 'negative';
+                return `<span class="badge badge-${cat}" title="${r.aa3}${r.res_num}">${r.aa3}${r.res_num}</span>`;
+            }).join(' ');
+            
+            // Predicted interactions
+            const ints = data.predicted_interactions || {};
+            const iaDiv = document.getElementById('interactionList');
+            const items = [];
+            if (ints.hydrogen_bonds) {
+                items.push(`<div class="interaction-item hbond"><strong>氢键</strong> ×${ints.hydrogen_bonds} — 极性残基与药物形成</div>`);
+            }
+            if (ints.pi_stacking) {
+                items.push(`<div class="interaction-item pistacking"><strong>π-π堆积</strong> ×${ints.pi_stacking} — 芳环与口袋残基</div>`);
+            }
+            if (ints.hydrophobic) {
+                items.push(`<div class="interaction-item hydrophobic"><strong>疏水作用</strong> ×${ints.hydrophobic} — 疏水残基包埋</div>`);
+            }
+            if (ints.halogen) {
+                items.push(`<div class="interaction-item saltbridge"><strong>卤键</strong> ×${ints.halogen} — F/Cl与残基侧链</div>`);
+            }
+            iaDiv.innerHTML = items.length > 0 ? items.join('') : '<span style="color:#5a6a8a;">相互作用数据加载中</span>';
+        }
+        
+        function updateStatus(state, msg) {
+            document.getElementById('statusText').textContent = msg;
+            const dot = document.getElementById('statusDot');
+            dot.className = 'status-dot';
+            if (state === 'ok') dot.classList.add('green');
+            else if (state === 'loading') dot.classList.add('yellow');
+            else dot.classList.add('red');
+        }
+        
+        // ========== Keyboard Shortcuts ==========
+        document.addEventListener('keydown', (e) => {
+            if (!currentPdbData) return;
+            switch(e.key.toLowerCase()) {
+                case 'r': resetView(); break;
+                case 'f': focusLigand(); break;
+                case 'c': toggleStyle('cartoon'); break;
+                case 's': toggleStyle('stick'); break;
+            }
+        });
+        
+        // ========== Startup ==========
+        $(document).ready(function() {
+            initViewer();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "target_name": "PD-1",
+  "pdb_id": "4ZQK",
+  "description": "PD-1 extracellular domain (IgV)",
+  "method": "X-ray diffraction",
+  "resolution": 2.45,
+  "has_ligand": true,
+  "ligand_description": "PD-L1 binding face exposed",
+  "alternatives": [
+    "5WT9",
+    "5GGS",
+    "6UMT",
+    "7BXA"
+  ],
+  "chain": "A",
+  "source": "RCSB PDB",
+  "fetch_date": "2026-08-06",
+  "deposition_date": "",
+  "release_date": "2015-11-04T00:00:00.000+00:00",
+  "organism": "Homo sapiens"
+}

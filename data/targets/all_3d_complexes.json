@@ -1,0 +1,1915 @@
+{
+  "PD-1": {
+    "target": "PD-1",
+    "n_protein_residues": 86,
+    "n_protein_atoms": 430,
+    "binding_pocket_center": [
+      57.932,
+      18.813,
+      -6.843
+    ],
+    "binding_pocket_residues": [
+      {
+        "res_num": 30,
+        "aa": "L",
+        "aa3": "LEU"
+      },
+      {
+        "res_num": 31,
+        "aa": "N",
+        "aa3": "ASN"
+      },
+      {
+        "res_num": 32,
+        "aa": "W",
+        "aa3": "TRP"
+      },
+      {
+        "res_num": 33,
+        "aa": "Y",
+        "aa3": "TYR"
+      },
+      {
+        "res_num": 34,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 35,
+        "aa": "M",
+        "aa3": "MET"
+      },
+      {
+        "res_num": 36,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 37,
+        "aa": "P",
+        "aa3": "PRO"
+      },
+      {
+        "res_num": 38,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 39,
+        "aa": "N",
+        "aa3": "ASN"
+      },
+      {
+        "res_num": 40,
+        "aa": "Q",
+        "aa3": "GLN"
+      },
+      {
+        "res_num": 44,
+        "aa": "L",
+        "aa3": "LEU"
+      },
+      {
+        "res_num": 45,
+        "aa": "A",
+        "aa3": "ALA"
+      },
+      {
+        "res_num": 46,
+        "aa": "A",
+        "aa3": "ALA"
+      },
+      {
+        "res_num": 47,
+        "aa": "F",
+        "aa3": "PHE"
+      },
+      {
+        "res_num": 48,
+        "aa": "P",
+        "aa3": "PRO"
+      },
+      {
+        "res_num": 49,
+        "aa": "E",
+        "aa3": "GLU"
+      },
+      {
+        "res_num": 50,
+        "aa": "D",
+        "aa3": "ASP"
+      },
+      {
+        "res_num": 51,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 52,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 53,
+        "aa": "Q",
+        "aa3": "GLN"
+      },
+      {
+        "res_num": 54,
+        "aa": "P",
+        "aa3": "PRO"
+      },
+      {
+        "res_num": 55,
+        "aa": "G",
+        "aa3": "GLY"
+      },
+      {
+        "res_num": 68,
+        "aa": "G",
+        "aa3": "GLY"
+      },
+      {
+        "res_num": 69,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 70,
+        "aa": "D",
+        "aa3": "ASP"
+      },
+      {
+        "res_num": 71,
+        "aa": "F",
+        "aa3": "PHE"
+      },
+      {
+        "res_num": 72,
+        "aa": "H",
+        "aa3": "HIS"
+      },
+      {
+        "res_num": 73,
+        "aa": "M",
+        "aa3": "MET"
+      },
+      {
+        "res_num": 74,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 75,
+        "aa": "V",
+        "aa3": "VAL"
+      },
+      {
+        "res_num": 76,
+        "aa": "V",
+        "aa3": "VAL"
+      },
+      {
+        "res_num": 77,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 78,
+        "aa": "A",
+        "aa3": "ALA"
+      }
+    ],
+    "n_drugs": 20,
+    "drugs": [
+      {
+        "mol_id": "mol_006",
+        "name": "Pembrolizumab Small Molecule Mimetic",
+        "mol_type": "Indole-piperidine",
+        "smiles_like": "COC1=CC2=C(C=C1)N(C=C2)CCN3CCC(CC3)O",
+        "binding_affinity": -10.1,
+        "mw": 326.4,
+        "drug_likeness": 0.81,
+        "predicted_interactions": {
+          "hydrogen_bonds": 4,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_008",
+        "name": "BMS-986207 Analog (Triazolopyrimidine)",
+        "mol_type": "Triazolopyrimidine",
+        "smiles_like": "CN1N=NC2=C1N=C(N=C2)NC3=CC=C(C=C3)C#N",
+        "binding_affinity": -9.8,
+        "mw": 370.4,
+        "drug_likeness": 0.83,
+        "predicted_interactions": {
+          "hydrogen_bonds": 4,
+          "pi_stacking": 3,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 18,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_003",
+        "name": "TSR-042 Analog (Benzimidazole)",
+        "mol_type": "Benzimidazole",
+        "smiles_like": "CC1=NC2=CC=CC=C2N1CC3=CC=C(C=C3)C(=O)NO",
+        "binding_affinity": -9.5,
+        "mw": 310.3,
+        "drug_likeness": 0.85,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_007",
+        "name": "Diethoxy benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "CCOc1cc(OCC)cc(C(=O)Nc2ncccn2)c1",
+        "binding_affinity": -9.4,
+        "mw": 326.1,
+        "drug_likeness": 0.86,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 0,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 12,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_007",
+        "name": "MBG453 Analog (Thiadiazole)",
+        "mol_type": "Thiadiazole",
+        "smiles_like": "CC1=NN=C(S1)NCC2=CC=C(C=C2)OC(F)(F)F",
+        "binding_affinity": -9.3,
+        "mw": 358.3,
+        "drug_likeness": 0.79,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 1,
+          "hydrophobic": 5,
+          "halogen": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_001",
+        "name": "BMS-936558 Analog (Aryl Ether)",
+        "mol_type": "Aryl Ether",
+        "smiles_like": "CCOC1=CC=C2NC3=CC=CC=C3C2=C1",
+        "binding_affinity": -9.2,
+        "mw": 380.4,
+        "drug_likeness": 0.82,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 17,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_003",
+        "name": "Sulfonamide-thiazole",
+        "mol_type": "Fragment",
+        "smiles_like": "Nc1ccc(S(=O)(=O)Nc2nccs2)cc1",
+        "binding_affinity": -9.1,
+        "mw": 327.2,
+        "drug_likeness": 0.86,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_008",
+        "name": "Thiadiazole thioether",
+        "mol_type": "Fragment",
+        "smiles_like": "Cc1nnc(SCC(=O)Nc2cccc(C)c2)s1",
+        "binding_affinity": -9.1,
+        "mw": 406.1,
+        "drug_likeness": 0.66,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 10,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_010",
+        "name": "AB122 Analog (Pyridine-Benzamide)",
+        "mol_type": "Pyridine-Benzamide",
+        "smiles_like": "CN1CCN(CC1)C2=CC=C(C=C2)C(=O)NC3=CC=NC=C3",
+        "binding_affinity": -9.0,
+        "mw": 325.4,
+        "drug_likeness": 0.88,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 20,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_005",
+        "name": "SHR-1210 Analog (Quinoline)",
+        "mol_type": "Quinoline",
+        "smiles_like": "CN1CCC(CC1)OC2=CC=C3C(=C2)C=CC=N3",
+        "binding_affinity": -8.9,
+        "mw": 345.4,
+        "drug_likeness": 0.73,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 3,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 20,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_002",
+        "name": "LAG-525 Analog (Benzamide)",
+        "mol_type": "Benzamide",
+        "smiles_like": "O=C(NCC1=CC=CC=C1)C2=CC=C(OCCN3CCCC3)C=C2",
+        "binding_affinity": -8.7,
+        "mw": 345.4,
+        "drug_likeness": 0.78,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 1,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 17,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_009",
+        "name": "TSR-033 Analog (Pyrazolopyrimidine)",
+        "mol_type": "Pyrazolopyrimidine",
+        "smiles_like": "CN1C=CC2=C1N=CN=C2NCC3=CC=C(C=C3)F",
+        "binding_affinity": -8.6,
+        "mw": 340.3,
+        "drug_likeness": 0.75,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 3,
+          "halogen": 1
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_010",
+        "name": "Morpholine benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "NC(=O)c1ccc(CN2CCOCC2)cc1",
+        "binding_affinity": -8.6,
+        "mw": 357.5,
+        "drug_likeness": 0.88,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 1,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 12,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_004",
+        "name": "CA-170 Analog (Biphenyl Urea)",
+        "mol_type": "Biphenyl Urea",
+        "smiles_like": "CN(C)CCOC1=CC=C(C=C1)C(=O)NC2=CC=CC=C2",
+        "binding_affinity": -8.4,
+        "mw": 355.4,
+        "drug_likeness": 0.76,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_009",
+        "name": "Tetrahydroisoquinoline furan",
+        "mol_type": "Fragment",
+        "smiles_like": "COc1ccc2c(c1)CCN(C2)C(=O)c3ccco3",
+        "binding_affinity": -8.4,
+        "mw": 440.8,
+        "drug_likeness": 0.63,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 0,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_004",
+        "name": "Cyclopropyl-carboxamide",
+        "mol_type": "Fragment",
+        "smiles_like": "O=C(NC1CC1)c2cccc3c2CCN(C)C3",
+        "binding_affinity": -8.1,
+        "mw": 319.9,
+        "drug_likeness": 0.85,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 13,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_002",
+        "name": "Dopamine Analog",
+        "mol_type": "Fragment",
+        "smiles_like": "CC(N)Cc1ccc(O)c(O)c1",
+        "binding_affinity": -7.9,
+        "mw": 449.8,
+        "drug_likeness": 0.52,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 10,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_005",
+        "name": "t-Butyl benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "CC(C)(C)c1ccc(C(=O)NCc2ccccc2)cc1",
+        "binding_affinity": -7.7,
+        "mw": 410.4,
+        "drug_likeness": 0.61,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_001",
+        "name": "4-(4-Fluorobenzyl)piperidine",
+        "mol_type": "Fragment",
+        "smiles_like": "Fc1ccc(CC2CCNCC2)cc1",
+        "binding_affinity": -7.6,
+        "mw": 422.6,
+        "drug_likeness": 0.55,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 9,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_006",
+        "name": "N-methyl piperidine amide",
+        "mol_type": "Fragment",
+        "smiles_like": "CNC(=O)C1CCN(CC1)c2ccccc2",
+        "binding_affinity": -7.5,
+        "mw": 301.3,
+        "drug_likeness": 0.74,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 8,
+        "has_pdb": true
+      }
+    ]
+  },
+  "LAG-3": {
+    "target": "LAG-3",
+    "n_protein_residues": 79,
+    "n_protein_atoms": 395,
+    "binding_pocket_center": [
+      22.805,
+      16.192,
+      20.759
+    ],
+    "binding_pocket_residues": [
+      {
+        "res_num": 30,
+        "aa": "L",
+        "aa3": "LEU"
+      },
+      {
+        "res_num": 31,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 32,
+        "aa": "L",
+        "aa3": "LEU"
+      },
+      {
+        "res_num": 33,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 34,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 35,
+        "aa": "A",
+        "aa3": "ALA"
+      },
+      {
+        "res_num": 36,
+        "aa": "G",
+        "aa3": "GLY"
+      },
+      {
+        "res_num": 37,
+        "aa": "V",
+        "aa3": "VAL"
+      },
+      {
+        "res_num": 38,
+        "aa": "T",
+        "aa3": "THR"
+      },
+      {
+        "res_num": 39,
+        "aa": "W",
+        "aa3": "TRP"
+      },
+      {
+        "res_num": 40,
+        "aa": "Q",
+        "aa3": "GLN"
+      },
+      {
+        "res_num": 64,
+        "aa": "A",
+        "aa3": "ALA"
+      },
+      {
+        "res_num": 65,
+        "aa": "P",
+        "aa3": "PRO"
+      },
+      {
+        "res_num": 66,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 67,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 68,
+        "aa": "W",
+        "aa3": "TRP"
+      },
+      {
+        "res_num": 69,
+        "aa": "G",
+        "aa3": "GLY"
+      },
+      {
+        "res_num": 70,
+        "aa": "P",
+        "aa3": "PRO"
+      },
+      {
+        "res_num": 71,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 72,
+        "aa": "P",
+        "aa3": "PRO"
+      },
+      {
+        "res_num": 73,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 74,
+        "aa": "R",
+        "aa3": "ARG"
+      }
+    ],
+    "n_drugs": 20,
+    "drugs": [
+      {
+        "mol_id": "mol_006",
+        "name": "Pembrolizumab Small Molecule Mimetic",
+        "mol_type": "Indole-piperidine",
+        "smiles_like": "COC1=CC2=C(C=C1)N(C=C2)CCN3CCC(CC3)O",
+        "binding_affinity": -10.1,
+        "mw": 326.4,
+        "drug_likeness": 0.81,
+        "predicted_interactions": {
+          "hydrogen_bonds": 4,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_008",
+        "name": "BMS-986207 Analog (Triazolopyrimidine)",
+        "mol_type": "Triazolopyrimidine",
+        "smiles_like": "CN1N=NC2=C1N=C(N=C2)NC3=CC=C(C=C3)C#N",
+        "binding_affinity": -9.8,
+        "mw": 370.4,
+        "drug_likeness": 0.83,
+        "predicted_interactions": {
+          "hydrogen_bonds": 4,
+          "pi_stacking": 3,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 18,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_003",
+        "name": "TSR-042 Analog (Benzimidazole)",
+        "mol_type": "Benzimidazole",
+        "smiles_like": "CC1=NC2=CC=CC=C2N1CC3=CC=C(C=C3)C(=O)NO",
+        "binding_affinity": -9.5,
+        "mw": 310.3,
+        "drug_likeness": 0.85,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_007",
+        "name": "Diethoxy benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "CCOc1cc(OCC)cc(C(=O)Nc2ncccn2)c1",
+        "binding_affinity": -9.4,
+        "mw": 326.1,
+        "drug_likeness": 0.86,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 0,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 12,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_007",
+        "name": "MBG453 Analog (Thiadiazole)",
+        "mol_type": "Thiadiazole",
+        "smiles_like": "CC1=NN=C(S1)NCC2=CC=C(C=C2)OC(F)(F)F",
+        "binding_affinity": -9.3,
+        "mw": 358.3,
+        "drug_likeness": 0.79,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 1,
+          "hydrophobic": 5,
+          "halogen": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_001",
+        "name": "BMS-936558 Analog (Aryl Ether)",
+        "mol_type": "Aryl Ether",
+        "smiles_like": "CCOC1=CC=C2NC3=CC=CC=C3C2=C1",
+        "binding_affinity": -9.2,
+        "mw": 380.4,
+        "drug_likeness": 0.82,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 17,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_003",
+        "name": "Sulfonamide-thiazole",
+        "mol_type": "Fragment",
+        "smiles_like": "Nc1ccc(S(=O)(=O)Nc2nccs2)cc1",
+        "binding_affinity": -9.1,
+        "mw": 327.2,
+        "drug_likeness": 0.86,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_008",
+        "name": "Thiadiazole thioether",
+        "mol_type": "Fragment",
+        "smiles_like": "Cc1nnc(SCC(=O)Nc2cccc(C)c2)s1",
+        "binding_affinity": -9.1,
+        "mw": 406.1,
+        "drug_likeness": 0.66,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 10,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_010",
+        "name": "AB122 Analog (Pyridine-Benzamide)",
+        "mol_type": "Pyridine-Benzamide",
+        "smiles_like": "CN1CCN(CC1)C2=CC=C(C=C2)C(=O)NC3=CC=NC=C3",
+        "binding_affinity": -9.0,
+        "mw": 325.4,
+        "drug_likeness": 0.88,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 20,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_005",
+        "name": "SHR-1210 Analog (Quinoline)",
+        "mol_type": "Quinoline",
+        "smiles_like": "CN1CCC(CC1)OC2=CC=C3C(=C2)C=CC=N3",
+        "binding_affinity": -8.9,
+        "mw": 345.4,
+        "drug_likeness": 0.73,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 3,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 20,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_002",
+        "name": "LAG-525 Analog (Benzamide)",
+        "mol_type": "Benzamide",
+        "smiles_like": "O=C(NCC1=CC=CC=C1)C2=CC=C(OCCN3CCCC3)C=C2",
+        "binding_affinity": -8.7,
+        "mw": 345.4,
+        "drug_likeness": 0.78,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 1,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 17,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_009",
+        "name": "TSR-033 Analog (Pyrazolopyrimidine)",
+        "mol_type": "Pyrazolopyrimidine",
+        "smiles_like": "CN1C=CC2=C1N=CN=C2NCC3=CC=C(C=C3)F",
+        "binding_affinity": -8.6,
+        "mw": 340.3,
+        "drug_likeness": 0.75,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 3,
+          "halogen": 1
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_010",
+        "name": "Morpholine benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "NC(=O)c1ccc(CN2CCOCC2)cc1",
+        "binding_affinity": -8.6,
+        "mw": 357.5,
+        "drug_likeness": 0.88,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 1,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 12,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_004",
+        "name": "CA-170 Analog (Biphenyl Urea)",
+        "mol_type": "Biphenyl Urea",
+        "smiles_like": "CN(C)CCOC1=CC=C(C=C1)C(=O)NC2=CC=CC=C2",
+        "binding_affinity": -8.4,
+        "mw": 355.4,
+        "drug_likeness": 0.76,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_009",
+        "name": "Tetrahydroisoquinoline furan",
+        "mol_type": "Fragment",
+        "smiles_like": "COc1ccc2c(c1)CCN(C2)C(=O)c3ccco3",
+        "binding_affinity": -8.4,
+        "mw": 440.8,
+        "drug_likeness": 0.63,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 0,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_004",
+        "name": "Cyclopropyl-carboxamide",
+        "mol_type": "Fragment",
+        "smiles_like": "O=C(NC1CC1)c2cccc3c2CCN(C)C3",
+        "binding_affinity": -8.1,
+        "mw": 319.9,
+        "drug_likeness": 0.85,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 13,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_002",
+        "name": "Dopamine Analog",
+        "mol_type": "Fragment",
+        "smiles_like": "CC(N)Cc1ccc(O)c(O)c1",
+        "binding_affinity": -7.9,
+        "mw": 449.8,
+        "drug_likeness": 0.52,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 10,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_005",
+        "name": "t-Butyl benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "CC(C)(C)c1ccc(C(=O)NCc2ccccc2)cc1",
+        "binding_affinity": -7.7,
+        "mw": 410.4,
+        "drug_likeness": 0.61,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_001",
+        "name": "4-(4-Fluorobenzyl)piperidine",
+        "mol_type": "Fragment",
+        "smiles_like": "Fc1ccc(CC2CCNCC2)cc1",
+        "binding_affinity": -7.6,
+        "mw": 422.6,
+        "drug_likeness": 0.55,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 9,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_006",
+        "name": "N-methyl piperidine amide",
+        "mol_type": "Fragment",
+        "smiles_like": "CNC(=O)C1CCN(CC1)c2ccccc2",
+        "binding_affinity": -7.5,
+        "mw": 301.3,
+        "drug_likeness": 0.74,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 8,
+        "has_pdb": true
+      }
+    ]
+  },
+  "TIM-3": {
+    "target": "TIM-3",
+    "n_protein_residues": 72,
+    "n_protein_atoms": 360,
+    "binding_pocket_center": [
+      12.205,
+      15.316,
+      -7.706
+    ],
+    "binding_pocket_residues": [
+      {
+        "res_num": 30,
+        "aa": "K",
+        "aa3": "LYS"
+      },
+      {
+        "res_num": 31,
+        "aa": "G",
+        "aa3": "GLY"
+      },
+      {
+        "res_num": 32,
+        "aa": "A",
+        "aa3": "ALA"
+      },
+      {
+        "res_num": 33,
+        "aa": "C",
+        "aa3": "CYS"
+      },
+      {
+        "res_num": 34,
+        "aa": "P",
+        "aa3": "PRO"
+      },
+      {
+        "res_num": 35,
+        "aa": "V",
+        "aa3": "VAL"
+      },
+      {
+        "res_num": 36,
+        "aa": "F",
+        "aa3": "PHE"
+      },
+      {
+        "res_num": 37,
+        "aa": "E",
+        "aa3": "GLU"
+      },
+      {
+        "res_num": 38,
+        "aa": "C",
+        "aa3": "CYS"
+      },
+      {
+        "res_num": 39,
+        "aa": "G",
+        "aa3": "GLY"
+      },
+      {
+        "res_num": 40,
+        "aa": "N",
+        "aa3": "ASN"
+      },
+      {
+        "res_num": 41,
+        "aa": "V",
+        "aa3": "VAL"
+      },
+      {
+        "res_num": 42,
+        "aa": "V",
+        "aa3": "VAL"
+      },
+      {
+        "res_num": 43,
+        "aa": "L",
+        "aa3": "LEU"
+      },
+      {
+        "res_num": 61,
+        "aa": "G",
+        "aa3": "GLY"
+      },
+      {
+        "res_num": 62,
+        "aa": "D",
+        "aa3": "ASP"
+      },
+      {
+        "res_num": 63,
+        "aa": "F",
+        "aa3": "PHE"
+      },
+      {
+        "res_num": 64,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 65,
+        "aa": "K",
+        "aa3": "LYS"
+      },
+      {
+        "res_num": 66,
+        "aa": "G",
+        "aa3": "GLY"
+      },
+      {
+        "res_num": 67,
+        "aa": "D",
+        "aa3": "ASP"
+      },
+      {
+        "res_num": 68,
+        "aa": "V",
+        "aa3": "VAL"
+      },
+      {
+        "res_num": 69,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 70,
+        "aa": "L",
+        "aa3": "LEU"
+      },
+      {
+        "res_num": 71,
+        "aa": "T",
+        "aa3": "THR"
+      }
+    ],
+    "n_drugs": 20,
+    "drugs": [
+      {
+        "mol_id": "mol_006",
+        "name": "Pembrolizumab Small Molecule Mimetic",
+        "mol_type": "Indole-piperidine",
+        "smiles_like": "COC1=CC2=C(C=C1)N(C=C2)CCN3CCC(CC3)O",
+        "binding_affinity": -10.1,
+        "mw": 326.4,
+        "drug_likeness": 0.81,
+        "predicted_interactions": {
+          "hydrogen_bonds": 4,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_008",
+        "name": "BMS-986207 Analog (Triazolopyrimidine)",
+        "mol_type": "Triazolopyrimidine",
+        "smiles_like": "CN1N=NC2=C1N=C(N=C2)NC3=CC=C(C=C3)C#N",
+        "binding_affinity": -9.8,
+        "mw": 370.4,
+        "drug_likeness": 0.83,
+        "predicted_interactions": {
+          "hydrogen_bonds": 4,
+          "pi_stacking": 3,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 18,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_003",
+        "name": "TSR-042 Analog (Benzimidazole)",
+        "mol_type": "Benzimidazole",
+        "smiles_like": "CC1=NC2=CC=CC=C2N1CC3=CC=C(C=C3)C(=O)NO",
+        "binding_affinity": -9.5,
+        "mw": 310.3,
+        "drug_likeness": 0.85,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_007",
+        "name": "Diethoxy benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "CCOc1cc(OCC)cc(C(=O)Nc2ncccn2)c1",
+        "binding_affinity": -9.4,
+        "mw": 326.1,
+        "drug_likeness": 0.86,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 0,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 12,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_007",
+        "name": "MBG453 Analog (Thiadiazole)",
+        "mol_type": "Thiadiazole",
+        "smiles_like": "CC1=NN=C(S1)NCC2=CC=C(C=C2)OC(F)(F)F",
+        "binding_affinity": -9.3,
+        "mw": 358.3,
+        "drug_likeness": 0.79,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 1,
+          "hydrophobic": 5,
+          "halogen": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_001",
+        "name": "BMS-936558 Analog (Aryl Ether)",
+        "mol_type": "Aryl Ether",
+        "smiles_like": "CCOC1=CC=C2NC3=CC=CC=C3C2=C1",
+        "binding_affinity": -9.2,
+        "mw": 380.4,
+        "drug_likeness": 0.82,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 17,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_003",
+        "name": "Sulfonamide-thiazole",
+        "mol_type": "Fragment",
+        "smiles_like": "Nc1ccc(S(=O)(=O)Nc2nccs2)cc1",
+        "binding_affinity": -9.1,
+        "mw": 327.2,
+        "drug_likeness": 0.86,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_008",
+        "name": "Thiadiazole thioether",
+        "mol_type": "Fragment",
+        "smiles_like": "Cc1nnc(SCC(=O)Nc2cccc(C)c2)s1",
+        "binding_affinity": -9.1,
+        "mw": 406.1,
+        "drug_likeness": 0.66,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 10,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_010",
+        "name": "AB122 Analog (Pyridine-Benzamide)",
+        "mol_type": "Pyridine-Benzamide",
+        "smiles_like": "CN1CCN(CC1)C2=CC=C(C=C2)C(=O)NC3=CC=NC=C3",
+        "binding_affinity": -9.0,
+        "mw": 325.4,
+        "drug_likeness": 0.88,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 20,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_005",
+        "name": "SHR-1210 Analog (Quinoline)",
+        "mol_type": "Quinoline",
+        "smiles_like": "CN1CCC(CC1)OC2=CC=C3C(=C2)C=CC=N3",
+        "binding_affinity": -8.9,
+        "mw": 345.4,
+        "drug_likeness": 0.73,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 3,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 20,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_002",
+        "name": "LAG-525 Analog (Benzamide)",
+        "mol_type": "Benzamide",
+        "smiles_like": "O=C(NCC1=CC=CC=C1)C2=CC=C(OCCN3CCCC3)C=C2",
+        "binding_affinity": -8.7,
+        "mw": 345.4,
+        "drug_likeness": 0.78,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 1,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 17,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_009",
+        "name": "TSR-033 Analog (Pyrazolopyrimidine)",
+        "mol_type": "Pyrazolopyrimidine",
+        "smiles_like": "CN1C=CC2=C1N=CN=C2NCC3=CC=C(C=C3)F",
+        "binding_affinity": -8.6,
+        "mw": 340.3,
+        "drug_likeness": 0.75,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 3,
+          "halogen": 1
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_010",
+        "name": "Morpholine benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "NC(=O)c1ccc(CN2CCOCC2)cc1",
+        "binding_affinity": -8.6,
+        "mw": 357.5,
+        "drug_likeness": 0.88,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 1,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 12,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_004",
+        "name": "CA-170 Analog (Biphenyl Urea)",
+        "mol_type": "Biphenyl Urea",
+        "smiles_like": "CN(C)CCOC1=CC=C(C=C1)C(=O)NC2=CC=CC=C2",
+        "binding_affinity": -8.4,
+        "mw": 355.4,
+        "drug_likeness": 0.76,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_009",
+        "name": "Tetrahydroisoquinoline furan",
+        "mol_type": "Fragment",
+        "smiles_like": "COc1ccc2c(c1)CCN(C2)C(=O)c3ccco3",
+        "binding_affinity": -8.4,
+        "mw": 440.8,
+        "drug_likeness": 0.63,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 0,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_004",
+        "name": "Cyclopropyl-carboxamide",
+        "mol_type": "Fragment",
+        "smiles_like": "O=C(NC1CC1)c2cccc3c2CCN(C)C3",
+        "binding_affinity": -8.1,
+        "mw": 319.9,
+        "drug_likeness": 0.85,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 13,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_002",
+        "name": "Dopamine Analog",
+        "mol_type": "Fragment",
+        "smiles_like": "CC(N)Cc1ccc(O)c(O)c1",
+        "binding_affinity": -7.9,
+        "mw": 449.8,
+        "drug_likeness": 0.52,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 10,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_005",
+        "name": "t-Butyl benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "CC(C)(C)c1ccc(C(=O)NCc2ccccc2)cc1",
+        "binding_affinity": -7.7,
+        "mw": 410.4,
+        "drug_likeness": 0.61,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_001",
+        "name": "4-(4-Fluorobenzyl)piperidine",
+        "mol_type": "Fragment",
+        "smiles_like": "Fc1ccc(CC2CCNCC2)cc1",
+        "binding_affinity": -7.6,
+        "mw": 422.6,
+        "drug_likeness": 0.55,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 9,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_006",
+        "name": "N-methyl piperidine amide",
+        "mol_type": "Fragment",
+        "smiles_like": "CNC(=O)C1CCN(CC1)c2ccccc2",
+        "binding_affinity": -7.5,
+        "mw": 301.3,
+        "drug_likeness": 0.74,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 8,
+        "has_pdb": true
+      }
+    ]
+  },
+  "VISTA": {
+    "target": "VISTA",
+    "n_protein_residues": 73,
+    "n_protein_atoms": 365,
+    "binding_pocket_center": [
+      9.661,
+      15.167,
+      -3.268
+    ],
+    "binding_pocket_residues": [
+      {
+        "res_num": 30,
+        "aa": "W",
+        "aa3": "TRP"
+      },
+      {
+        "res_num": 31,
+        "aa": "Y",
+        "aa3": "TYR"
+      },
+      {
+        "res_num": 32,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 33,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 34,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 35,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 36,
+        "aa": "G",
+        "aa3": "GLY"
+      },
+      {
+        "res_num": 37,
+        "aa": "E",
+        "aa3": "GLU"
+      },
+      {
+        "res_num": 38,
+        "aa": "V",
+        "aa3": "VAL"
+      },
+      {
+        "res_num": 39,
+        "aa": "Q",
+        "aa3": "GLN"
+      },
+      {
+        "res_num": 40,
+        "aa": "T",
+        "aa3": "THR"
+      },
+      {
+        "res_num": 41,
+        "aa": "C",
+        "aa3": "CYS"
+      },
+      {
+        "res_num": 42,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 43,
+        "aa": "E",
+        "aa3": "GLU"
+      },
+      {
+        "res_num": 44,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 45,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 46,
+        "aa": "P",
+        "aa3": "PRO"
+      },
+      {
+        "res_num": 47,
+        "aa": "I",
+        "aa3": "ILE"
+      },
+      {
+        "res_num": 48,
+        "aa": "R",
+        "aa3": "ARG"
+      },
+      {
+        "res_num": 49,
+        "aa": "N",
+        "aa3": "ASN"
+      },
+      {
+        "res_num": 50,
+        "aa": "L",
+        "aa3": "LEU"
+      },
+      {
+        "res_num": 61,
+        "aa": "G",
+        "aa3": "GLY"
+      },
+      {
+        "res_num": 62,
+        "aa": "H",
+        "aa3": "HIS"
+      },
+      {
+        "res_num": 63,
+        "aa": "Q",
+        "aa3": "GLN"
+      },
+      {
+        "res_num": 64,
+        "aa": "A",
+        "aa3": "ALA"
+      },
+      {
+        "res_num": 65,
+        "aa": "A",
+        "aa3": "ALA"
+      },
+      {
+        "res_num": 66,
+        "aa": "N",
+        "aa3": "ASN"
+      },
+      {
+        "res_num": 67,
+        "aa": "T",
+        "aa3": "THR"
+      },
+      {
+        "res_num": 68,
+        "aa": "S",
+        "aa3": "SER"
+      },
+      {
+        "res_num": 69,
+        "aa": "H",
+        "aa3": "HIS"
+      },
+      {
+        "res_num": 70,
+        "aa": "D",
+        "aa3": "ASP"
+      },
+      {
+        "res_num": 71,
+        "aa": "L",
+        "aa3": "LEU"
+      }
+    ],
+    "n_drugs": 20,
+    "drugs": [
+      {
+        "mol_id": "mol_006",
+        "name": "Pembrolizumab Small Molecule Mimetic",
+        "mol_type": "Indole-piperidine",
+        "smiles_like": "COC1=CC2=C(C=C1)N(C=C2)CCN3CCC(CC3)O",
+        "binding_affinity": -10.1,
+        "mw": 326.4,
+        "drug_likeness": 0.81,
+        "predicted_interactions": {
+          "hydrogen_bonds": 4,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_008",
+        "name": "BMS-986207 Analog (Triazolopyrimidine)",
+        "mol_type": "Triazolopyrimidine",
+        "smiles_like": "CN1N=NC2=C1N=C(N=C2)NC3=CC=C(C=C3)C#N",
+        "binding_affinity": -9.8,
+        "mw": 370.4,
+        "drug_likeness": 0.83,
+        "predicted_interactions": {
+          "hydrogen_bonds": 4,
+          "pi_stacking": 3,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 18,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_003",
+        "name": "TSR-042 Analog (Benzimidazole)",
+        "mol_type": "Benzimidazole",
+        "smiles_like": "CC1=NC2=CC=CC=C2N1CC3=CC=C(C=C3)C(=O)NO",
+        "binding_affinity": -9.5,
+        "mw": 310.3,
+        "drug_likeness": 0.85,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_007",
+        "name": "Diethoxy benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "CCOc1cc(OCC)cc(C(=O)Nc2ncccn2)c1",
+        "binding_affinity": -9.4,
+        "mw": 326.1,
+        "drug_likeness": 0.86,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 0,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 12,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_007",
+        "name": "MBG453 Analog (Thiadiazole)",
+        "mol_type": "Thiadiazole",
+        "smiles_like": "CC1=NN=C(S1)NCC2=CC=C(C=C2)OC(F)(F)F",
+        "binding_affinity": -9.3,
+        "mw": 358.3,
+        "drug_likeness": 0.79,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 1,
+          "hydrophobic": 5,
+          "halogen": 3
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_001",
+        "name": "BMS-936558 Analog (Aryl Ether)",
+        "mol_type": "Aryl Ether",
+        "smiles_like": "CCOC1=CC=C2NC3=CC=CC=C3C2=C1",
+        "binding_affinity": -9.2,
+        "mw": 380.4,
+        "drug_likeness": 0.82,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 17,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_003",
+        "name": "Sulfonamide-thiazole",
+        "mol_type": "Fragment",
+        "smiles_like": "Nc1ccc(S(=O)(=O)Nc2nccs2)cc1",
+        "binding_affinity": -9.1,
+        "mw": 327.2,
+        "drug_likeness": 0.86,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_008",
+        "name": "Thiadiazole thioether",
+        "mol_type": "Fragment",
+        "smiles_like": "Cc1nnc(SCC(=O)Nc2cccc(C)c2)s1",
+        "binding_affinity": -9.1,
+        "mw": 406.1,
+        "drug_likeness": 0.66,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 10,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_010",
+        "name": "AB122 Analog (Pyridine-Benzamide)",
+        "mol_type": "Pyridine-Benzamide",
+        "smiles_like": "CN1CCN(CC1)C2=CC=C(C=C2)C(=O)NC3=CC=NC=C3",
+        "binding_affinity": -9.0,
+        "mw": 325.4,
+        "drug_likeness": 0.88,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 20,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_005",
+        "name": "SHR-1210 Analog (Quinoline)",
+        "mol_type": "Quinoline",
+        "smiles_like": "CN1CCC(CC1)OC2=CC=C3C(=C2)C=CC=N3",
+        "binding_affinity": -8.9,
+        "mw": 345.4,
+        "drug_likeness": 0.73,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 3,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 20,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_002",
+        "name": "LAG-525 Analog (Benzamide)",
+        "mol_type": "Benzamide",
+        "smiles_like": "O=C(NCC1=CC=CC=C1)C2=CC=C(OCCN3CCCC3)C=C2",
+        "binding_affinity": -8.7,
+        "mw": 345.4,
+        "drug_likeness": 0.78,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 1,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 17,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_009",
+        "name": "TSR-033 Analog (Pyrazolopyrimidine)",
+        "mol_type": "Pyrazolopyrimidine",
+        "smiles_like": "CN1C=CC2=C1N=CN=C2NCC3=CC=C(C=C3)F",
+        "binding_affinity": -8.6,
+        "mw": 340.3,
+        "drug_likeness": 0.75,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 3,
+          "halogen": 1
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_010",
+        "name": "Morpholine benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "NC(=O)c1ccc(CN2CCOCC2)cc1",
+        "binding_affinity": -8.6,
+        "mw": 357.5,
+        "drug_likeness": 0.88,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 1,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 12,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "mol_004",
+        "name": "CA-170 Analog (Biphenyl Urea)",
+        "mol_type": "Biphenyl Urea",
+        "smiles_like": "CN(C)CCOC1=CC=C(C=C1)C(=O)NC2=CC=CC=C2",
+        "binding_affinity": -8.4,
+        "mw": 355.4,
+        "drug_likeness": 0.76,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 4
+        },
+        "n_ligand_atoms": 19,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_009",
+        "name": "Tetrahydroisoquinoline furan",
+        "mol_type": "Fragment",
+        "smiles_like": "COc1ccc2c(c1)CCN(C2)C(=O)c3ccco3",
+        "binding_affinity": -8.4,
+        "mw": 440.8,
+        "drug_likeness": 0.63,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 0,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_004",
+        "name": "Cyclopropyl-carboxamide",
+        "mol_type": "Fragment",
+        "smiles_like": "O=C(NC1CC1)c2cccc3c2CCN(C)C3",
+        "binding_affinity": -8.1,
+        "mw": 319.9,
+        "drug_likeness": 0.85,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 13,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_002",
+        "name": "Dopamine Analog",
+        "mol_type": "Fragment",
+        "smiles_like": "CC(N)Cc1ccc(O)c(O)c1",
+        "binding_affinity": -7.9,
+        "mw": 449.8,
+        "drug_likeness": 0.52,
+        "predicted_interactions": {
+          "hydrogen_bonds": 2,
+          "pi_stacking": 2,
+          "hydrophobic": 3
+        },
+        "n_ligand_atoms": 10,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_005",
+        "name": "t-Butyl benzamide",
+        "mol_type": "Fragment",
+        "smiles_like": "CC(C)(C)c1ccc(C(=O)NCc2ccccc2)cc1",
+        "binding_affinity": -7.7,
+        "mw": 410.4,
+        "drug_likeness": 0.61,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 14,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_001",
+        "name": "4-(4-Fluorobenzyl)piperidine",
+        "mol_type": "Fragment",
+        "smiles_like": "Fc1ccc(CC2CCNCC2)cc1",
+        "binding_affinity": -7.6,
+        "mw": 422.6,
+        "drug_likeness": 0.55,
+        "predicted_interactions": {
+          "hydrogen_bonds": 3,
+          "pi_stacking": 2,
+          "hydrophobic": 5
+        },
+        "n_ligand_atoms": 9,
+        "has_pdb": true
+      },
+      {
+        "mol_id": "simple_006",
+        "name": "N-methyl piperidine amide",
+        "mol_type": "Fragment",
+        "smiles_like": "CNC(=O)C1CCN(CC1)c2ccccc2",
+        "binding_affinity": -7.5,
+        "mw": 301.3,
+        "drug_likeness": 0.74,
+        "predicted_interactions": {
+          "hydrogen_bonds": 1,
+          "pi_stacking": 2,
+          "hydrophobic": 2
+        },
+        "n_ligand_atoms": 8,
+        "has_pdb": true
+      }
+    ]
+  }
+}

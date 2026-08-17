@@ -1,0 +1,15 @@
+{
+  "data_source": "RDKit真实计算",
+  "total_compounds": 109,
+  "parse_failed": 0,
+  "duplicates_removed": 91,
+  "pains_flags": 25,
+  "lipinski_pass": 108,
+  "lipinski_fail": 1,
+  "pass_rate": 99.1,
+  "mean_mw": 249.56,
+  "mean_logp": 2.64,
+  "mean_tpsa": 42.12,
+  "mean_qed": 0.8,
+  "mean_sa": 1.768
+}

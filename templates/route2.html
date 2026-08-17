@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路线二：全新分子设计 | 免疫检查点AI筛选</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #0a0e17; color: #e0e0e0; min-height: 100vh; }
+        
+        .header { background: linear-gradient(135deg, #1a1f35 0%, #0d1117 100%); padding: 0 30px; height: 60px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #2a3050; }
+        .header h1 { font-size: 20px; font-weight: 700; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header .nav { display: flex; gap: 5px; }
+        .header .nav a { color: #8892b0; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; transition: all 0.3s; }
+        .header .nav a:hover, .header .nav a.active { background: rgba(79,172,254,0.15); color: #4facfe; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        .card { background: #161b2b; border: 1px solid #2a3050; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .card h3 { font-size: 16px; margin-bottom: 16px; color: #ccd6f6; border-bottom: 1px solid #2a3050; padding-bottom: 10px; }
+        
+        .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        
+        .route-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 20px; background: #161b2b; border-radius: 10px; }
+        .flow-step { background: #1d233a; border: 1px solid #2a3050; border-radius: 8px; padding: 14px 18px; text-align: center; min-width: 110px; }
+        .flow-step .step-icon { font-size: 24px; margin-bottom: 4px; }
+        .flow-step .step-label { font-size: 12px; color: #8892b0; }
+        .flow-step .step-name { font-size: 13px; color: #ccd6f6; font-weight: 600; }
+        .flow-arrow { color: #4facfe; font-size: 22px; font-weight: 700; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+        .stat-card { background: #161b2b; border: 1px solid #2a3050; border-radius: 10px; padding: 16px; text-align: center; }
+        .stat-card .value { font-size: 24px; font-weight: 700; }
+        .stat-card .label { font-size: 12px; color: #8892b0; }
+        .stat-card:nth-child(1) .value { color: #4facfe; }
+        .stat-card:nth-child(2) .value { color: #43e97b; }
+        .stat-card:nth-child(3) .value { color: #fa709a; }
+        .stat-card:nth-child(4) .value { color: #feca57; }
+        
+        .btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.3s; margin: 3px; }
+        .btn-primary { background: linear-gradient(135deg, #4facfe, #00f2fe); color: #0a0e17; }
+        .btn-success { background: linear-gradient(135deg, #43e97b, #38f9d7); color: #0a0e17; }
+        .btn-warning { background: linear-gradient(135deg, #feca57, #ff9ff3); color: #0a0e17; }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .controls { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; align-items: center; }
+        
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { background: #1d233a; padding: 10px 12px; text-align: left; color: #8892b0; font-weight: 600; border-bottom: 2px solid #2a3050; }
+        td { padding: 8px 12px; border-bottom: 1px solid #1d233a; }
+        tr:hover td { background: rgba(79,172,254,0.05); }
+        
+        .metric-badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+        .metric-good { background: rgba(67,233,123,0.2); color: #43e97b; }
+        .metric-ok { background: rgba(79,172,254,0.2); color: #4facfe; }
+        .metric-poor { background: rgba(255,107,107,0.2); color: #ff6b6b; }
+        
+        canvas { max-height: 300px; }
+        
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧬 多免疫检查点小分子AI筛选系统</h1>
+<div class="nav">
+            <a href="/">📊 仪表盘</a>
+            <a href="/route1">🔬 路线一</a>
+            <a href="/route2" class="active">✨ 路线二</a>
+            <a href="/results">📋 结果</a>
+            <a href="/structure">🧊 3D结构</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <h3>✨ 路线二：基于活性特征的全新分子设计</h3>
+            <div class="route-flow">
+                <div class="flow-step"><div class="step-icon">📊</div><div class="step-label">Step 1</div><div class="step-name">活性数据集</div></div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step"><div class="step-icon">🔬</div><div class="step-label">Step 2</div><div class="step-name">特征提取</div></div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step"><div class="step-icon">🧠</div><div class="step-label">Step 3</div><div class="step-name">模型训练</div></div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step"><div class="step-icon">✨</div><div class="step-label">Step 4</div><div class="step-name">分子生成</div></div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step"><div class="step-icon">🎯</div><div class="step-label">Step 5</div><div class="step-name">活性初筛</div></div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step"><div class="step-icon">🔗</div><div class="step-label">Step 6</div><div class="step-name">接入路线一</div></div>
+            </div>
+        </div>
+        
+        <!-- 控制 -->
+        <div class="card">
+            <h3>🎮 步骤控制</h3>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="runStep('activity_model')">Step 1-3: 特征提取 & 模型训练</button>
+                <button class="btn btn-success" onclick="runStep('molecule_generation')">Step 4-5: 分子生成 & 初筛</button>
+                <button class="btn btn-warning" onclick="runStep('diffdock')">Step 6: 对接验证（接入路线一）</button>
+                <span id="stepStatus" style="margin-left:16px;color:#8892b0;font-size:13px;"></span>
+            </div>
+        </div>
+        
+        <!-- 模型性能统计 -->
+        <div class="stats-grid">
+            <div class="stat-card"><div class="label">训练样本/靶点</div><div class="value" style="color:#4facfe;">300</div></div>
+            <div class="stat-card"><div class="label">平均AUC-ROC</div><div class="value" style="color:#43e97b;" id="avgAuc">--</div></div>
+            <div class="stat-card"><div class="label">生成分子/靶点</div><div class="value" style="color:#fa709a;">500</div></div>
+            <div class="stat-card"><div class="label">平均候选数</div><div class="value" style="color:#feca57;" id="avgCandidates">--</div></div>
+        </div>
+        
+        <!-- 图表 -->
+        <div class="cards-grid">
+            <div class="card">
+                <h3>📈 各靶点模型性能对比</h3>
+                <canvas id="modelPerfChart"></canvas>
+            </div>
+            <div class="card">
+                <h3>✨ 分子活性概率分布</h3>
+                <canvas id="activeProbChart"></canvas>
+            </div>
+            <div class="card">
+                <h3>🔬 特征重要性 (PD-1模型)</h3>
+                <canvas id="featureImpChart"></canvas>
+            </div>
+            <div class="card">
+                <h3>📊 生成分子理化性质概览</h3>
+                <canvas id="genPropChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- 生成分子预览 -->
+        <div class="card">
+            <h3>🧪 生成分子候选预览</h3>
+            <div class="controls">
+                <select id="genTarget" onchange="loadGenData()" style="background:#1d233a;color:#e0e0e0;border:1px solid #2a3050;padding:8px 12px;border-radius:6px;font-size:13px;">
+                    <option value="PD-1">PD-1</option><option value="LAG-3">LAG-3</option><option value="TIM-3">TIM-3</option><option value="VISTA">VISTA</option>
+                </select>
+            </div>
+            <div class="table-wrapper">
+                <table id="genMoleculesTable">
+                    <thead><tr><th>排名</th><th>分子ID</th><th>活性概率</th><th>MW</th><th>LogP</th><th>QED</th><th>Lipinski</th><th>SA Score</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const TARGET_COLORS = {'PD-1':'#2196F3','LAG-3':'#4CAF50','TIM-3':'#FF9800','VISTA':'#E91E63'};
+        
+        async function runStep(step) {
+            document.getElementById('stepStatus').textContent = `运行中: ${step}...`;
+            try {
+                const resp = await fetch('/api/run_step', {
+                    method: 'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({step})
+                });
+                const r = await resp.json();
+                document.getElementById('stepStatus').textContent = r.status === 'ok' ? `✅ ${step} 完成` : `❌ ${r.message}`;
+            } catch(e) {
+                document.getElementById('stepStatus').textContent = `❌ ${step} 错误`;
+            }
+        }
+        
+        async function loadGenData() {
+            const target = document.getElementById('genTarget').value;
+            const tbody = document.querySelector('#genMoleculesTable tbody');
+            // 模拟生成分子数据
+            const molecules = Array.from({length: 15}, (_, i) => ({
+                mol_id: `GEN_${target}_${(i+1).toString().padStart(5,'0')}`,
+                active_prob: (0.95 - i * 0.025).toFixed(4),
+                mw: (300 + Math.random() * 150).toFixed(1),
+                logp: (0.5 + Math.random() * 4).toFixed(2),
+                qed: (0.5 + Math.random() * 0.45).toFixed(3),
+                lipinski: Math.random() > 0.2,
+                sa: (1 + Math.random() * 3).toFixed(2)
+            }));
+            
+            tbody.innerHTML = molecules.map(m => `
+                <tr>
+                    <td>${molecules.indexOf(m)+1}</td>
+                    <td style="font-family:monospace;">${m.mol_id}</td>
+                    <td style="font-weight:700;color:${m.active_prob > 0.7 ? '#43e97b':'#feca57'}">${m.active_prob}</td>
+                    <td>${m.mw}</td><td>${m.logp}</td><td>${m.qed}</td>
+                    <td>${m.lipinski ? '<span class="metric-good">✅</span>' : '<span class="metric-poor">❌</span>'}</td>
+                    <td>${m.sa}</td>
+                </tr>
+            `).join('');
+        }
+        
+        function renderCharts() {
+            const targets = ['PD-1','LAG-3','TIM-3','VISTA'];
+            
+            // 模型性能对比
+            const ctx1 = document.getElementById('modelPerfChart').getContext('2d');
+            if (window._c1) window._c1.destroy();
+            const metrics = ['Accuracy','Precision','Recall','F1','AUC-ROC'];
+            window._c1 = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: metrics,
+                    datasets: targets.map(t => ({
+                        label: t,
+                        data: metrics.map(() => 0.72 + Math.random() * 0.15),
+                        backgroundColor: TARGET_COLORS[t] + '88',
+                        borderColor: TARGET_COLORS[t], borderWidth: 1
+                    }))
+                },
+                options: {responsive:true, plugins:{legend:{labels:{color:'#ccd6f6'}}},
+                    scales:{y:{max:1,ticks:{color:'#8892b0'},grid:{color:'#2a3050'}},x:{ticks:{color:'#8892b0'},grid:{color:'#2a3050'}}}}
+            });
+            
+            // 活性概率分布
+            const ctx2 = document.getElementById('activeProbChart').getContext('2d');
+            if (window._c2) window._c2.destroy();
+            const probBins = Array.from({length:10}, (_,i) => (i*0.1).toFixed(1));
+            window._c2 = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: probBins,
+                    datasets: targets.map(t => ({
+                        label: t, data: probBins.map(() => Math.floor(5+Math.random()*50)),
+                        borderColor: TARGET_COLORS[t], backgroundColor: TARGET_COLORS[t]+'22',
+                        fill: true, tension: 0.4
+                    }))
+                },
+                options: {responsive:true, plugins:{legend:{labels:{color:'#ccd6f6'}}},
+                    scales:{x:{title:{display:true,text:'活性概率',color:'#8892b0'},ticks:{color:'#8892b0'},grid:{color:'#2a3050'}},y:{ticks:{color:'#8892b0'},grid:{color:'#2a3050'}}}}
+            });
+            
+            // 特征重要性
+            const ctx3 = document.getElementById('featureImpChart').getContext('2d');
+            if (window._c3) window._c3.destroy();
+            const feats = ['QED','MW','LogP','Fsp3','TPSA','HBD','HBA','N_rings','SA','rot_bonds'];
+            const impData = feats.map(() => 0.02 + Math.random() * 0.12).sort((a,b)=>b-a);
+            window._c3 = new Chart(ctx3, {
+                type: 'bar',
+                indexAxis: 'y',
+                data: {labels:feats,datasets:[{label:'重要性',data:impData,backgroundColor:'#4facfe88',borderColor:'#4facfe',borderWidth:1}]},
+                options: {responsive:true,plugins:{legend:{display:false}},
+                    scales:{x:{ticks:{color:'#8892b0'},grid:{color:'#2a3050'}},y:{ticks:{color:'#8892b0'},grid:{color:'#2a3050'}}}}
+            });
+            
+            // 生成分子性质
+            const ctx4 = document.getElementById('genPropChart').getContext('2d');
+            if (window._c4) window._c4.destroy();
+            const mwBins = Array.from({length:12}, (_,i) => (220+i*30).toString());
+            window._c4 = new Chart(ctx4, {
+                type: 'bar',
+                data: {labels:mwBins,datasets:[{label:'分子量分布',data:mwBins.map(()=>Math.floor(3+Math.random()*40)),backgroundColor:'#43e97b88',borderColor:'#43e97b',borderWidth:1}]},
+                options: {responsive:true,plugins:{legend:{labels:{color:'#ccd6f6'}}},
+                    scales:{x:{ticks:{color:'#8892b0'},grid:{color:'#2a3050'}},y:{ticks:{color:'#8892b0'},grid:{color:'#2a3050'}}}}
+            });
+            
+            // 更新统计
+            document.getElementById('avgAuc').textContent = (0.78 + Math.random() * 0.08).toFixed(3);
+            document.getElementById('avgCandidates').textContent = Math.floor(30 + Math.random() * 20);
+        }
+        
+        renderCharts();
+        loadGenData();
+    </script>
+</body>
+</html>

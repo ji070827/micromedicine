@@ -1,0 +1,170 @@
+{
+  "normal": {
+    "target": "LAG-3",
+    "tme_condition": "normal",
+    "conditions": {
+      "pH": 7.4,
+      "pO2_mmHg": 50,
+      "temperature_C": 37.0,
+      "lactate_mM": 2.0,
+      "description": "正常生理环境"
+    },
+    "his_analysis": {
+      "residues": [
+        "HIS53",
+        "HIS98"
+      ],
+      "n_total": 2,
+      "n_protonated_at_TME_pH": 0,
+      "n_protonated_at_pH7.4": 0,
+      "delta_protonation": 0,
+      "states": {
+        "HIS53": {
+          "pKa": 6.04,
+          "pH": 7.4,
+          "protonated": 0.042,
+          "deprotonated": 0.958,
+          "charge_state": "neutral"
+        },
+        "HIS98": {
+          "pKa": 6.04,
+          "pH": 7.4,
+          "protonated": 0.042,
+          "deprotonated": 0.958,
+          "charge_state": "neutral"
+        }
+      }
+    },
+    "energy_shifts": {
+      "dG_pH_shift_kcal_mol": 0.0,
+      "dG_polar_shift_kcal_mol": 0.0,
+      "dG_hypoxia_kcal_mol": -0.0,
+      "dG_lactate_kcal_mol": 0.0,
+      "dG_tme_total_kcal_mol": 0.0
+    },
+    "affinity_modification": {
+      "kd_tme_vs_normal_ratio": 1.0,
+      "competition_factor": 1.0,
+      "effective_kd_modifier": 1.0,
+      "interpretation": "TME对结合影响不大"
+    },
+    "tme_considerations": [
+      "TME pH=7.4: 结合口袋 0/2 个His质子化 (生理pH 7.4下为 0/2)",
+      "ΔG_TME 修正 = +0.00 kcal/mol",
+      "有效Kd变化倍数 ≈ 1.00x",
+      "酸性环境可能削弱与 MHC-II 的结合"
+    ]
+  },
+  "tme_moderate": {
+    "target": "LAG-3",
+    "tme_condition": "tme_moderate",
+    "conditions": {
+      "pH": 6.8,
+      "pO2_mmHg": 20,
+      "temperature_C": 37.0,
+      "lactate_mM": 15.0,
+      "description": "中度肿瘤微环境 (肿瘤边缘)"
+    },
+    "his_analysis": {
+      "residues": [
+        "HIS53",
+        "HIS98"
+      ],
+      "n_total": 2,
+      "n_protonated_at_TME_pH": 0,
+      "n_protonated_at_pH7.4": 0,
+      "delta_protonation": 0,
+      "states": {
+        "HIS53": {
+          "pKa": 6.04,
+          "pH": 6.8,
+          "protonated": 0.148,
+          "deprotonated": 0.852,
+          "charge_state": "neutral"
+        },
+        "HIS98": {
+          "pKa": 6.04,
+          "pH": 6.8,
+          "protonated": 0.148,
+          "deprotonated": 0.852,
+          "charge_state": "neutral"
+        }
+      }
+    },
+    "energy_shifts": {
+      "dG_pH_shift_kcal_mol": 0.0,
+      "dG_polar_shift_kcal_mol": 0.147,
+      "dG_hypoxia_kcal_mol": -0.255,
+      "dG_lactate_kcal_mol": 0.113,
+      "dG_tme_total_kcal_mol": 0.005
+    },
+    "affinity_modification": {
+      "kd_tme_vs_normal_ratio": 0.991,
+      "competition_factor": 1.196,
+      "effective_kd_modifier": 1.186,
+      "interpretation": "TME对结合影响不大"
+    },
+    "tme_considerations": [
+      "TME pH=6.8: 结合口袋 0/2 个His质子化 (生理pH 7.4下为 0/2)",
+      "ΔG_TME 修正 = +0.01 kcal/mol",
+      "有效Kd变化倍数 ≈ 1.19x",
+      "酸性环境可能削弱与 MHC-II 的结合"
+    ]
+  },
+  "tme_severe": {
+    "target": "LAG-3",
+    "tme_condition": "tme_severe",
+    "conditions": {
+      "pH": 6.4,
+      "pO2_mmHg": 5,
+      "temperature_C": 36.5,
+      "lactate_mM": 35.0,
+      "description": "重度肿瘤微环境 (肿瘤核心)"
+    },
+    "his_analysis": {
+      "residues": [
+        "HIS53",
+        "HIS98"
+      ],
+      "n_total": 2,
+      "n_protonated_at_TME_pH": 0,
+      "n_protonated_at_pH7.4": 0,
+      "delta_protonation": 0,
+      "states": {
+        "HIS53": {
+          "pKa": 6.04,
+          "pH": 6.4,
+          "protonated": 0.304,
+          "deprotonated": 0.696,
+          "charge_state": "neutral"
+        },
+        "HIS98": {
+          "pKa": 6.04,
+          "pH": 6.4,
+          "protonated": 0.304,
+          "deprotonated": 0.696,
+          "charge_state": "neutral"
+        }
+      }
+    },
+    "energy_shifts": {
+      "dG_pH_shift_kcal_mol": 0.0,
+      "dG_polar_shift_kcal_mol": 0.141,
+      "dG_hypoxia_kcal_mol": -0.037,
+      "dG_lactate_kcal_mol": 0.335,
+      "dG_tme_total_kcal_mol": 0.439
+    },
+    "affinity_modification": {
+      "kd_tme_vs_normal_ratio": 0.49,
+      "competition_factor": 1.065,
+      "effective_kd_modifier": 0.522,
+      "interpretation": "TME略增强结合"
+    },
+    "tme_considerations": [
+      "TME pH=6.4: 结合口袋 0/2 个His质子化 (生理pH 7.4下为 0/2)",
+      "ΔG_TME 修正 = +0.44 kcal/mol",
+      "有效Kd变化倍数 ≈ 0.52x",
+      "酸性环境可能削弱与 MHC-II 的结合"
+    ]
+  }
+}

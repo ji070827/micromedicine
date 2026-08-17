@@ -1,0 +1,20 @@
+{
+  "target_name": "VISTA",
+  "pdb_id": "6OIL",
+  "description": "VISTA IgV domain",
+  "method": "X-ray diffraction",
+  "resolution": 2.7,
+  "has_ligand": false,
+  "ligand_description": "Ligand-free form",
+  "alternatives": [
+    "6OIJ",
+    "8GCM",
+    "8GCL"
+  ],
+  "chain": "A",
+  "source": "RCSB PDB",
+  "fetch_date": "2026-08-06",
+  "deposition_date": "",
+  "release_date": "2019-09-11T00:00:00.000+00:00",
+  "organism": "Homo sapiens"
+}

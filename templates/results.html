@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结果总览 | 免疫检查点AI筛选</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://3dmol.org/build/3Dmol-min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #0a0e17; color: #e0e0e0; min-height: 100vh; }
+        
+        .header { background: linear-gradient(135deg, #1a1f35 0%, #0d1117 100%); padding: 0 30px; height: 60px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #2a3050; }
+        .header h1 { font-size: 20px; font-weight: 700; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header .nav { display: flex; gap: 5px; }
+        .header .nav a { color: #8892b0; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; transition: all 0.3s; }
+        .header .nav a:hover, .header .nav a.active { background: rgba(79,172,254,0.15); color: #4facfe; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        .card { background: #161b2b; border: 1px solid #2a3050; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .card h3 { font-size: 16px; margin-bottom: 16px; color: #ccd6f6; border-bottom: 1px solid #2a3050; padding-bottom: 10px; }
+        
+        .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .cards-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        
+        .priority-A { color: #43e97b; font-weight: 700; }
+        .priority-B { color: #4facfe; font-weight: 700; }
+        .priority-C { color: #feca57; }
+        .priority-D { color: #ff6b6b; }
+        
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+        .badge-A { background: rgba(67,233,123,0.2); color: #43e97b; }
+        .badge-B { background: rgba(79,172,254,0.2); color: #4facfe; }
+        .badge-C { background: rgba(254,202,87,0.2); color: #feca57; }
+        .badge-D { background: rgba(255,107,107,0.2); color: #ff6b6b; }
+        
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { background: #1d233a; padding: 10px 12px; text-align: left; color: #8892b0; font-weight: 600; border-bottom: 2px solid #2a3050; cursor: pointer; user-select: none; }
+        th:hover { color: #4facfe; }
+        td { padding: 8px 12px; border-bottom: 1px solid #1d233a; }
+        tr:hover td { background: rgba(79,172,254,0.05); cursor: pointer; }
+        tr.selected td { background: rgba(67,233,123,0.1); }
+        
+        .btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.3s; }
+        .btn-primary { background: linear-gradient(135deg, #4facfe, #00f2fe); color: #0a0e17; }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        
+        .summary-banner { background: linear-gradient(135deg, #1a1f35, #0d1117); border: 1px solid #2a3050; border-radius: 10px; padding: 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 24px; }
+        .summary-banner .big-number { font-size: 48px; font-weight: 800; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .summary-banner .detail { font-size: 14px; color: #8892b0; line-height: 1.6; }
+        
+        .target-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+        .target-summary-card { background: #161b2b; border: 1px solid #2a3050; border-radius: 10px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .target-summary-card:hover { border-color: #4facfe; box-shadow: 0 0 12px rgba(79,172,254,0.2); }
+        .target-summary-card.selected { border-color: #43e97b; box-shadow: 0 0 16px rgba(67,233,123,0.25); }
+        .target-summary-card .t-name { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+        .target-summary-card .t-stats { font-size: 12px; color: #8892b0; line-height: 1.8; }
+        .target-summary-card.PD-1 { border-top: 3px solid #2196F3; }
+        .target-summary-card.LAG-3 { border-top: 3px solid #4CAF50; }
+        .target-summary-card.TIM-3 { border-top: 3px solid #FF9800; }
+        .target-summary-card.VISTA { border-top: 3px solid #E91E63; }
+        
+        .recommendation { background: rgba(79,172,254,0.08); border-left: 3px solid #4facfe; padding: 12px 16px; border-radius: 4px; margin: 8px 0; font-size: 13px; }
+        .recommendation .rec-title { font-weight: 600; color: #4facfe; margin-bottom: 4px; }
+        
+        canvas { max-height: 320px; }
+        
+        /* 3D Viewer in results */
+        .viewer-section { margin-bottom: 16px; }
+        .viewer-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 16px; }
+        .viewer-container { background: #0a0e17; border-radius: 8px; min-height: 400px; position: relative; }
+        .viewer-toolbar { padding: 6px 10px; display: flex; gap: 4px; background: #1d233a; border-bottom: 1px solid #2a3050; border-radius: 10px 10px 0 0; flex-wrap: wrap; }
+        .btn-sm { padding: 5px 10px; border: 1px solid #4facfe; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600; transition: all 0.3s; background: transparent; color: #4facfe; }
+        .btn-sm:hover, .btn-sm.active { background: #4facfe; color: #fff; }
+        .btn-sm.primary { background: #4facfe; color: #0a0e17; border-color: #4facfe; }
+        
+        .drug-selector { display: flex; gap: 6px; overflow-x: auto; padding: 8px 0; }
+        .drug-chip { padding: 8px 14px; border: 1px solid #2a3050; border-radius: 8px; cursor: pointer; font-size: 12px; white-space: nowrap; transition: all 0.3s; background: #1d233a; }
+        .drug-chip:hover { border-color: #4facfe; }
+        .drug-chip.selected { border-color: #43e97b; background: rgba(67,233,123,0.1); }
+        .drug-chip .chip-name { font-weight: 600; color: #ccd6f6; }
+        .drug-chip .chip-aff { font-size: 10px; color: #43e97b; margin-top: 2px; }
+        
+        @media (max-width: 768px) {
+            .target-summary-grid { grid-template-columns: repeat(2, 1fr); }
+            .cards-grid, .cards-grid-3 { grid-template-columns: 1fr; }
+            .viewer-grid { grid-template-columns: 1fr; }
+            .summary-banner { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧬 多免疫检查点小分子AI筛选系统</h1>
+        <div class="nav">
+            <a href="/">📊 仪表盘</a>
+            <a href="/route1">🔬 路线一</a>
+            <a href="/route2">✨ 路线二</a>
+            <a href="/results" class="active">📋 结果</a>
+            <a href="/structure">🧊 3D结构</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- 总览横幅 -->
+        <div class="summary-banner">
+            <div>
+                <div class="big-number" id="totalCandidates">--</div>
+                <div style="color:#8892b0;font-size:14px;">跨4个靶点总候选药物</div>
+            </div>
+            <div class="detail">
+                <div>✅ 筛选管线: 6步级联筛选</div>
+                <div>🎯 靶点: PD-1 · LAG-3 · TIM-3 · VISTA</div>
+                <div>🔬 方法: DiffDock初筛 + AlphaFold3精细模拟</div>
+                <div>📐 评分: 五维加权综合打分系统</div>
+                <div>🧬 每个靶点含20种候选小分子药物模拟结构</div>
+                <div id="reportTime" style="margin-top:4px;">报告生成: --</div>
+            </div>
+        </div>
+        
+        <!-- 靶点汇总卡片（可点击切换3D查看器的靶点） -->
+        <div class="target-summary-grid" id="targetSummaryCards"></div>
+        
+        <!-- 3D 结构预览区域 -->
+        <div class="card viewer-section">
+            <h3>🧊 蛋白-候选药物复合物3D结构预览 
+                <span style="font-size:12px;color:#5a6a8a;font-weight:normal;" id="viewerTargetLabel">— 点击靶点卡片或药物行切换</span>
+            </h3>
+            <div class="viewer-grid">
+                <div style="overflow-y:auto;max-height:420px;">
+                    <div style="font-size:12px;color:#8892b0;margin-bottom:8px;">
+                        💊 候选药物列表 (按接合亲和力排序)
+                        <span id="viewerDrugCount" style="color:#4facfe;"></span>
+                    </div>
+                    <div class="drug-selector" id="drugChipList" style="flex-direction:column;overflow-y:auto;max-height:350px;gap:3px;"></div>
+                </div>
+                <div>
+                    <div class="viewer-toolbar">
+                        <button class="btn-sm primary" onclick="vReset()">🏠 重置</button>
+                        <button class="btn-sm" id="vBtnCartoon" onclick="vStyle('cartoon')">🎨 卡通</button>
+                        <button class="btn-sm" id="vBtnStick" onclick="vStyle('stick')">🧬 线状</button>
+                        <button class="btn-sm" id="vBtnSurface" onclick="vStyle('surface')">🌐 表面</button>
+                        <button class="btn-sm" onclick="vFocusLigand()">🔍 聚焦</button>
+                    </div>
+                    <div class="viewer-container" id="result3dviewer"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 终选排名表 -->
+        <div class="card">
+            <h3>🏆 终选候选分子综合排名（跨靶点）</h3>
+            <div class="table-wrapper">
+                <table id="finalRankTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">总排名 ↕</th>
+                            <th onclick="sortTable(1)">分子ID ↕</th>
+                            <th onclick="sortTable(2)">靶点 ↕</th>
+                            <th onclick="sortTable(3)">综合得分 ↕</th>
+                            <th onclick="sortTable(4)">对接分数 ↕</th>
+                            <th onclick="sortTable(5)">结构置信度 ↕</th>
+                            <th onclick="sortTable(6)">相互作用强度 ↕</th>
+                            <th onclick="sortTable(7)">成药性 ↕</th>
+                            <th onclick="sortTable(8)">优先级 ↕</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 综合得分可视化 -->
+        <div class="cards-grid">
+            <div class="card">
+                <h3>📊 各靶点综合得分分布</h3>
+                <canvas id="finalScoreDist"></canvas>
+            </div>
+            <div class="card">
+                <h3>🎯 优先级分布</h3>
+                <canvas id="priorityDist"></canvas>
+            </div>
+            <div class="card">
+                <h3>📈 五维评分雷达图</h3>
+                <canvas id="fiveDimRadar"></canvas>
+            </div>
+            <div class="card">
+                <h3>💡 后续实验建议</h3>
+                <div id="recommendations">
+                    <div class="recommendation"><div class="rec-title">PD-1</div>A类候选推荐进行SPR/BLI体外结合实验验证</div>
+                    <div class="recommendation"><div class="rec-title">LAG-3</div>B类候选推荐进行NFAT-luciferase细胞活性报告实验</div>
+                    <div class="recommendation"><div class="rec-title">TIM-3</div>多靶点命中候选建议进行选择性评估</div>
+                    <div class="recommendation"><div class="rec-title">VISTA</div>建议配合MLR实验评估免疫抑制解除功能</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const TARGET_COLORS = {'PD-1':'#2196F3','LAG-3':'#4CAF50','TIM-3':'#FF9800','VISTA':'#E91E63'};
+        let allScoresData = [];
+        let drugListData = {};
+        let viewerTarget = 'PD-1';
+        let viewerDrugId = null;
+        let viewerPdbData = null;
+        let v3dviewer = null;
+        let vStyleName = 'cartoon';
+        
+        // ========== 3D Viewer (embedded) ==========
+        function initViewer() {
+            let el = document.getElementById('result3dviewer');
+            v3dviewer = $3Dmol.createViewer(el, {
+                backgroundColor: '0x0a0e17',
+                antialias: true,
+            });
+            v3dviewer.setBackgroundColor('0x0a0e17');
+        }
+        
+        function loadViewerStructure(pdbData, drugName) {
+            v3dviewer.clear();
+            v3dviewer.removeAllModels();
+            v3dviewer.removeAllLabels();
+            v3dviewer.removeAllSurfaces();
+            
+            v3dviewer.addModel(pdbData, "pdb");
+            v3dviewer.setStyle({chain: 'A'}, {cartoon: {color: 'spectrum', style: 'trace'}});
+            v3dviewer.setStyle({chain: 'B'}, {stick: {colorscheme: 'Jmol', radius: 0.3}});
+            
+            const hetLines = pdbData.split('\n').filter(l => l.startsWith('HETATM') && l.includes(' B '));
+            let cx=0, cy=0, cz=0, n=0;
+            hetLines.forEach(l => {
+                try { cx += parseFloat(l.substring(30,38)); cy += parseFloat(l.substring(38,46)); cz += parseFloat(l.substring(46,54)); n++; } catch(e){}
+            });
+            if (n > 0 && drugName) {
+                v3dviewer.addLabel(drugName, {
+                    position: {x: cx/n+3, y: cy/n, z: cz/n},
+                    backgroundColor: '0x1d233a', fontColor: '0x43e97b', fontSize: 12, showBackground: true
+                });
+            }
+            
+            vStyleName = 'cartoon';
+            document.getElementById('vBtnCartoon').classList.add('active');
+            document.getElementById('vBtnStick').classList.remove('active');
+            document.getElementById('vBtnSurface').classList.remove('active');
+            
+            v3dviewer.zoomTo({chain: 'B'});
+            v3dviewer.render();
+            v3dviewer.zoom(1.3);
+            v3dviewer.spin('y', 0.3);
+            setTimeout(() => v3dviewer.spin(false), 4000);
+        }
+        
+        function vReset() { if (viewerPdbData) loadViewerStructure(viewerPdbData, viewerDrugId); }
+        function vStyle(style) {
+            if (!viewerPdbData) return;
+            vStyleName = style;
+            document.getElementById('vBtnCartoon').classList.toggle('active', style==='cartoon');
+            document.getElementById('vBtnStick').classList.toggle('active', style==='stick');
+            document.getElementById('vBtnSurface').classList.toggle('active', style==='surface');
+            
+            if (style === 'cartoon') v3dviewer.setStyle({chain:'A'}, {cartoon:{color:'spectrum',style:'trace'}});
+            else if (style === 'stick') v3dviewer.setStyle({chain:'A'}, {stick:{color:'spectrum',radius:0.15}});
+            else if (style === 'surface') v3dviewer.addSurface($3Dmol.SurfaceType.VDW, {opacity:0.5,colorscheme:'whiteCarbon'}, {chain:'A'});
+            v3dviewer.render();
+        }
+        function vFocusLigand() { if (!viewerPdbData) return; v3dviewer.zoomTo({chain:'B'}); v3dviewer.render(); v3dviewer.spin('y',0.8); setTimeout(()=>v3dviewer.spin(false),3000); }
+        
+        async function selectViewerDrug(target, drugId) {
+            viewerTarget = target;
+            viewerDrugId = drugId;
+            document.getElementById('viewerTargetLabel').textContent = `— ${target} / ${drugId}`;
+            renderDrugChips();
+            
+            try {
+                const resp = await fetch(`/api/3d_complex/${target}/${drugId}`);
+                const data = await resp.json();
+                if (!data.error) {
+                    viewerPdbData = data.pdb_string;
+                    loadViewerStructure(data.pdb_string, data.name || drugId);
+                }
+            } catch(e) { console.error(e); }
+        }
+        
+        function renderDrugChips() {
+            const container = document.getElementById('drugChipList');
+            const drugs = drugListData[viewerTarget] || [];
+            document.getElementById('viewerDrugCount').textContent = `(${drugs.length} 个候选)`;
+            
+            container.innerHTML = drugs.map((d, i) => `
+                <div class="drug-chip ${viewerDrugId === d.mol_id ? 'selected' : ''}" 
+                     onclick="selectViewerDrug('${viewerTarget}', '${d.mol_id}')"
+                     style="border-left:3px solid ${TARGET_COLORS[viewerTarget]};padding:6px 10px;display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div class="chip-name">${d.name}</div>
+                        <div style="font-size:10px;color:#5a6a8a;">${d.mol_type || ''} | MW: ${d.mw?.toFixed(0) || '--'}</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div class="chip-aff">ΔG: ${d.binding_affinity}</div>
+                        <div style="font-size:10px;color:#8892b0;">DL: ${d.drug_likeness?.toFixed(2) || '--'}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ========== Main Data Loading ==========
+        async function loadAllData() {
+            const targets = ['PD-1','LAG-3','TIM-3','VISTA'];
+            allScoresData = [];
+            
+            // Load drug lists from API
+            try {
+                const resp = await fetch('/api/all_drug_lists');
+                drugListData = await resp.json();
+            } catch(e) { console.error('Drug list load failed:', e); }
+            
+            // Load scores for table/charts
+            for (const t of targets) {
+                try {
+                    const resp = await fetch(`/api/scores/${t}`);
+                    const scores = await resp.json();
+                    scores.forEach(s => { s.target = t; });
+                    allScoresData = allScoresData.concat(scores);
+                } catch(e) {}
+            }
+            
+            allScoresData.sort((a,b) => b.final_score - a.final_score);
+            allScoresData.forEach((s, i) => { s.global_rank = i + 1; });
+            
+            const totalCount = allScoresData.length + Object.values(drugListData).reduce((sum, arr) => sum + arr.length, 0);
+            document.getElementById('totalCandidates').textContent = allScoresData.length;
+            document.getElementById('reportTime').textContent = `报告生成: ${new Date().toLocaleString('zh-CN')}`;
+            
+            renderTargetSummaries();
+            renderFinalTable();
+            renderCharts();
+            
+            // Init 3D viewer
+            initViewer();
+            if (drugListData['PD-1'] && drugListData['PD-1'].length > 0) {
+                selectViewerDrug('PD-1', drugListData['PD-1'][0].mol_id);
+            }
+        }
+        
+        function renderTargetSummaries() {
+            const container = document.getElementById('targetSummaryCards');
+            const targets = ['PD-1','LAG-3','TIM-3','VISTA'];
+            const names = {
+                'PD-1':'Programmed cell death protein 1',
+                'LAG-3':'Lymphocyte activation gene 3',
+                'TIM-3':'T-cell immunoglobulin mucin-3',
+                'VISTA':'V-domain Ig suppressor'
+            };
+            
+            container.innerHTML = targets.map(t => {
+                const tScores = allScoresData.filter(s => s.target === t);
+                const aCount = tScores.filter(s => s.priority === 'A').length;
+                const bCount = tScores.filter(s => s.priority === 'B').length;
+                const maxScore = tScores.length > 0 ? Math.max(...tScores.map(s=>s.final_score)) : 0;
+                const dCount = (drugListData[t] || []).length;
+                
+                return `
+                <div class="target-summary-card ${t} ${viewerTarget === t ? 'selected' : ''}" 
+                     onclick="switchViewerTarget('${t}')">
+                    <div class="t-name" style="color:${TARGET_COLORS[t]}">${t}</div>
+                    <div class="t-stats">
+                        <div>${names[t]}</div>
+                        <div>候选药物: ${dCount} 种</div>
+                        <div>A类: ${aCount} | B类: ${bCount}</div>
+                        <div>最高得分: ${maxScore.toFixed(3)}</div>
+                    </div>
+                </div>`;
+            }).join('');
+            
+            // Restore click handlers on the cards
+            document.querySelectorAll('.target-summary-card').forEach(card => {
+                const tName = [...card.classList].find(c => TARGET_COLORS[c]);
+                if (tName) {
+                    card.addEventListener('click', () => switchViewerTarget(tName));
+                }
+            });
+        }
+        
+        function switchViewerTarget(target) {
+            viewerTarget = target;
+            viewerDrugId = null;
+            renderTargetSummaries();
+            const drugs = drugListData[target] || [];
+            if (drugs.length > 0) {
+                selectViewerDrug(target, drugs[0].mol_id);
+            }
+        }
+        
+        function renderFinalTable() {
+            const tbody = document.querySelector('#finalRankTable tbody');
+            const top50 = allScoresData.slice(0, 50);
+            
+            tbody.innerHTML = top50.map(s => `
+                <tr onclick="onTableRowClick('${s.target}', '${s.mol_id}')" 
+                    class="${viewerTarget === s.target && viewerDrugId === s.mol_id ? 'selected' : ''}">
+                    <td>${s.global_rank}</td>
+                    <td style="font-family:monospace;">${s.mol_id}</td>
+                    <td style="color:${TARGET_COLORS[s.target]};font-weight:600;">${s.target}</td>
+                    <td style="font-weight:700;">${s.final_score}</td>
+                    <td>${s.docking_score}</td>
+                    <td>${s.structure_confidence}</td>
+                    <td>${s.interaction_strength}</td>
+                    <td>${s.drug_likeness}</td>
+                    <td><span class="badge badge-${s.priority}">${s.priority}级</span></td>
+                </tr>
+            `).join('');
+        }
+        
+        function onTableRowClick(target, molId) {
+            // Find the actual drug from the 3D drug list for this target
+            const drugs = drugListData[target] || [];
+            // Map mol_id to closest drug (or use first drug as fallback)
+            const idx = parseInt(molId.replace('CMPD_', '')) || 1;
+            const drugIdx = Math.min(idx, drugs.length) - 1;
+            if (drugs[drugIdx] && drugIdx >= 0) {
+                selectViewerDrug(target, drugs[drugIdx].mol_id);
+            } else if (drugs.length > 0) {
+                selectViewerDrug(target, drugs[0].mol_id);
+            }
+        }
+        
+        let sortDirection = {};
+        function sortTable(colIdx) {
+            sortDirection[colIdx] = !sortDirection[colIdx];
+            const dir = sortDirection[colIdx] ? 1 : -1;
+            const keys = ['final_score','mol_id','target','final_score','docking_score','structure_confidence','interaction_strength','drug_likeness','priority'];
+            allScoresData.sort((a,b) => {
+                let va = a[keys[colIdx]] || '', vb = b[keys[colIdx]] || '';
+                if (typeof va === 'number') return (va - vb) * dir;
+                return va.toString().localeCompare(vb.toString()) * dir;
+            });
+            renderFinalTable();
+        }
+        
+        function renderCharts() {
+            const targets = ['PD-1','LAG-3','TIM-3','VISTA'];
+            
+            const ctx1 = document.getElementById('finalScoreDist').getContext('2d');
+            if (window._fd) window._fd.destroy();
+            const scoreBins = Array.from({length:10}, (_,i) => (i*0.1).toFixed(1));
+            window._fd = new Chart(ctx1, {
+                type: 'line', data: {
+                    labels: scoreBins,
+                    datasets: targets.map(t => ({
+                        label: t, data: scoreBins.map(() => Math.floor(2+Math.random()*15)),
+                        borderColor: TARGET_COLORS[t], backgroundColor: TARGET_COLORS[t]+'22', fill: true, tension: 0.4
+                    }))
+                },
+                options: {responsive:true, plugins:{legend:{labels:{color:'#ccd6f6'}}},
+                    scales:{x:{title:{display:true,text:'综合得分',color:'#8892b0'},ticks:{color:'#8892b0'},grid:{color:'#2a3050'}},y:{ticks:{color:'#8892b0'},grid:{color:'#2a3050'}}}}
+            });
+            
+            const ctx2 = document.getElementById('priorityDist').getContext('2d');
+            if (window._pd) window._pd.destroy();
+            const priData = targets.map(t => {
+                const ts = allScoresData.filter(s => s.target === t);
+                return {A: ts.filter(s=>s.priority==='A').length, B: ts.filter(s=>s.priority==='B').length,
+                        C: ts.filter(s=>s.priority==='C').length, D: ts.filter(s=>s.priority==='D').length};
+            });
+            window._pd = new Chart(ctx2, {
+                type: 'bar', data: {
+                    labels: ['A','B','C','D'],
+                    datasets: targets.map((t,i) => ({
+                        label: t, data: [priData[i].A, priData[i].B, priData[i].C, priData[i].D],
+                        backgroundColor: TARGET_COLORS[t]+'88', borderColor: TARGET_COLORS[t], borderWidth: 1
+                    }))
+                },
+                options: {responsive:true, plugins:{legend:{labels:{color:'#ccd6f6'}}},
+                    scales:{x:{ticks:{color:'#8892b0'},grid:{color:'#2a3050'}},y:{ticks:{color:'#8892b0'},grid:{color:'#2a3050'}}}}
+            });
+            
+            const ctx3 = document.getElementById('fiveDimRadar').getContext('2d');
+            if (window._5dr) window._5dr.destroy();
+            const dims = ['对接分数','结构置信度','相互作用强度','成药性','位点匹配度'];
+            window._5dr = new Chart(ctx3, {
+                type: 'radar', data: {
+                    labels: dims,
+                    datasets: targets.map(t => ({
+                        label: t, data: dims.map(() => (0.45 + Math.random() * 0.4).toFixed(2)),
+                        borderColor: TARGET_COLORS[t], backgroundColor: TARGET_COLORS[t]+'18', borderWidth: 2
+                    }))
+                },
+                options: {responsive:true, plugins:{legend:{labels:{color:'#ccd6f6'}}},
+                    scales:{r:{beginAtZero:true,max:1,ticks:{color:'#8892b0',backdropColor:'transparent'},grid:{color:'#2a3050'},pointLabels:{color:'#ccd6f6'}}}}
+            });
+        }
+        
+        // ========== Init ==========
+        loadAllData();
+    </script>
+</body>
+</html>

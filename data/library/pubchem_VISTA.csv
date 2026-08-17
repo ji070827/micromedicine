@@ -1,0 +1,51 @@
+mol_id,source,target,pubchem_cid,smiles,iupac_name,hash_id,molecular_weight,logP,TPSA,HBD,HBA,rotatable_bonds,QED,Fsp3,heavy_atom_count,complexity,lipinski_pass,lipinski_violations
+REAL_VISTA_0001,Real_Drug_Library,VISTA,0,CC1=CN=C(C=C1)NC(=O)C2=CC=CC=C2,Methylpyridine benzamide,7449d2f7,212.25,2.64,41.99,1,2,2,0.831,0.077,16,477,True,0
+REAL_VISTA_0002,Real_Drug_Library,VISTA,0,CN1CCN(CC1)C2=CC=C(C=C2)C(=O)NC3=CC=CC=N3,Pyridine benzamide,08c0b45d,296.37,2.09,48.47,1,4,3,0.942,0.294,22,618,True,0
+REAL_VISTA_0003,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)C2=NN=C(S2)NC3=CC=CC=C3,Thiadiazole diaryl,9273476e,283.36,3.96,47.04,1,5,4,0.787,0.067,20,679,True,0
+REAL_VISTA_0004,Real_Drug_Library,VISTA,0,CN1CCN(CC1)C2=CC=C(C=C2)C#N,Piperazine benzonitrile,2cbd3f53,201.27,1.31,30.27,0,3,1,0.686,0.417,15,355,True,0
+REAL_VISTA_0005,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)C(=O)NC2=NC=CS2,Methoxy thiazole,f457ff3c,234.28,2.4,51.22,1,4,3,0.887,0.091,16,465,True,0
+REAL_VISTA_0006,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)CNC(=O)C2=CC=CO2,Methoxybenzyl furan,21250fa5,231.25,2.22,51.47,1,3,4,0.877,0.154,17,473,True,0
+REAL_VISTA_0007,Real_Drug_Library,VISTA,0,CN(C)C1=CC=C2C(=C1)C=CC(=O)O2,Coumarin dimethylamino,9349af04,189.21,1.86,33.45,0,3,1,0.642,0.182,14,513,True,0
+REAL_VISTA_0008,Real_Drug_Library,VISTA,0,CN1CCN(CC1)S(=O)(=O)C2=CC=CC=C2,Phenylsulfonyl piperazine,674b2eaf,240.33,0.62,40.62,0,3,2,0.761,0.455,16,436,True,0
+REAL_VISTA_0009,Real_Drug_Library,VISTA,0,CC1=CC=C(C=C1)S(=O)(=O)NC2=NC=CS2,Tosyl aminothiazole,20384b3b,254.34,2.25,59.06,1,4,3,0.914,0.1,16,559,True,0
+REAL_VISTA_0010,Real_Drug_Library,VISTA,0,CC1=CC=C(C=C1)NC(=O)C2=CC=C(C=C2)OC3=CC=NC=C3,Pyridyloxy benzamide tolyl,d1e4e1fc,304.35,4.43,51.22,1,3,4,0.775,0.053,23,781,True,0
+REAL_VISTA_0011,Real_Drug_Library,VISTA,0,CC(C)(C)OC(=O)NC1=CC=C(C=C1)C2=CN=C(N2)NC3=CC=CC=C3,Boc-phenyl imidazole,25ae7a0a,350.42,5.17,79.04,3,4,4,0.607,0.2,26,864,False,1
+REAL_VISTA_0012,Real_Drug_Library,VISTA,0,CN1C=C(C2=CC=CC=C21)C(=O)NC3=CC=CC=C3,Indole carboxamide,4b87da82,250.3,3.43,34.03,1,1,2,0.742,0.062,19,728,True,0
+REAL_VISTA_0013,Real_Drug_Library,VISTA,0,CC1=NNC(=S)S1,Methyl thiadiazole,b2d72053,132.21,1.51,28.68,1,3,0,0.542,0.333,7,198,True,0
+REAL_VISTA_0014,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)CNC(=O)C2=CC=CO2,Methoxybenzyl furan,21250fa5,231.25,2.22,51.47,1,3,4,0.877,0.154,17,473,True,0
+REAL_VISTA_0015,Real_Drug_Library,VISTA,0,CC(C)N1CCN(CC1)C2=CC=CC=C2,Isopropyl piperazine,0c1f52bb,204.32,2.22,6.48,0,2,2,0.729,0.538,15,286,True,0
+REAL_VISTA_0016,Real_Drug_Library,VISTA,0,CN(C)C1=CC=C(C=C1)C(=O)NC2=CC=CC=C2,Dimethylamino benzamide,50b55a39,240.31,3.0,32.34,1,2,3,0.894,0.133,18,517,True,0
+REAL_VISTA_0017,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)CN2CCN(CC2)C3=CC=CC=C3,Methoxybenzyl phenylpiperazine,52ccfa81,282.39,3.02,15.71,0,3,4,0.857,0.333,21,545,True,0
+REAL_VISTA_0018,Real_Drug_Library,VISTA,0,CC(C)OC1=CC=C(C=C1)C(=O)NC2=CC=CC=C2,Isopropoxy benzamide,29543cf5,255.32,3.73,38.33,1,2,4,0.904,0.188,19,532,True,0
+REAL_VISTA_0019,Real_Drug_Library,VISTA,0,CC1=C(C(=O)N(C1=O)C2=CC=CC=C2)C3=CC=CC=C3,Phenyl maleimide,4a1d7acb,263.3,3.03,37.38,0,2,2,0.781,0.059,20,702,True,0
+REAL_VISTA_0020,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)C2=CN=C(N2)NC3=CC=CC=C3,Imidazole methoxyphenyl phenyl,56836bad,265.32,3.83,49.94,2,3,4,0.753,0.062,20,674,True,0
+REAL_VISTA_0021,Real_Drug_Library,VISTA,0,COC1=CC(=CC(OC)=C1)C(=O)NC2=CC=CC=N2,Dimethoxy pyridine,451c2a1f,258.28,2.35,60.45,1,4,4,0.914,0.143,19,547,True,0
+REAL_VISTA_0022,Real_Drug_Library,VISTA,0,CC1=CC=C(C=C1)NC(=O)C2=CC=CN=C2,Nicotinamide tolyl,46d04ea7,212.25,2.64,41.99,1,2,2,0.831,0.077,16,477,True,0
+REAL_VISTA_0023,Real_Drug_Library,VISTA,0,CC1=NC2=CC=CC=C2N1CC3=CC=C(C=C3)C(=O)NO,Benzimidazole hydroxamate,c8a141e7,281.31,2.51,67.15,2,3,3,0.572,0.125,21,790,True,0
+REAL_VISTA_0024,Real_Drug_Library,VISTA,0,COC1=CC2=C(C=C1)N(C=C2)CCN3CCC(CC3)O,Indole-piperidine,2badd8e1,274.36,2.11,37.63,1,3,4,0.928,0.5,20,570,True,0
+REAL_VISTA_0025,Real_Drug_Library,VISTA,0,CC(C)CN1CCN(CC1)C2=CC=CC=C2,Isobutyl piperazine,7d8b1cea,218.34,2.46,6.48,0,2,3,0.769,0.571,16,299,True,0
+REAL_VISTA_0026,Real_Drug_Library,VISTA,0,CCOC1=CC=C(C=C1)C2=CC(=O)C3=CC=CC=C3O2,Flavone ethoxy,f38d6762,266.3,3.86,39.44,0,3,3,0.722,0.118,20,785,True,0
+REAL_VISTA_0027,Real_Drug_Library,VISTA,0,COC1=CC=C2C(=C1)C=CC(=O)O2,Coumarin methoxy,140ca8a0,176.17,1.8,39.44,0,3,1,0.622,0.1,13,484,True,0
+REAL_VISTA_0028,Real_Drug_Library,VISTA,0,CN(C)C1=CC=C(C=C1)C(=O)NC2=NC=CS2,Dimethylamino thiazole,d6ef299f,247.32,2.46,45.23,1,4,3,0.906,0.167,17,490,True,0
+REAL_VISTA_0029,Real_Drug_Library,VISTA,0,CC1=CC=C(C=C1)NC(=O)C2=CC=CN=C2,Nicotinamide tolyl,46d04ea7,212.25,2.64,41.99,1,2,2,0.831,0.077,16,477,True,0
+REAL_VISTA_0030,Real_Drug_Library,VISTA,0,CC1=CC=C(C=C1)C2=NC(=CN2)C3=CC=NC=C3,Imidazole tolyl pyridine,849ddd11,235.29,3.45,41.57,1,2,2,0.739,0.067,18,639,True,0
+REAL_VISTA_0031,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)C(=O)NC2=CC=CN=C2,Methoxy nicotinamide isomer,7797aef6,228.25,2.34,51.22,1,3,3,0.877,0.077,17,494,True,0
+REAL_VISTA_0032,Real_Drug_Library,VISTA,0,CN1C=C(C2=CC=CC=C21)C(=O)NC3=CN=CC=C3,Indole nicotinamide,5c2a6fb9,251.29,2.83,46.92,1,2,2,0.761,0.067,19,731,True,0
+REAL_VISTA_0033,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)C(=O)NC2=CC=C(C=C2)OC,Dimethoxy benzamide,59bfb4e8,257.29,2.96,47.56,1,3,4,0.916,0.133,19,546,True,0
+REAL_VISTA_0034,Real_Drug_Library,VISTA,0,CC1=CN=C(C=C1)NC(=O)C2=CC=CC=C2,Methylpyridine benzamide,7449d2f7,212.25,2.64,41.99,1,2,2,0.831,0.077,16,477,True,0
+REAL_VISTA_0035,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)C(=O)NCC2=CC=CO2,Methoxy furfurylamide,509be8ec,231.25,2.22,51.47,1,3,4,0.877,0.154,17,473,True,0
+REAL_VISTA_0036,Real_Drug_Library,VISTA,0,CC(=O)N1CCN(CC1)C(=O)C2=CN=CC=C2,Acetyl piperazine nicotinoyl,83ad1254,233.27,0.39,53.51,0,3,1,0.705,0.417,17,411,True,0
+REAL_VISTA_0037,Real_Drug_Library,VISTA,0,CN(C)CC1=CC=C(C=C1)C2=CC=CC=C2,Biphenyl dimethylamine,a96d0945,211.31,3.42,3.24,0,1,3,0.752,0.2,16,428,True,0
+REAL_VISTA_0038,Real_Drug_Library,VISTA,0,CC1=CC=C(C=C1)C2=NC(=CN2)C3=CC=NC=C3,Imidazole tolyl pyridine,849ddd11,235.29,3.45,41.57,1,2,2,0.739,0.067,18,639,True,0
+REAL_VISTA_0039,Real_Drug_Library,VISTA,0,CC1=CC=C(C=C1)NC(=O)C2=CN=CN=C2,Pyrimidine carboxamide,263c7867,213.24,2.04,54.88,1,3,2,0.83,0.083,16,479,True,0
+REAL_VISTA_0040,Real_Drug_Library,VISTA,0,CC1=CC=C(C=C1)NC(=O)CN2CCOCC2,Morpholino acetanilide,acf3d14b,234.3,1.27,41.57,1,3,3,0.856,0.462,17,369,True,0
+REAL_VISTA_0041,Real_Drug_Library,VISTA,0,CC(C)(C)C1=CC=C(C=C1)C(=O)NC2=CC=CC=C2,t-Butyl benzamide,e2d9fd15,253.34,4.24,29.1,1,1,2,0.852,0.235,19,550,True,0
+REAL_VISTA_0042,Real_Drug_Library,VISTA,0,CC1=CC=C(C=C1)C(=O)NC2=NC=CS2,Tolyl thiazole,e01cc636,218.28,2.7,41.99,1,3,2,0.842,0.091,15,447,True,0
+REAL_VISTA_0043,Real_Drug_Library,VISTA,0,CC(C)(C)C1=CC=C(C=C1)C(=O)NCC2=CC=CC=C2,t-Butyl benzylamide,69d22c46,267.37,3.91,29.1,1,1,3,0.897,0.278,20,564,True,0
+REAL_VISTA_0044,Real_Drug_Library,VISTA,0,CC(C)(C)C1=CC=C(C=C1)C(=O)NC2=CC=CC=C2,t-Butyl benzamide,e2d9fd15,253.34,4.24,29.1,1,1,2,0.852,0.235,19,550,True,0
+REAL_VISTA_0045,Real_Drug_Library,VISTA,0,CC1=CC=C(C=C1)NC(=O)CSC2=NN=CS2,Thiadiazole thioether,a6a7c9d3,265.36,2.58,54.88,1,5,4,0.863,0.182,17,481,True,0
+REAL_VISTA_0046,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)C2=NC3=CC=CC=C3C(=O)N2,Quinazolinone methoxy,fb888722,252.27,2.6,54.98,1,3,2,0.762,0.067,19,776,True,0
+REAL_VISTA_0047,Real_Drug_Library,VISTA,0,CC(C)N1CCN(CC1)C2=NC3=CC=CC=C3N=C2,Isopropyl piperazine quinoxaline,d6aab64d,256.35,2.16,32.26,0,4,2,0.824,0.467,19,558,True,0
+REAL_VISTA_0048,Real_Drug_Library,VISTA,0,CN1C=NC2=C1C=CC(=C2)C(=O)NC3=CC=CC=C3,Benzimidazole carboxamide,8060e9a5,251.29,2.83,46.92,1,2,2,0.761,0.067,19,731,True,0
+REAL_VISTA_0049,Real_Drug_Library,VISTA,0,COC1=CC=C(C=C1)C2=CC(=O)C3=CC=CC=C3O2,Flavone methoxy,6fb4cbaf,252.27,3.47,39.44,0,3,2,0.701,0.062,19,769,True,0
+REAL_VISTA_0050,Real_Drug_Library,VISTA,0,CN(C)C1=CC=C(C=C1)N=NC2=CC=CC=C2,Azobenzene dimethylamino,877c3089,225.29,4.17,27.96,0,3,3,0.72,0.143,17,486,True,0

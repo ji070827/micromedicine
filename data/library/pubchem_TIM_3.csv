@@ -1,0 +1,51 @@
+mol_id,source,target,pubchem_cid,smiles,iupac_name,hash_id,molecular_weight,logP,TPSA,HBD,HBA,rotatable_bonds,QED,Fsp3,heavy_atom_count,complexity,lipinski_pass,lipinski_violations
+REAL_TIM-3_0001,Real_Drug_Library,TIM-3,0,CC1=CC=C(C=C1)C2=CC(=O)N(C2=O)C3=CC=CC=C3,Tolyl maleimide,54c74313,263.3,2.95,37.38,0,2,2,0.781,0.059,20,699,True,0
+REAL_TIM-3_0002,Real_Drug_Library,TIM-3,0,CN1C(=O)C2=CC=CC=C2N=C1C3=CC=CC=C3,Quinazolinone phenyl,8aba85d5,236.27,2.6,34.89,0,2,1,0.651,0.067,18,760,True,0
+REAL_TIM-3_0003,Real_Drug_Library,TIM-3,0,COC1=CC=C(C=C1)C(=O)NC2=CC(=CC=C2)C(F)(F)F,Methoxy trifluoromethyl,1360f9c5,295.26,3.97,38.33,1,2,3,0.93,0.133,21,636,True,0
+REAL_TIM-3_0004,Real_Drug_Library,TIM-3,0,FC1=CC=C(CN2CCNCC2)C=C1,4-Fluorobenzyl piperazine,bc2e7e3b,194.25,1.23,15.27,1,2,2,0.761,0.455,14,277,True,0
+REAL_TIM-3_0005,Real_Drug_Library,TIM-3,0,COC1=C(C=C2C=CC=CC2=C1)C(=O)NC3=CC=CC=C3,Naphthamide,c314d10b,277.32,4.1,38.33,1,2,3,0.782,0.056,21,781,True,0
+REAL_TIM-3_0006,Real_Drug_Library,TIM-3,0,CC(C)N1CCN(CC1)C2=CC=C(C=C2)C(=O)NC3=CC=CC=C3,Isopropyl piperazine benzanilide,e181b887,323.44,3.47,35.58,1,3,4,0.936,0.35,24,659,True,0
+REAL_TIM-3_0007,Real_Drug_Library,TIM-3,0,CNC(=O)C1CCN(CC1)C2=CC=CC=C2,N-methyl piperidine benzamide,84278bc3,218.3,1.65,32.34,1,2,2,0.818,0.462,16,342,True,0
+REAL_TIM-3_0008,Real_Drug_Library,TIM-3,0,CN(C)C1=CC=C(C=C1)C(=O)NC2=NC=CS2,Dimethylamino thiazole,d6ef299f,247.32,2.46,45.23,1,4,3,0.906,0.167,17,490,True,0
+REAL_TIM-3_0009,Real_Drug_Library,TIM-3,0,COC1=CC=C(C=C1)C(=O)NCC2=CC=CO2,Methoxy furfurylamide,509be8ec,231.25,2.22,51.47,1,3,4,0.877,0.154,17,473,True,0
+REAL_TIM-3_0010,Real_Drug_Library,TIM-3,0,CN(C)CC1=CC=C(C=C1)C(=O)NC2=CC=CC=C2,Dimethylaminomethyl benzanilide,c9243b5c,254.33,3.0,32.34,1,2,4,0.909,0.188,19,532,True,0
+REAL_TIM-3_0011,Real_Drug_Library,TIM-3,0,CN(C)CCCN1C2=CC=CC=C2CCC3=CC=CC=C31,Tricyclic amine,de881809,280.42,3.88,6.48,0,2,4,0.838,0.368,21,556,True,0
+REAL_TIM-3_0012,Real_Drug_Library,TIM-3,0,CC(=O)N1CCN(CC1)C2=CC=CC=C2,Acetyl piperazine phenyl,f7099f41,204.27,1.36,23.55,0,2,1,0.689,0.417,15,328,True,0
+REAL_TIM-3_0013,Real_Drug_Library,TIM-3,0,CCOC1=CC(OCC)=CC(C(=O)NC2=CC=NC=C2)=C1,Diethoxy pyridine,66e23540,286.33,3.13,60.45,1,4,6,0.886,0.25,21,575,True,0
+REAL_TIM-3_0014,Real_Drug_Library,TIM-3,0,COC1=CC(=CC(OC)=C1)C(=O)NC2=CC=CC=N2,Dimethoxy pyridine,451c2a1f,258.28,2.35,60.45,1,4,4,0.914,0.143,19,547,True,0
+REAL_TIM-3_0015,Real_Drug_Library,TIM-3,0,CC1=C(C(=O)N(C1=O)C2=CC=CC=C2)C3=CC=CC=C3,Phenyl maleimide,4a1d7acb,263.3,3.03,37.38,0,2,2,0.781,0.059,20,702,True,0
+REAL_TIM-3_0016,Real_Drug_Library,TIM-3,0,CC1=CC=C(C=C1)C2=CN(C=N2)C3=CC=CC=C3,Imidazole tolyl phenyl,1703c1af,234.3,3.85,17.82,0,1,2,0.658,0.062,18,636,True,0
+REAL_TIM-3_0017,Real_Drug_Library,TIM-3,0,CC1=CC=C(C=C1)C(=O)NC2=CC=C(C=C2)CN3CCN(CC3)C,CA-170 analog,89dab3ae,323.44,2.99,35.58,1,3,4,0.939,0.35,24,671,True,0
+REAL_TIM-3_0018,Real_Drug_Library,TIM-3,0,CN(C)CC1=CC=C(C=C1)C2=CC=CC=C2,Biphenyl dimethylamine,a96d0945,211.31,3.42,3.24,0,1,3,0.752,0.2,16,428,True,0
+REAL_TIM-3_0019,Real_Drug_Library,TIM-3,0,COC1=CC(=O)C2=CC=CC=C2C1=O,Naphthoquinone methoxy,28b78475,188.18,1.6,43.37,0,3,1,0.672,0.091,14,443,True,0
+REAL_TIM-3_0020,Real_Drug_Library,TIM-3,0,CC(C)NC(=O)C1=CC=C(C=C1)NC2=CC=NC=C2,Isopropyl benzamide,0f36e0ec,255.32,2.96,54.02,2,3,4,0.883,0.2,19,535,True,0
+REAL_TIM-3_0021,Real_Drug_Library,TIM-3,0,CN1CCC(CC1)OC2=CC=C3C(=C2)C=CC=N3,Quinoline piperidine,5479a0e4,242.32,2.71,25.36,0,3,2,0.809,0.4,18,532,True,0
+REAL_TIM-3_0022,Real_Drug_Library,TIM-3,0,COC1=CC=C(C=C1)C(=O)NC2=NC(=CS2)C3=CC=CC=C3,Thiazole phenyl methoxy,aedbf146,310.38,4.07,51.22,1,4,4,0.79,0.059,22,766,True,0
+REAL_TIM-3_0023,Real_Drug_Library,TIM-3,0,CC(=O)N1CCN(CC1)C2=NC=CC=N2,Acetyl piperazine pyrimidine,dfef0a83,206.25,0.15,49.33,0,4,1,0.656,0.5,15,332,True,0
+REAL_TIM-3_0024,Real_Drug_Library,TIM-3,0,CC1=CC=C(C=C1)C2=CC(=O)C=C(O2)C3=CC=CC=C3,Flavone tolyl phenyl,0b207586,262.31,4.28,30.21,0,2,2,0.69,0.056,20,768,True,0
+REAL_TIM-3_0025,Real_Drug_Library,TIM-3,0,COC1=CC=C(C=C1)C2=NN=C(S2)NC3=CC=CC=C3,Thiadiazole diaryl,9273476e,283.36,3.96,47.04,1,5,4,0.787,0.067,20,679,True,0
+REAL_TIM-3_0026,Real_Drug_Library,TIM-3,0,CCOC1=CC=C(C=C1)C2=CN=C(N2)NC3=CC=CC=C3,Imidazole diaryl,0de7db58,279.34,4.22,49.94,2,3,5,0.735,0.118,21,689,True,0
+REAL_TIM-3_0027,Real_Drug_Library,TIM-3,0,CN1C=NC2=C1C=CC(=C2)NC(=O)C3=CC=CO3,Benzimidazole furan,d2f93061,241.25,2.42,60.06,1,3,2,0.749,0.077,18,698,True,0
+REAL_TIM-3_0028,Real_Drug_Library,TIM-3,0,CC(C)N1CCN(CC1)C(=O)C2=CC=CC=C2,Benzoyl piperazine,c2829980,232.33,1.85,23.55,0,2,2,0.777,0.5,17,367,True,0
+REAL_TIM-3_0029,Real_Drug_Library,TIM-3,0,COC1=CC=C(C=C1)C2=NC(=CN2)C3=CC=NC=C3,Imidazole bipyridine,086aac1e,251.29,3.15,50.8,1,3,3,0.778,0.067,19,659,True,0
+REAL_TIM-3_0030,Real_Drug_Library,TIM-3,0,NC(=O)C1=CC=C(CN2CCOCC2)C=C1,Morpholine benzamide,100c5a5b,220.27,0.62,55.56,1,3,3,0.812,0.417,16,355,True,0
+REAL_TIM-3_0031,Real_Drug_Library,TIM-3,0,CC1=CC=C(C=C1)NC(=O)C2=CC=C(C=C2)OC3=CC=NC=C3,Pyridyloxy benzamide tolyl,d1e4e1fc,304.35,4.43,51.22,1,3,4,0.775,0.053,23,781,True,0
+REAL_TIM-3_0032,Real_Drug_Library,TIM-3,0,CC1=CN=C(S1)NC(=O)C2=CC=C(C=C2)OC,Thiazole methoxybenzamide,2af10935,248.31,2.71,51.22,1,4,3,0.908,0.167,17,519,True,0
+REAL_TIM-3_0033,Real_Drug_Library,TIM-3,0,COC1=CC=C(C=C1)C2=CN=C(N2)NC3=CC=CC=C3,Imidazole methoxyphenyl phenyl,56836bad,265.32,3.83,49.94,2,3,4,0.753,0.062,20,674,True,0
+REAL_TIM-3_0034,Real_Drug_Library,TIM-3,0,CN1C(=O)C2=CC=CC=C2N=C1C3=CC=CC=C3,Quinazolinone phenyl,8aba85d5,236.27,2.6,34.89,0,2,1,0.651,0.067,18,760,True,0
+REAL_TIM-3_0035,Real_Drug_Library,TIM-3,0,FC1=CC=C(CN2CCNCC2)C=C1,4-Fluorobenzyl piperazine,bc2e7e3b,194.25,1.23,15.27,1,2,2,0.761,0.455,14,277,True,0
+REAL_TIM-3_0036,Real_Drug_Library,TIM-3,0,COC1=CC=C(C=C1)C2=NC3=CC=CC=C3C(=O)N2,Quinazolinone methoxyphenyl,fb888722,252.27,2.6,54.98,1,3,2,0.762,0.067,19,776,True,0
+REAL_TIM-3_0037,Real_Drug_Library,TIM-3,0,CN1C=NC2=C1C=CC(=C2)OC3=CC=CC=C3,Phenoxy benzimidazole,fed9b35b,224.26,3.37,27.05,0,2,2,0.667,0.071,17,643,True,0
+REAL_TIM-3_0038,Real_Drug_Library,TIM-3,0,CC(=O)NC1=CC=C(C=C1)S(=O)(=O)N2CCOCC2,Acetamido morpholine,370157c3,284.34,0.67,75.71,1,4,3,0.885,0.417,19,547,True,0
+REAL_TIM-3_0039,Real_Drug_Library,TIM-3,0,CC1=CC=C(C=C1)NC(=O)CN2CCOCC2,Morpholino acetanilide,acf3d14b,234.3,1.27,41.57,1,3,3,0.856,0.462,17,369,True,0
+REAL_TIM-3_0040,Real_Drug_Library,TIM-3,0,CN(C)CCOC1=CC=C(C=C1)C(=O)NC2=CC=CC=C2,Biphenyl urea derivative,16800f5c,284.36,2.88,41.57,1,3,6,0.887,0.235,21,565,True,0
+REAL_TIM-3_0041,Real_Drug_Library,TIM-3,0,CN1CCN(CC1)C2=NC(=CC=N2)C3=CC=CC=C3,Piperazine pyrimidine,7394ef6b,254.34,1.9,32.26,0,4,2,0.819,0.333,19,532,True,0
+REAL_TIM-3_0042,Real_Drug_Library,TIM-3,0,COC1=CC=C(C=C1)C2=NC3=CC=CC=C3C(=O)N2,Quinazolinone methoxy,fb888722,252.27,2.6,54.98,1,3,2,0.762,0.067,19,776,True,0
+REAL_TIM-3_0043,Real_Drug_Library,TIM-3,0,CN1CCN(CC1)C2=NC=NC3=CC=CC=C32,Piperazine quinazoline,56113197,228.3,1.38,32.26,0,4,1,0.738,0.385,17,512,True,0
+REAL_TIM-3_0044,Real_Drug_Library,TIM-3,0,C1=CC=C2C(=C1)C=CN=C2NC3=CC=CC=C3,Anilino quinoline,cd388f2d,220.28,3.98,24.92,1,2,2,0.706,0.0,17,627,True,0
+REAL_TIM-3_0045,Real_Drug_Library,TIM-3,0,CNC(=O)C1=CC=C(C=C1)OC2=CC=NC=C2,Pyridyloxy benzamide,1ed64cec,228.25,2.23,51.22,1,3,3,0.876,0.077,17,494,True,0
+REAL_TIM-3_0046,Real_Drug_Library,TIM-3,0,COC1=C(OC)C=C(C=C1)C(=O)NC2=CC=CC=N2,Veratrole pyridine,7251d427,258.28,2.35,60.45,1,4,4,0.914,0.143,19,570,True,0
+REAL_TIM-3_0047,Real_Drug_Library,TIM-3,0,COC1=CC=C(C=C1)C2=CC(=O)C3=CC=CC=C3O2,Flavone methoxy,6fb4cbaf,252.27,3.47,39.44,0,3,2,0.701,0.062,19,769,True,0
+REAL_TIM-3_0048,Real_Drug_Library,TIM-3,0,CCOC1=CC=C(C=C1)C2=CC(=O)C3=CC=CC=C3O2,Flavone ethoxy,f38d6762,266.3,3.86,39.44,0,3,3,0.722,0.118,20,785,True,0
+REAL_TIM-3_0049,Real_Drug_Library,TIM-3,0,COC1=CC=C(C=C1)C(=O)NC2=CC=CN=C2,Methoxy nicotinamide isomer,7797aef6,228.25,2.34,51.22,1,3,3,0.877,0.077,17,494,True,0
+REAL_TIM-3_0050,Real_Drug_Library,TIM-3,0,CN(C)CCCNC1=CC=NC2=CC=CC=C12,Quinoline diamine,b5e3efdd,229.33,2.6,28.16,1,3,5,0.799,0.357,17,474,True,0

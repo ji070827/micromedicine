@@ -1,0 +1,20 @@
+{
+  "target_name": "LAG-3",
+  "pdb_id": "7TZH",
+  "description": "LAG-3 extracellular domain with FGL1 ligand",
+  "method": "X-ray diffraction",
+  "resolution": 3.1,
+  "has_ligand": true,
+  "ligand_description": "FGL1 bound complex",
+  "alternatives": [
+    "7TZG",
+    "6V9O",
+    "8FQN"
+  ],
+  "chain": "A",
+  "source": "RCSB PDB",
+  "fetch_date": "2026-08-06",
+  "deposition_date": "",
+  "release_date": "2022-05-11T00:00:00.000+00:00",
+  "organism": "Homo sapiens"
+}

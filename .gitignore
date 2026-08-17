@@ -1,0 +1,51 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# ===== 虚拟环境（本地 venv + conda env）=====
+venv/
+env/
+ENV/
+.venv/
+conda-meta/
+
+# ===== 日志 =====
+logs/
+*.log
+
+# ===== 运行时生成结果（可重新跑管线生成）=====
+results/
+
+# ===== 生成的 3D 结构 PDB 文件（由 generate_3d_complex.py 生成）=====
+data/targets/*.pdb
+
+# ===== 下载的真实蛋白结构（由 download_real_data.py 下载，体积大）=====
+data/targets/real_structures/
+
+# ===== 用户上传的数据集 =====
+data/library/user_uploads/
+
+# ===== 缓存与临时文件 =====
+.openbabel_cache/
+*.tmp
+tmp/
+
+# ===== 安装器与大文件 =====
+*.zip
+*.tar
+*.tar.gz
+Miniconda*.exe
+
+# ===== IDE =====
+.vscode/
+.idea/
+
+# ===== 操作系统 =====
+Thumbs.db
+.DS_Store

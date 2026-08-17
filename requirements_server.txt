@@ -1,0 +1,54 @@
+# ============================================================
+# 服务器部署依赖清单 (Linux + GPU)
+# 使用方法: pip install -r requirements_server.txt
+#
+# 注意：
+# 1. torch 需根据服务器 CUDA 版本选择（当前默认 cu118）
+# 2. torch-scatter/sparse/cluster 需与 torch 版本严格匹配
+# 3. 完整 DiffDock 依赖参考 tools/DiffDock/requirements.txt
+# ============================================================
+
+# ---- 深度学习框架 (GPU) ----
+# torch 2.2.0 + cu118（按服务器 GPU 调整，见下方注释）
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.2.0
+torchvision==0.17.0
+
+# ---- DiffDock 核心依赖 ----
+e3nn==0.5.0
+fair-esm[esmfold]==2.0.0
+torch-geometric==2.2.0
+torch-scatter==2.1.2
+torch-sparse==0.6.18
+torch-cluster==1.6.3
+torch-spline-conv==1.2.2
+prody==2.2.0
+torchmetrics==0.11.0
+
+# ---- 化学信息学 ----
+rdkit
+openbabel      # 或 openbabel-wheel
+
+# ---- 数据处理 ----
+numpy
+pandas
+scipy
+pyyaml
+scikit-learn
+
+# ---- 本项目 Web 依赖 ----
+flask
+
+# ============================================================
+# CUDA 版本对照（选择其一替换上面的 torch 行）
+# ============================================================
+# CUDA 11.8: torch==2.2.0 --index-url https://download.pytorch.org/whl/cu118
+# CUDA 12.1: torch==2.2.0 --index-url https://download.pytorch.org/whl/cu121
+# CUDA 12.4: torch==2.4.0 --index-url https://download.pytorch.org/whl/cu124
+#
+# torch-geometric 扩展包下载地址（需匹配 torch 版本）:
+#   https://pytorch-geometric.com/whl/torch-<版本>+<cuda>.html
+# 例如 torch 2.2.0 + cu118:
+#   pip install torch-scatter torch-sparse torch-cluster \
+#       -f https://pytorch-geometric.com/whl/torch-2.2.0+cu118.html
+# ============================================================

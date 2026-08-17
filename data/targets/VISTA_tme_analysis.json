@@ -1,0 +1,170 @@
+{
+  "normal": {
+    "target": "VISTA",
+    "tme_condition": "normal",
+    "conditions": {
+      "pH": 7.4,
+      "pO2_mmHg": 50,
+      "temperature_C": 37.0,
+      "lactate_mM": 2.0,
+      "description": "正常生理环境"
+    },
+    "his_analysis": {
+      "residues": [
+        "HIS53",
+        "HIS91"
+      ],
+      "n_total": 2,
+      "n_protonated_at_TME_pH": 0,
+      "n_protonated_at_pH7.4": 0,
+      "delta_protonation": 0,
+      "states": {
+        "HIS53": {
+          "pKa": 6.04,
+          "pH": 7.4,
+          "protonated": 0.042,
+          "deprotonated": 0.958,
+          "charge_state": "neutral"
+        },
+        "HIS91": {
+          "pKa": 6.04,
+          "pH": 7.4,
+          "protonated": 0.042,
+          "deprotonated": 0.958,
+          "charge_state": "neutral"
+        }
+      }
+    },
+    "energy_shifts": {
+      "dG_pH_shift_kcal_mol": 0.0,
+      "dG_polar_shift_kcal_mol": 0.0,
+      "dG_hypoxia_kcal_mol": -0.0,
+      "dG_lactate_kcal_mol": 0.0,
+      "dG_tme_total_kcal_mol": 0.0
+    },
+    "affinity_modification": {
+      "kd_tme_vs_normal_ratio": 1.0,
+      "competition_factor": 1.0,
+      "effective_kd_modifier": 1.0,
+      "interpretation": "TME对结合影响不大"
+    },
+    "tme_considerations": [
+      "TME pH=7.4: 结合口袋 0/2 个His质子化 (生理pH 7.4下为 0/2)",
+      "ΔG_TME 修正 = +0.00 kcal/mol",
+      "有效Kd变化倍数 ≈ 1.00x",
+      "pH依赖的构象变化已知影响VISTA功能"
+    ]
+  },
+  "tme_moderate": {
+    "target": "VISTA",
+    "tme_condition": "tme_moderate",
+    "conditions": {
+      "pH": 6.8,
+      "pO2_mmHg": 20,
+      "temperature_C": 37.0,
+      "lactate_mM": 15.0,
+      "description": "中度肿瘤微环境 (肿瘤边缘)"
+    },
+    "his_analysis": {
+      "residues": [
+        "HIS53",
+        "HIS91"
+      ],
+      "n_total": 2,
+      "n_protonated_at_TME_pH": 0,
+      "n_protonated_at_pH7.4": 0,
+      "delta_protonation": 0,
+      "states": {
+        "HIS53": {
+          "pKa": 6.04,
+          "pH": 6.8,
+          "protonated": 0.148,
+          "deprotonated": 0.852,
+          "charge_state": "neutral"
+        },
+        "HIS91": {
+          "pKa": 6.04,
+          "pH": 6.8,
+          "protonated": 0.148,
+          "deprotonated": 0.852,
+          "charge_state": "neutral"
+        }
+      }
+    },
+    "energy_shifts": {
+      "dG_pH_shift_kcal_mol": 0.0,
+      "dG_polar_shift_kcal_mol": 0.078,
+      "dG_hypoxia_kcal_mol": -0.044,
+      "dG_lactate_kcal_mol": 0.131,
+      "dG_tme_total_kcal_mol": 0.165
+    },
+    "affinity_modification": {
+      "kd_tme_vs_normal_ratio": 0.765,
+      "competition_factor": 1.152,
+      "effective_kd_modifier": 0.881,
+      "interpretation": "TME对结合影响不大"
+    },
+    "tme_considerations": [
+      "TME pH=6.8: 结合口袋 0/2 个His质子化 (生理pH 7.4下为 0/2)",
+      "ΔG_TME 修正 = +0.17 kcal/mol",
+      "有效Kd变化倍数 ≈ 0.88x",
+      "pH依赖的构象变化已知影响VISTA功能"
+    ]
+  },
+  "tme_severe": {
+    "target": "VISTA",
+    "tme_condition": "tme_severe",
+    "conditions": {
+      "pH": 6.4,
+      "pO2_mmHg": 5,
+      "temperature_C": 36.5,
+      "lactate_mM": 35.0,
+      "description": "重度肿瘤微环境 (肿瘤核心)"
+    },
+    "his_analysis": {
+      "residues": [
+        "HIS53",
+        "HIS91"
+      ],
+      "n_total": 2,
+      "n_protonated_at_TME_pH": 0,
+      "n_protonated_at_pH7.4": 0,
+      "delta_protonation": 0,
+      "states": {
+        "HIS53": {
+          "pKa": 6.04,
+          "pH": 6.4,
+          "protonated": 0.304,
+          "deprotonated": 0.696,
+          "charge_state": "neutral"
+        },
+        "HIS91": {
+          "pKa": 6.04,
+          "pH": 6.4,
+          "protonated": 0.304,
+          "deprotonated": 0.696,
+          "charge_state": "neutral"
+        }
+      }
+    },
+    "energy_shifts": {
+      "dG_pH_shift_kcal_mol": 0.0,
+      "dG_polar_shift_kcal_mol": 0.115,
+      "dG_hypoxia_kcal_mol": 0.02,
+      "dG_lactate_kcal_mol": 0.149,
+      "dG_tme_total_kcal_mol": 0.284
+    },
+    "affinity_modification": {
+      "kd_tme_vs_normal_ratio": 0.63,
+      "competition_factor": 1.091,
+      "effective_kd_modifier": 0.688,
+      "interpretation": "TME略增强结合"
+    },
+    "tme_considerations": [
+      "TME pH=6.4: 结合口袋 0/2 个His质子化 (生理pH 7.4下为 0/2)",
+      "ΔG_TME 修正 = +0.28 kcal/mol",
+      "有效Kd变化倍数 ≈ 0.69x",
+      "pH依赖的构象变化已知影响VISTA功能"
+    ]
+  }
+}
