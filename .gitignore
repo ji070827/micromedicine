@@ -51,6 +51,8 @@ commit_rapid.py
 commit_rapid.log
 commit_docs.py
 commit_docs.log
+commit_whu.py
+commit_whu.log
 git_final.log
 git_push3.log
 git_state.log
