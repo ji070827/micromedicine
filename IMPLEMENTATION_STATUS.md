@@ -21,7 +21,8 @@ immuno_checkpoint_screen/
 │   ├── adme_predictor.py         # ADME/Tox 预测
 │   ├── final_ranking.py          # 终选排序
 │   ├── generate_3d_complex.py    # 3D 结构生成
-│   ├── generate_real_library.py  # 真实化合物库生成
+│   ├── generate_real_library.py  # 真实化合物库生成（类药片段）
+│   ├── generate_fda_drug_library.py  # 🆕 真实 FDA 批准成药库生成
 │   ├── download_real_data.py     # 真实数据下载（服务器）
 │   ├── activity_model_train.py   # 活性模型训练（路线二）
 │   ├── molecule_generation.py    # 分子生成（路线二，RDKit 组合化学）
@@ -89,6 +90,8 @@ immuno_checkpoint_screen/
 | `targetdiff_generate.py` | 🆕 TargetDiff 口袋感知生成（真实扩散模型，降级到 RDKit 组合化学） | 路线二 |
 | `generate_3d_complex.py` | 用 IgV 拓扑模板生成蛋白-药物 3D 结构 | 共用 |
 | `generate_real_library.py` | 生成 200 个真实类药分子库 | 共用 |
+| `generate_fda_drug_library.py` | 🆕 生成 47 个真实 FDA 批准成药库（阿斯匹林/布洛芬/二甲双胍等） | 共用 |
+| `library_loader.py` | 🆕 通用库加载器（自动识别 SMILES 列 + 多格式） | 共用 |
 | `download_real_data.py` | 下载真实 PDB 结构 + PubChem 抑制剂（服务器） | 共用 |
 | `pubchem_fetcher.py` | PubChem 在线拉取 | 辅助 |
 | `pdb_fetcher.py` | RCSB PDB 元数据获取 | 辅助 |

@@ -5,7 +5,7 @@ project:
 
 # 数据集配置
 data:
-  active_library: "pubchem_all_targets.csv"
+  active_library: "fda_approved_drugs.csv"
   library_dir: "data/library"
   upload_dir: "data/library/user_uploads"
 

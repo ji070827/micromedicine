@@ -406,6 +406,10 @@ final_ranking:
 
 ## 小分子数据库替换指南
 
+> **当前默认库**：`fda_approved_drugs.csv` — 47 个真实 FDA 批准成药（阿司匹林、布洛芬、二甲双胍等），由 `scripts/generate_fda_drug_library.py` 生成，PubChem CID 真实，理化性质由 RDKit 真实计算。
+>
+> 旧库 `pubchem_all_targets.csv`（200 个类药片段）已保留，可随时切换。
+
 ### 🆕 网页端一键管理
 
 **无需修改代码，在仪表盘首页即可完成：**
