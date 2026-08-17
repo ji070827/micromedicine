@@ -16,7 +16,6 @@
 #SBATCH --mem=128G
 #SBATCH --time=48:00:00
 
-CONDA_MODULE="anaconda"
 ENV_PATH="${HOME}/project/conda_envs/immuno_drug_screen"
 AF3_SIF="${HOME}/project/alphafold3.sif"      # Singularity 镜像放 /project
 AF3_DB_DIR="${HOME}/project/af3_databases"   # AF3 数据库放 /project
@@ -25,8 +24,15 @@ echo "=== AlphaFold3 作业开始 ==="
 date
 hostname
 
-module load ${CONDA_MODULE} 2>/dev/null || module load anaconda/3.7
-source activate "${ENV_PATH}"
+# 激活 Python 环境（conda 或 venv 都能激活）
+if [ -f "${ENV_PATH}/bin/activate" ]; then
+    source "${ENV_PATH}/bin/activate"      # venv
+elif [ -d "${ENV_PATH}" ]; then
+    source activate "${ENV_PATH}"           # conda
+else
+    echo "❌ 未找到环境: ${ENV_PATH}，请先运行 bash setup_whu.sh"
+    exit 1
+fi
 
 cd ~/project/micromedicine
 mkdir -p logs
