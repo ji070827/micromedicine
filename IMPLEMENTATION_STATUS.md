@@ -11,7 +11,10 @@ immuno_checkpoint_screen/
 │   └── config.yaml               # 全局配置（靶点/数据/筛选/评分权重）
 ├── scripts/                      # 18 个 Python 计算脚本
 │   ├── real_chemistry.py         # 核心真实化学计算（RDKit）
+│   ├── library_loader.py         # 🆕 通用库加载器（自动识别 SMILES 列 + 流式迭代）
 │   ├── data_preprocess.py        # 数据预处理
+│   ├── rapid_prefilter.py        # 🆕 百万级海选快速预筛（第1级，流式）
+│   ├── download_million_library.py  # 🆕 百万级库下载指引（ZINC/PubChem）
 │   ├── diffdock_batch_run.py     # DiffDock 对接（真实调用已就绪 + 模拟兜底）
 │   ├── primary_screen_filter.py  # 初筛过滤
 │   ├── af3_complex_prediction.py # AlphaFold3 预测（真实调用已就绪 + 模拟兜底）
@@ -76,8 +79,11 @@ immuno_checkpoint_screen/
 | 脚本 | 功能 | 所属路线 |
 |------|------|---------|
 | `real_chemistry.py` | 所有真实 RDKit 计算的封装：分子解析、性质、指纹、3D构象、PAINS | 共用 |
+| `library_loader.py` | 🆕 通用库加载器（自动识别 SMILES 列 + 多格式 + 流式迭代） | 共用 |
 | `data_preprocess.py` | 蛋白信息整理 + 小分子真实理化性质计算 | 共用 |
-| `diffdock_batch_run.py` | DiffDock 对接（当前模拟分数 + 真实 3D 构象生成） | 路线一 |
+| `rapid_prefilter.py` | 🆕 百万级海选第1级：流式快速预筛（Lipinski+PAINS+QED/SA） | 路线一 |
+| `download_million_library.py` | 🆕 百万级库下载指引（ZINC/PubChem bulk） | 共用 |
+| `diffdock_batch_run.py` | DiffDock 对接（模拟兜底 + 真实 GPU 调用） | 路线一 |
 | `primary_screen_filter.py` | 三阶段过滤（置信度→Lipinski→位点校验） | 路线一 |
 | `af3_complex_prediction.py` | AlphaFold3 复合物预测（当前模拟） | 路线一 |
 | `interaction_analysis.py` | 真实 3D 几何相互作用分析（氢键/疏水/盐桥/卤键） | 路线一 |
@@ -91,7 +97,6 @@ immuno_checkpoint_screen/
 | `generate_3d_complex.py` | 用 IgV 拓扑模板生成蛋白-药物 3D 结构 | 共用 |
 | `generate_real_library.py` | 生成 200 个真实类药分子库 | 共用 |
 | `generate_fda_drug_library.py` | 🆕 生成 47 个真实 FDA 批准成药库（阿斯匹林/布洛芬/二甲双胍等） | 共用 |
-| `library_loader.py` | 🆕 通用库加载器（自动识别 SMILES 列 + 多格式） | 共用 |
 | `download_real_data.py` | 下载真实 PDB 结构 + PubChem 抑制剂（服务器） | 共用 |
 | `pubchem_fetcher.py` | PubChem 在线拉取 | 辅助 |
 | `pdb_fetcher.py` | RCSB PDB 元数据获取 | 辅助 |
@@ -136,22 +141,21 @@ immuno_checkpoint_screen/
 └─────────────────────────────────────────────────┘
 ```
 
-### 路线一：已知小分子库虚拟筛选
+### 路线一：已知小分子库虚拟筛选（分级海选）
 
 ```
-数据准备
-  ├─ generate_real_library.py  → 200个真实类药分子
-  └─ generate_3d_complex.py    → 80个蛋白3D结构
-
-Step 1  data_preprocess.py        数据预处理（RDKit 真实计算）
-Step 2  diffdock_batch_run.py     DiffDock 对接（待服务器真实化）
-Step 3  primary_screen_filter.py  三阶段过滤 → Top 候选
-Step 4  af3_complex_prediction.py AlphaFold3（待服务器真实化）
-Step 5  interaction_analysis.py   真实几何相互作用分析
-Step 5.5 competitive_binding.py   竞争性抑制预测
-         selectivity_analysis.py  选择性分析
-         adme_predictor.py        ADME/Tox 类药性评估
-Step 6  final_ranking.py          七维加权终选 → A/B/C/D 分级
+第 0 级  download_million_library.py  下载百万级库（ZINC/PubChem，~10^6）
+第 1 级  rapid_prefilter.py           快速预筛（CPU，毫秒/分子）
+          Lipinski + PAINS + QED/SA    10^6 → ~5,000
+第 2 级  diffdock_batch_run.py        DiffDock 对接（GPU，秒级/分子）
+          真实对接 + confidence 打分    5,000 → ~几百
+第 3 级  primary_screen_filter.py     初筛过滤（Lipinski + 位点）
+第 4 级  af3_complex_prediction.py    AlphaFold3（待服务器真实化）
+第 5 级  interaction_analysis.py      真实几何相互作用分析
+第 5.5级 competitive_binding.py       竞争性抑制预测
+         selectivity_analysis.py      选择性分析
+         adme_predictor.py            ADME/Tox 类药性评估
+第 6 级  final_ranking.py             七维加权终选 → A/B/C/D 分级
 ```
 
 ### 路线二：全新分子设计
