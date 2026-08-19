@@ -121,6 +121,26 @@
             </div>
         </div>
         
+        <!-- 🆕 实时运行进度 -->
+        <div class="card" id="realtimeCard">
+            <h3>🔄 实时进度
+                <span id="realtimeStatus" style="font-size:13px;color:#4facfe;font-weight:normal;margin-left:10px;">等待数据...</span>
+            </h3>
+            <div style="height:8px;background:#1d233a;border-radius:4px;overflow:hidden;">
+                <div id="realtimeProgress" style="height:100%;width:0%;background:linear-gradient(90deg,#4facfe,#00f2fe);transition:width 0.5s;"></div>
+            </div>
+            <div id="realtimeStep" style="margin-top:8px;font-size:12px;color:#8892b0;">—</div>
+        </div>
+
+        <!-- 🆕 逐分子成药性详情 -->
+        <div class="card" id="moleculeCard">
+            <h3>💊 分子成药性评估（逐个查看）
+                <span style="font-size:12px;color:#5a6a8a;font-weight:normal;" id="moleculeCount"></span>
+            </h3>
+            <div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;" id="moleculeFilter"></div>
+            <div id="moleculeList" style="max-height:600px;overflow-y:auto;"></div>
+        </div>
+
         <!-- 靶点汇总卡片（可点击切换3D查看器的靶点） -->
         <div class="target-summary-grid" id="targetSummaryCards"></div>
         
@@ -492,8 +512,122 @@
             });
         }
         
+        // ========== 实时进度 + 分子成药性 ==========
+        let moleculeReports = [];
+        let filterVerdict = 'all';
+
+        async function updateRealtimeStatus() {
+            try {
+                const resp = await fetch('/api/status');
+                const st = await resp.json();
+                const pct = st.progress || 0;
+                document.getElementById('realtimeProgress').style.width = pct + '%';
+                document.getElementById('realtimeStatus').textContent = st.running
+                    ? `运行中 (${pct}%)` : (st.error ? '⚠ 出错' : '✅ 就绪');
+                document.getElementById('realtimeStep').textContent = st.running
+                    ? `当前步骤: ${st.current_step}` : (st.error ? `错误: ${st.error}` : '管线未运行');
+            } catch(e) {}
+        }
+
+        async function loadMoleculeReports() {
+            try {
+                const resp = await fetch('/api/molecule_reports');
+                const data = await resp.json();
+                moleculeReports = data.molecules || [];
+                document.getElementById('moleculeCount').textContent = `（共 ${moleculeReports.length} 个分子）`;
+                renderMoleculeFilter();
+                renderMoleculeList();
+            } catch(e) {
+                document.getElementById('moleculeList').innerHTML =
+                    '<div style="color:#8892b0;text-align:center;padding:20px;">暂无分子报告（运行筛选后可生成）</div>';
+            }
+        }
+
+        function renderMoleculeFilter() {
+            const verdicts = [...new Set(moleculeReports.map(m => m.drug_likeness_verdict || '未知'))];
+            const container = document.getElementById('moleculeFilter');
+            container.innerHTML = '<button class="btn-sm" onclick="setFilter(\'all\')" style="background:#4facfe;color:#0a0e17;border-color:#4facfe;">全部</button>' +
+                verdicts.map(v => `<button class="btn-sm" onclick="setFilter('${v.replace(/'/g, '')}')">${v}</button>`).join('');
+        }
+
+        function setFilter(v) {
+            filterVerdict = v;
+            renderMoleculeList();
+        }
+
+        function renderMoleculeList() {
+            const container = document.getElementById('moleculeList');
+            let list = moleculeReports;
+            if (filterVerdict !== 'all') {
+                list = list.filter(m => (m.drug_likeness_verdict || '未知') === filterVerdict);
+            }
+            // 最多展示前 200 个，避免前端卡顿
+            list = list.slice(0, 200);
+
+            if (list.length === 0) {
+                container.innerHTML = '<div style="color:#8892b0;text-align:center;padding:20px;">没有符合条件的分子</div>';
+                return;
+            }
+
+            container.innerHTML = list.map(m => {
+                const verdictColor = (m.drug_likeness_verdict || '').includes('不适合') ? '#ff6b6b'
+                    : (m.drug_likeness_verdict || '').includes('基本') ? '#feca57' : '#43e97b';
+                const lipinskiItems = (m.lipinski_items || []).map(item =>
+                    `<div style="font-size:11px;color:${item.pass ? '#43e97b' : '#ff6b6b'};">
+                        ${item.pass ? '✓' : '✗'} ${item.rule}（${item.value}）</div>`).join('');
+                const reasons = (m.verdict_reasons || []).map(r => `<div style="font-size:12px;color:#8892b0;">• ${r}</div>`).join('');
+                const admeReasons = (m.adme_reasons || []).map(r => `<div style="font-size:11px;color:#5a6a8a;">• ${r}</div>`).join('');
+                const breakdown = m.score_breakdown
+                    ? Object.entries(m.score_breakdown).map(([k,v]) => `<span style="background:#1d233a;padding:2px 6px;border-radius:4px;font-size:11px;color:#4facfe;margin-right:4px;">${k}: ${typeof v === 'number' ? v.toFixed(2) : v}</span>`).join('')
+                    : '';
+
+                return `
+                <div style="display:flex;gap:16px;padding:12px;border:1px solid #2a3050;border-radius:8px;margin-bottom:10px;background:#0d1117;">
+                    <div style="flex-shrink:0;width:160px;height:160px;background:#fff;border-radius:6px;overflow:hidden;">
+                        <img src="/api/molecule_svg/${m.mol_id}" style="width:100%;height:100%;object-fit:contain;" alt="${m.mol_id}" onerror="this.style.display='none'">
+                    </div>
+                    <div style="flex:1;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                            <div>
+                                <span style="font-family:monospace;font-weight:700;color:#ccd6f6;">${m.mol_id}</span>
+                                <span style="color:#5a6a8a;font-size:12px;margin-left:10px;">MW ${m.molecular_weight} | logP ${m.logP} | TPSA ${m.TPSA}</span>
+                            </div>
+                            <span style="color:${verdictColor};font-weight:700;font-size:14px;">${m.drug_likeness_verdict || ''}</span>
+                        </div>
+                        <div style="font-size:12px;color:#5a6a8a;font-family:monospace;margin-bottom:8px;word-break:break-all;">${m.smiles}</div>
+                        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
+                            <div><span style="color:#8892b0;font-size:11px;">QED</span> <b style="color:#ccd6f6;">${m.QED}</b></div>
+                            <div><span style="color:#8892b0;font-size:11px;">SA</span> <b style="color:#ccd6f6;">${m.sa_score}</b></div>
+                            <div><span style="color:#8892b0;font-size:11px;">HBD</span> <b style="color:#ccd6f6;">${m.HBD}</b></div>
+                            <div><span style="color:#8892b0;font-size:11px;">HBA</span> <b style="color:#ccd6f6;">${m.HBA}</b></div>
+                            ${m.final_score !== undefined ? `<div><span style="color:#8892b0;font-size:11px;">综合得分</span> <b style="color:#43e97b;">${m.final_score.toFixed(3)}</b></div>` : ''}
+                            ${m.priority_class ? `<div><span style="color:#8892b0;font-size:11px;">优先级</span> <b style="color:#43e97b;">${m.priority_class}</b></div>` : ''}
+                        </div>
+                        ${breakdown ? `<div style="margin-bottom:6px;">${breakdown}</div>` : ''}
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                            <div style="background:#161b2b;border-radius:6px;padding:8px;">
+                                <div style="font-size:12px;font-weight:600;color:#ccd6f6;margin-bottom:4px;">📏 Lipinski 五规则</div>
+                                ${lipinskiItems}
+                            </div>
+                            <div style="background:#161b2b;border-radius:6px;padding:8px;">
+                                <div style="font-size:12px;font-weight:600;color:#ccd6f6;margin-bottom:4px;">🔬 成药性理由</div>
+                                ${reasons || '<span style="color:#5a6a8a;font-size:12px;">—</span>'}
+                                ${admeReasons ? `<div style="margin-top:6px;border-top:1px solid #2a3050;padding-top:6px;">${admeReasons}</div>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
         // ========== Init ==========
         loadAllData();
+        updateRealtimeStatus();
+        loadMoleculeReports();
+        // 每 3 秒轮询一次实时进度
+        setInterval(updateRealtimeStatus, 3000);
+        // 每 10 秒刷新一次分子报告（如果管线在跑）
+        setInterval(() => { if (document.getElementById('realtimeStatus').textContent.includes('运行中')) loadMoleculeReports(); }, 10000);
     </script>
 </body>
 </html>

@@ -57,5 +57,8 @@ python scripts/primary_screen_filter.py
 python scripts/interaction_analysis.py
 python scripts/final_ranking.py
 
+# 🆕 生成逐分子成药性报告（前端实时展示用）
+python scripts/build_molecule_report.py
+
 echo "=== DiffDock 作业完成 ==="
 date

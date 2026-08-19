@@ -14,6 +14,9 @@ from pathlib import Path
 from datetime import datetime
 from flask import Flask, render_template, jsonify, request, send_file
 from collections import defaultdict
+from rdkit import Chem
+from rdkit.Chem import Draw
+from rdkit.Chem.Draw import rdMolDraw2D
 
 # 添加项目路径
 sys.path.insert(0, str(Path(__file__).parent))
@@ -380,8 +383,55 @@ def results_page():
 
 @app.route('/api/status')
 def get_status():
-    """获取管线运行状态"""
-    return jsonify(pipeline_status)
+    """获取管线运行状态（兼容本地内存状态 + 超算结果文件检测）"""
+    # 基础状态：内存里的 pipeline_status（本地跑 Flask 管线时用）
+    status = dict(pipeline_status)
+
+    # 超算场景：sbatch 作业在独立进程跑，Flask 内存不会更新
+    # 这里检测结果文件，推断真实进度
+    results_dir = Path(__file__).parent / "results"
+    script_dir = Path(__file__).parent
+
+    # 检测各步骤的结果文件是否存在，推断进度
+    step_files = {
+        '数据预处理': script_dir / "data" / "library" / "compounds_standardized.csv",
+        'DiffDock 对接': results_dir / "diffdock" / "docking_summary.csv",
+        '初筛过滤': results_dir / "primary_screen" / "all_candidates.csv",
+        'AlphaFold3': results_dir / "alphafold3" / "af3_summary.csv",
+        '相互作用分析': results_dir / "alphafold3" / "interaction_viz_data.json",
+        '终选排序': results_dir / "final_report" / "final_report.json",
+    }
+
+    completed_steps = []
+    running_step = None
+    for step, fpath in step_files.items():
+        if fpath.exists():
+            completed_steps.append(step)
+        else:
+            if running_step is None:
+                running_step = step
+
+    # 如果内存里没在跑，但结果文件显示有部分完成，推断为"超算作业在进行中"
+    if not status.get('running'):
+        if completed_steps:
+            if len(completed_steps) == len(step_files):
+                # 全部完成
+                status['running'] = False
+                status['current_step'] = '完成'
+                status['progress'] = 100
+            else:
+                # 部分完成，推断正在跑下一步
+                total = len(step_files)
+                done = len(completed_steps)
+                status['running'] = True
+                status['current_step'] = running_step or '运行中'
+                status['progress'] = int((done / total) * 100)
+                status['completed_steps'] = completed_steps
+                status['note'] = '(超算作业进度：基于结果文件检测)'
+
+    status['completed_steps'] = completed_steps
+    status['detected_from_files'] = True
+    return jsonify(status)
 
 
 @app.route('/api/dashboard_data')
@@ -452,6 +502,11 @@ def run_single_step():
             r = ActivityModelTrainer()
             r.run()
             result = {'status': 'ok'}
+        elif step == 'rapid_prefilter':
+            from scripts.rapid_prefilter import RapidPrefilter
+            r = RapidPrefilter()
+            df = r.run()
+            result = {'status': 'ok', 'compounds': len(df) if df is not None else 0}
         elif step == 'molecule_generation':
             from scripts.targetdiff_generate import TargetDiffGenerator
             r = TargetDiffGenerator()
@@ -843,6 +898,73 @@ def switch_dataset():
         'active_library': filename,
         'message': f'Switched to dataset: {filename}',
     })
+
+
+@app.route('/api/molecule_reports')
+def get_molecule_reports():
+    """
+    获取所有分子的成药性报告（用于前端逐分子展示）。
+    如果报告文件不存在，动态生成。
+    """
+    report_path = Path(__file__).parent / "results" / "molecule_report.json"
+    if not report_path.exists():
+        # 动态生成
+        try:
+            from scripts.build_molecule_report import build_report
+            build_report()
+        except Exception as e:
+            return jsonify({'error': f'生成分子报告失败: {e}'}), 500
+
+    if report_path.exists():
+        with open(report_path, 'r', encoding='utf-8') as f:
+            return jsonify(json.load(f))
+    return jsonify({'error': '报告不存在'}), 404
+
+
+@app.route('/api/molecule_svg/<mol_id>')
+def get_molecule_svg(mol_id):
+    """
+    返回某个分子的 2D 结构图（SVG）。
+    从化合物库中找到该分子的 SMILES，用 RDKit 渲染。
+    """
+    # 先尝试从分子报告里找
+    report_path = Path(__file__).parent / "results" / "molecule_report.json"
+    smiles = None
+    if report_path.exists():
+        with open(report_path, 'r', encoding='utf-8') as f:
+            report = json.load(f)
+        for m in report.get('molecules', []):
+            if m.get('mol_id') == mol_id:
+                smiles = m.get('smiles')
+                break
+
+    # 如果报告里没有，从库文件找
+    if smiles is None:
+        from scripts.library_loader import load_library_file
+        active_lib = config.get('data', {}).get('active_library', 'fda_approved_drugs.csv')
+        lib_path = Path(__file__).parent / "data" / "library" / active_lib
+        if lib_path.exists():
+            df = load_library_file(lib_path)
+            match = df[df['mol_id'] == mol_id]
+            if len(match):
+                smiles = match.iloc[0]['smiles']
+
+    if smiles is None:
+        return jsonify({'error': f'未找到分子 {mol_id}'}), 404
+
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return jsonify({'error': 'SMILES 解析失败'}), 500
+
+    # 生成 2D SVG
+    try:
+        drawer = rdMolDraw2D.MolDraw2DSVG(300, 300)
+        rdMolDraw2D.PrepareAndDrawMolecule(drawer, mol)
+        drawer.FinishDrawing()
+        svg = drawer.GetDrawingText()
+        return svg, 200, {'Content-Type': 'image/svg+xml'}
+    except Exception as e:
+        return jsonify({'error': f'SVG 渲染失败: {e}'}), 500
 
 
 @app.route('/api/config')
