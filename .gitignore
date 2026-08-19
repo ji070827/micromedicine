@@ -53,6 +53,7 @@ commit_docs.py
 commit_docs.log
 commit_whu.py
 commit_whu.log
+final_commit.py
 git_final.log
 git_push3.log
 git_state.log
@@ -77,3 +78,5 @@ verify_conda_app.py
 # ===== 操作系统 =====
 Thumbs.db
 .DS_Store
+final_commit.log
+data/library/large_library_100k.csv
