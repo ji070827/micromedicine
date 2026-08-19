@@ -9,12 +9,14 @@ immuno_checkpoint_screen/
 ├── start_server.bat              # 🆕 一键启动脚本（自动调用 conda 环境）
 ├── config/
 │   └── config.yaml               # 全局配置（靶点/数据/筛选/评分权重）
-├── scripts/                      # 18 个 Python 计算脚本
+├── scripts/                      # 25 个 Python 计算脚本
 │   ├── real_chemistry.py         # 核心真实化学计算（RDKit）
 │   ├── library_loader.py         # 🆕 通用库加载器（自动识别 SMILES 列 + 流式迭代）
 │   ├── data_preprocess.py        # 数据预处理
 │   ├── rapid_prefilter.py        # 🆕 百万级海选快速预筛（第1级，流式）
-│   ├── download_million_library.py  # 🆕 百万级库下载指引（ZINC/PubChem）
+│   ├── download_million_library.py  # 🆕 下载 ChEMBL 真实化合物库（230万，水库采样10万）
+│   ├── generate_large_library.py # 🆕 程序化生成10^5类药分子库（备选，非自生成也可用ChEMBL）
+│   ├── build_molecule_report.py  # 🆕 生成逐分子成药性报告（前端展示）
 │   ├── diffdock_batch_run.py     # DiffDock 对接（真实调用已就绪 + 模拟兜底）
 │   ├── primary_screen_filter.py  # 初筛过滤
 │   ├── af3_complex_prediction.py # AlphaFold3 预测（真实调用已就绪 + 模拟兜底）
@@ -82,7 +84,9 @@ immuno_checkpoint_screen/
 | `library_loader.py` | 🆕 通用库加载器（自动识别 SMILES 列 + 多格式 + 流式迭代） | 共用 |
 | `data_preprocess.py` | 蛋白信息整理 + 小分子真实理化性质计算 | 共用 |
 | `rapid_prefilter.py` | 🆕 百万级海选第1级：流式快速预筛（Lipinski+PAINS+QED/SA） | 路线一 |
-| `download_million_library.py` | 🆕 百万级库下载指引（ZINC/PubChem bulk） | 共用 |
+| `download_million_library.py` | 🆕 下载 ChEMBL 真实化合物库（230万，水库采样10万） | 共用 |
+| `generate_large_library.py` | 🆕 程序化生成10^5类药分子库（备选方案） | 共用 |
+| `build_molecule_report.py` | 🆕 生成逐分子成药性报告（前端展示） | 共用 |
 | `diffdock_batch_run.py` | DiffDock 对接（模拟兜底 + 真实 GPU 调用） | 路线一 |
 | `primary_screen_filter.py` | 三阶段过滤（置信度→Lipinski→位点校验） | 路线一 |
 | `af3_complex_prediction.py` | AlphaFold3 复合物预测（当前模拟） | 路线一 |
@@ -136,7 +140,7 @@ immuno_checkpoint_screen/
 │  Web 服务层  app.py (Flask, 端口 5050)          │
 │            页面路由 + 21个API + 后台线程调度     │
 ├─────────────────────────────────────────────────┤
-│  计算核心层  scripts/*.py (18个模块)            │
+│  计算核心层  scripts/*.py (25个模块)            │
 │            两条筛选路线 + 3D结构 + 数据准备      │
 └─────────────────────────────────────────────────┘
 ```
@@ -144,7 +148,7 @@ immuno_checkpoint_screen/
 ### 路线一：已知小分子库虚拟筛选（分级海选）
 
 ```
-第 0 级  download_million_library.py  下载百万级库（ZINC/PubChem，~10^6）
+第 0 级  download_million_library.py  下载 ChEMBL 真实库（230万，水库采样10万）
 第 1 级  rapid_prefilter.py           快速预筛（CPU，毫秒/分子）
           Lipinski + PAINS + QED/SA    10^6 → ~5,000
 第 2 级  diffdock_batch_run.py        DiffDock 对接（GPU，秒级/分子）
@@ -170,13 +174,15 @@ Step 2  targetdiff_generate.py    TargetDiff 口袋感知生成（真实扩散�
 ### 数据流
 
 ```
-data/library/pubchem_all_targets.csv   ← 输入（200个化合物）
+data/library/{active_library}  ← 输入库（默认 fda_approved_drugs.csv，
+        │                        海选时用 chembl_100k.csv，可网页切换任意库）
         ↓
    各计算脚本处理（结果写入 results/ 和 data/）
         ↓
 results/final_report/final_report.json  ← 最终输出（排名+报告）
+results/molecule_report.json            ← 逐分子成药性报告（前端展示）
         ↓
-Web 前端通过 AJAX 调用 /api/* 读取 JSON 并渲染
+Web 前端通过 AJAX 轮询 /api/* 读取 JSON 并实时渲染
 ```
 
 ### 运行方式
